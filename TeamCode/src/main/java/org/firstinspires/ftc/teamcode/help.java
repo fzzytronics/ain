@@ -1,3 +1,4 @@
+//git is my frienemy
 package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.command.OdometrySubsystem;
@@ -33,7 +34,7 @@ public class help extends LinearOpMode {
 
         }
     }
- 
+
     private void initializeHardware() {
         // Member variables, so like motors and stuff
         MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
