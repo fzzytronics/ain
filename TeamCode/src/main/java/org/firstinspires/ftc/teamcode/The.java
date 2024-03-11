@@ -36,7 +36,7 @@ public class The extends LinearOpMode {
         HDrive drive = new HDrive(front_left, front_right, back_left, back_right);
 
         waitForStart();
-        intake.setPositionTolerance(1);
+        intake.setPositionTolerance(0);
         intakeElevation.setPosition(0);
         drone.setPosition(0.0);
 
@@ -52,6 +52,7 @@ public class The extends LinearOpMode {
 
             double intakePower = gamepad2.right_trigger > 0.8 ? 1.0 : 0.9;
             intake.set(0);
+
 
             stopAllMotorsAndServos(hanger, lifty, claw, intake,
                     front_left, front_right, back_left, back_right);
@@ -107,6 +108,7 @@ public class The extends LinearOpMode {
         lifty.set(targetVelocity);
     }
 
+
     private void drivetrainControl(HDrive drive) {
         this.intakeElevation = intakeElevation;
         this.intake = intake;
@@ -119,6 +121,8 @@ public class The extends LinearOpMode {
         intakePower = Range.clip(intakePower, 0.0, 1.0);
         intake.set(intakePower);
     }
+
+    // Existing code...
 
     private void intakeElevationControl(Servo intakeElevation, Motor intake) {
         double elevationPower = gamepad2.right_stick_y;
@@ -141,6 +145,34 @@ public class The extends LinearOpMode {
         // Adjust intake power
         intakePower = Range.clip(intakePower / maxPower, 1, 1);
         intake.set(intakePower);
+    }
+
+
+    private void intakeElevationControl(Servo intakeElevation) {
+        double position = intakeElevation.getPosition();
+        double newPosition = position + gamepad2.left_stick_y * 0.4;
+
+        newPosition = Range.clip(newPosition, 0.4, 1.0);
+
+        if (newPosition < 0.4) {
+            newPosition = Range.clip(newPosition, 0.4, 0.6);
+        } else if (newPosition < 0.8) {
+            newPosition = Range.clip(newPosition, 0.6, 0.8);
+        } else if (newPosition < 1.2) {
+            newPosition = Range.clip(newPosition, 1.0, 1.2);
+        } else if (newPosition < 1.6) {
+            newPosition = Range.clip(newPosition, 1.4, 1.6);
+        } else {
+            newPosition = Range.clip(newPosition, 1.6, 1.8);
+        }
+
+        telemetry.addData("Before - Servo Position", intakeElevation.getPosition());
+        telemetry.update();
+
+        intakeElevation.setPosition(newPosition);
+
+        telemetry.addData("After - Servo Position", intakeElevation.getPosition());
+        telemetry.update();
     }
 
     private void droneControl(Servo drone) {
