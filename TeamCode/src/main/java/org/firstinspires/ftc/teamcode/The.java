@@ -26,8 +26,8 @@ public class The extends LinearOpMode {
         Motor lifty = new Motor(hardwareMap, "lifty");
         Motor intake = new Motor(hardwareMap, "intake");
         Servo intake_elevation = hardwareMap.get(Servo.class, "intake_elevation");
-        Servo grab1 = hardwareMap.get(Servo.class, "grab1");
-        Servo grab2 = hardwareMap.get(Servo.class, "grab2");
+        /**Servo grab1 = hardwareMap.get(Servo.class, "grab1");
+        Servo grab2 = hardwareMap.get(Servo.class, "grab2");**/
         Servo drone = hardwareMap.get(Servo.class, "drone");
         Motor front_left = new Motor(hardwareMap, "front_left");
         Motor front_right = new Motor(hardwareMap, "front_right");
@@ -41,14 +41,16 @@ public class The extends LinearOpMode {
         drone.setPosition(0.0);
 
         while (opModeIsActive()) {
-            initializeMotorsAndServos(hanger, claw, lifty, intake, intake_elevation,
-                    grab1, grab2, drone, front_left, front_right, back_left, back_right);
+            initializeMotorsAndServos(hanger, claw, lifty, intake, intake_elevation
+                   /** grab1, grab2**/, drone, front_left, front_right, back_left, back_right);
 
             hangerControl(hanger);
             liftyControl(lifty);
             drivetrainControl(drive);
             intakeElevationControl(intake_elevation);
+            /**
             clawControl(grab1, grab2);
+             **/
             droneControl(drone);
 
             double intakePower = gamepad2.right_trigger > 0.2 ? 1.0 : 0.9;
@@ -58,19 +60,19 @@ public class The extends LinearOpMode {
 
             stopAllMotorsAndServos(hanger, lifty, claw, intake,
                     front_left, front_right, back_left, back_right);
-            stopAllServos(intake_elevation, grab1, grab2, drone);
+            stopAllServos(intake_elevation /**grab1, grab2**/, drone);
         }
     }
 
     private void initializeMotorsAndServos(Motor hanger, Motor claw, Motor lifty, Motor intake,
-                                           Servo intakeElevation, Servo grab1, Servo grab2,
+                                           Servo intakeElevation/** Servo grab1, Servo grab2**/,
                                            Servo drone, Motor frontLeft, Motor frontRight,
                                            Motor backLeft, Motor backRight) {
 
         hanger.setRunMode(Motor.RunMode.VelocityControl);
 
 
-        claw.setRunMode(Motor.RunMode.VelocityControl);
+       /** claw.setRunMode(Motor.RunMode.VelocityControl);**/
 
 
         lifty.setRunMode(Motor.RunMode.VelocityControl);
@@ -85,10 +87,10 @@ public class The extends LinearOpMode {
 
 
         intakeElevation.setPosition(0.0);
-
+/**
         grab1.setPosition(0.0);
         grab2.setPosition(0.0);
-
+**/
         drone.setPosition(0.0);
     }
 
@@ -106,7 +108,7 @@ public class The extends LinearOpMode {
 
     private void hangerControl(Motor hanger) {
         hanger.setRunMode(Motor.RunMode.VelocityControl);
-        // If needed, set velocity coefficients here
+
 
         double hangerPower = 1.0;
 
@@ -173,7 +175,7 @@ public class The extends LinearOpMode {
 
         intakeElevation.setPosition(newPosition);
     }
-
+/**
     private void clawControl(Servo grab1, Servo grab2) {
         if (gamepad2.dpad_right && !dpadRightPressed) {
             grab1.setPosition(1.0);
@@ -191,7 +193,7 @@ public class The extends LinearOpMode {
             dpadLeftPressed = false;
         }
     }
-
+**/
     private void droneControl(Servo drone) {
         if (gamepad1.dpad_right && !dpadRightPressed) {
             drone.setPosition(1.0);
