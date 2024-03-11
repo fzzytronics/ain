@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 //justin is not life
 //hel
+import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.command.OdometrySubsystem;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
@@ -11,6 +12,16 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous
 public abstract class Justin extends LinearOpMode{
+    public class OdometrySubsystem extends SubsystemBase {
+        private MotorEx frontLeft;
+        private MotorEx frontRight;
+        private MotorEx backLeft;
+        private MotorEx backRight;
+        private MotorEx encoderLeft;
+        private MotorEx encoderRight;
+        private MotorEx encoderPerp;
+        private HolonomicOdometry holOdom;
+     }
         // Constants
         private static final double TRACKWIDTH = 13.7;
         private static final double TICKS_TO_INCHES = 15.3;
@@ -31,15 +42,18 @@ public abstract class Justin extends LinearOpMode{
             while (opModeIsActive()) {
                 // while match woah
 
-                telemetry.addData("X Position (in)", Odometry.getX());
-                telemetry.addData("Y Position (in)", Odometry.getY());
-                telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
-                telemetry.update();            }
+                            }
         }
 
         private void initializeHardware() {
             // Member variables, so like motors and stuff
             MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
+            MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
+            MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
+            MotorEx backRight = new MotorEx (hardwareMap, "back_right");
+            MotorEx encoderLeft = new MotorEx(hardwareMap, "left_encoder");
+            MotorEx encoderRight = new MotorEx(hardwareMap, "right_encoder");
+            MotorEx encoderPerp = new MotorEx(hardwareMap, "center_encoder");
             // Initialize other motors and encoders...
         }
 
@@ -62,13 +76,13 @@ public abstract class Justin extends LinearOpMode{
             );
 
             // Create the odometry subsystem
-            OdometrySubsystem odometry = new OdometrySubsystem(holOdom);
-
-            //update
-            odometry.update();
-
-
+                OdometrySubsystem odometry = new OdometrySubsystem(hol0dom);
             }
+            //update
+                telemetry.addData("X Position (in)", Odometry.getX());
+                telemetry.addData("Y Position (in)", Odometry.getY());
+                telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
+                telemetry.update();
+                Odometry.update();
         }
-
-
+}
