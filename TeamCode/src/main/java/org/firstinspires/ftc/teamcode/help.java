@@ -24,7 +24,8 @@ import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 
 //mew
 @Autonomous(name = "Mogging")
-public abstract class help extends CommandOpMode {
+
+public class help extends CommandOpMode {
     // Hardware components
     private MotorEx frontLeft, backLeft, backRight, frontRight;
     private Motor intake;
@@ -46,22 +47,24 @@ public abstract class help extends CommandOpMode {
     private double heading;
     private PurePursuitCommand ppCommand;
 //yurr
+    //rebase test
 
     @Override
-    public void runOpMode() {
-
+    public void initialize() {
+        // Initialization
         initializeHardware();
-        initializeOdometry();
-         waitForStart();
+
+        waitForStart();
 
         while (opModeIsActive()) {
             // Autonomous actions
             // Update odometry
             odometry.updatePose();
             m_path.followPath(driveTrain, odometry);
+
+            ppCommand.schedule(); // Schedule the command
+            m_path.init();
         }
-        ppCommand.schedule();
-        m_path.init();
     }
 
     private void initializeHardware() {
