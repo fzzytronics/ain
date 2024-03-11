@@ -26,7 +26,7 @@ public class The extends LinearOpMode {
         Motor hanger = new Motor(hardwareMap, "hanger");
         Motor claw = new Motor(hardwareMap, "claw");
         Motor lifty = new Motor(hardwareMap, "lifty");
-        Motor intake = new Motor(hardwareMap, "intake");
+        intake = new Motor(hardwareMap, "intake");
         Servo intake_elevation = hardwareMap.get(Servo.class, "intake_elevation");
         /**Servo grab1 = hardwareMap.get(Servo.class, "grab1");
         Servo grab2 = hardwareMap.get(Servo.class, "grab2");**/
