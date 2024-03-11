@@ -39,8 +39,8 @@ public class The extends LinearOpMode {
         drone.setPosition(0.0);
 
         while (opModeIsActive()) {
-            initializeMotorsAndServos(hanger, claw, lifty, intake, intake_elevation,
-                    grab1, grab2, drone, front_left, front_right, back_left, back_right);
+            initializeMotorsAndServos(hanger, claw, lifty, intake, intake_elevation
+                   /** grab1, grab2**/, drone, front_left, front_right, back_left, back_right);
 
             hangerControl(hanger);
             liftyControl(lifty);
@@ -63,7 +63,7 @@ public class The extends LinearOpMode {
     }
 
     private void initializeMotorsAndServos(Motor hanger, Motor claw, Motor lifty, Motor intake,
-                                           Servo intakeElevation, Servo grab1, Servo grab2,
+                                           Servo intakeElevation/** Servo grab1, Servo grab2**/,
                                            Servo drone, Motor frontLeft, Motor frontRight,
                                            Motor backLeft, Motor backRight) {
 
@@ -85,10 +85,10 @@ public class The extends LinearOpMode {
 
 
         intakeElevation.setPosition(0.0);
-
+/**
         grab1.setPosition(0.0);
         grab2.setPosition(0.0);
-
+**/
         drone.setPosition(0.0);
     }
 
