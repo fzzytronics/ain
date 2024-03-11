@@ -53,8 +53,8 @@ public class The extends LinearOpMode {
              **/
             droneControl(drone);
 
-            double intakePower = gamepad2.right_trigger > 0.2 ? 1.0 : 0.9;
-            intake.set(intakePower);
+            double intakePower = gamepad2.right_trigger > 0.8 ? 1.0 : 0.9;
+            intake.set(0);
 
 
 
@@ -133,31 +133,26 @@ public class The extends LinearOpMode {
     }
 
     private void drivetrainControl(HDrive drive) {
-        double driveX = -gamepad1.left_stick_x;
         double driveY = gamepad1.left_stick_y;
+        double turnX = gamepad1.right_stick_x;
 
-        double turn = driveX;
 
-        double leftPower = driveY + turn;
-        double rightPower = driveY - turn;
+        double maxPower = 1.0;
 
-        leftPower = Math.copySign(Math.min(Math.abs(leftPower), 1.0), leftPower);
-        rightPower = Math.copySign(Math.min(Math.abs(rightPower), 1.0), rightPower);
+        double forwardPower = Range.clip(driveY / maxPower, -1, 1);
+        double turnPower = Range.clip(turnX / maxPower, -1, 1);
 
-        drive.driveRobotCentric(leftPower, rightPower, driveX);
 
-        if (gamepad1.left_bumper) {
-            drive.driveRobotCentric(1, -1, -1);
-        } else if (gamepad1.right_bumper) {
-            drive.driveRobotCentric(-1, 1, 1);
-        }
+        drive.setMaxSpeed(forwardPower);
 
         sleep(20);
     }
 
+
+
     private void intakeElevationControl(Servo intakeElevation) {
         double position = intakeElevation.getPosition();
-        double newPosition = position + gamepad2.left_stick_y * 0.02;
+        double newPosition = position + gamepad2.left_stick_y * 0;
 
         newPosition = Range.clip(newPosition, 0.0, 1.0);
 
