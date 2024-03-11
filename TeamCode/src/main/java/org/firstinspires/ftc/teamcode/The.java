@@ -15,6 +15,10 @@ public class The extends LinearOpMode {
     private boolean dpadUpPressed = false;
     private boolean dpadRightPressed = false;
     private boolean dpadLeftPressed = false;
+    private Servo intakeElevation;
+    private Motor intake;
+
+    private double manualControl = 0.0;
 
     @Override
     public void runOpMode() {
@@ -24,10 +28,8 @@ public class The extends LinearOpMode {
         Motor hanger = new Motor(hardwareMap, "hanger");
         Motor claw = new Motor(hardwareMap, "claw");
         Motor lifty = new Motor(hardwareMap, "lifty");
-        Motor intake = new Motor(hardwareMap, "intake");
+        intake = new Motor(hardwareMap, "intake");
         Servo intake_elevation = hardwareMap.get(Servo.class, "intake_elevation");
-        /**Servo grab1 = hardwareMap.get(Servo.class, "grab1");
-        Servo grab2 = hardwareMap.get(Servo.class, "grab2");**/
         Servo drone = hardwareMap.get(Servo.class, "drone");
         Motor front_left = new Motor(hardwareMap, "front_left");
         Motor front_right = new Motor(hardwareMap, "front_right");
@@ -41,56 +43,30 @@ public class The extends LinearOpMode {
         drone.setPosition(0.0);
 
         while (opModeIsActive()) {
-            initializeMotorsAndServos(hanger, claw, lifty, intake, intake_elevation
-                   /** grab1, grab2**/, drone, front_left, front_right, back_left, back_right);
+            initializeMotorsAndServos(hanger, claw, lifty, intake, intake_elevation, drone, front_left, front_right, back_left, back_right);
 
             hangerControl(hanger);
             liftyControl(lifty);
             drivetrainControl(drive);
             intakeElevationControl(intake_elevation);
-            /**
-            clawControl(grab1, grab2);
-             **/
             droneControl(drone);
 
-            double intakePower = gamepad2.right_trigger > 0.2 ? 1.0 : 0.9;
-            intake.set(intakePower);
+            double intakePower = gamepad2.right_trigger > 0.8 ? 1.0 : 0.9;
+            intake.set(0);
 
-
-
-            stopAllMotorsAndServos(hanger, lifty, claw, intake,
-                    front_left, front_right, back_left, back_right);
-            stopAllServos(intake_elevation /**grab1, grab2**/, drone);
+            stopAllMotorsAndServos(hanger, lifty, claw, intake, front_left, front_right, back_left, back_right);
+            stopAllServos(intake_elevation, drone);
         }
     }
 
-    private void initializeMotorsAndServos(Motor hanger, Motor claw, Motor lifty, Motor intake,
-                                           Servo intakeElevation/** Servo grab1, Servo grab2**/,
-                                           Servo drone, Motor frontLeft, Motor frontRight,
-                                           Motor backLeft, Motor backRight) {
-
+    private void initializeMotorsAndServos(Motor hanger, Motor claw, Motor lifty, Motor intake, Servo intakeElevation, Servo drone, Motor frontLeft, Motor frontRight, Motor backLeft, Motor backRight) {
         hanger.setRunMode(Motor.RunMode.VelocityControl);
-
-
-       /** claw.setRunMode(Motor.RunMode.VelocityControl);**/
-
-
         lifty.setRunMode(Motor.RunMode.VelocityControl);
-
-
         intake.setRunMode(Motor.RunMode.RawPower);
         intake.set(0);
-
         frontLeft.setRunMode(Motor.RunMode.RawPower);
         frontLeft.set(0);
-
-
-
         intakeElevation.setPosition(0.0);
-/**
-        grab1.setPosition(0.0);
-        grab2.setPosition(0.0);
-**/
         drone.setPosition(0.0);
     }
 
@@ -108,8 +84,6 @@ public class The extends LinearOpMode {
 
     private void hangerControl(Motor hanger) {
         hanger.setRunMode(Motor.RunMode.VelocityControl);
-
-
         double hangerPower = 1.0;
 
         if (gamepad1.dpad_up && !dpadUpPressed) {
@@ -119,81 +93,84 @@ public class The extends LinearOpMode {
             dpadUpPressed = false;
             hanger.set(0);
         } else {
-            hanger.set(-hangerPower);
+            hanger.set(hangerPower);
         }
     }
+
     private void liftyControl(Motor lifty) {
         lifty.setRunMode(Motor.RunMode.VelocityControl);
-
         double leftStickY = -gamepad2.left_stick_x;
-
         double targetVelocity = LIFTY_POWER * leftStickY;
-
         lifty.set(targetVelocity);
     }
 
     private void drivetrainControl(HDrive drive) {
-        double driveX = -gamepad1.left_stick_x;
         double driveY = gamepad1.left_stick_y;
-
-        double turn = driveX;
-
-        double leftPower = driveY + turn;
-        double rightPower = driveY - turn;
-
-        leftPower = Math.copySign(Math.min(Math.abs(leftPower), 1.0), leftPower);
-        rightPower = Math.copySign(Math.min(Math.abs(rightPower), 1.0), rightPower);
-
-        drive.driveRobotCentric(leftPower, rightPower, driveX);
-
-        if (gamepad1.left_bumper) {
-            drive.driveRobotCentric(1, -1, -1);
-        } else if (gamepad1.right_bumper) {
-            drive.driveRobotCentric(-1, 1, 1);
-        }
-
+        double turnX = gamepad1.right_stick_x;
+        double maxPower = 1.0;
+        double forwardPower = Range.clip(driveY / maxPower, -1, 1);
+        double turnPower = Range.clip(turnX / maxPower, -1, 1);
+        drive.setMaxSpeed(forwardPower);
         sleep(20);
     }
 
     private void intakeElevationControl(Servo intakeElevation) {
+        double leftStickY = gamepad2.left_stick_y;
+
+        // Check for a change in left stick y-axis
+        if (leftStickY != 0.0) {
+            manualControl = leftStickY;
+        }
+
         double position = intakeElevation.getPosition();
-        double newPosition = position + gamepad2.left_stick_y * 0.02;
+        double newPosition = position + manualControl * 0.4;
 
-        newPosition = Range.clip(newPosition, 0.0, 1.0);
+        newPosition = Range.clip(newPosition, 0.4, 1.0);
 
-        if (newPosition < 0.2) {
-            newPosition = Range.clip(newPosition, 0.0, 0.2);
-        } else if (newPosition < 0.4) {
-            newPosition = Range.clip(newPosition, 0.2, 0.4);
-        } else if (newPosition < 0.6) {
+        if (newPosition < 0.4) {
             newPosition = Range.clip(newPosition, 0.4, 0.6);
         } else if (newPosition < 0.8) {
             newPosition = Range.clip(newPosition, 0.6, 0.8);
+        } else if (newPosition < 1.2) {
+            newPosition = Range.clip(newPosition, 1.0, 1.2);
+        } else if (newPosition < 1.6) {
+            newPosition = Range.clip(newPosition, 1.4, 1.6);
         } else {
-            newPosition = Range.clip(newPosition, 0.8, 1.0);
+            newPosition = Range.clip(newPosition, 1.6, 1.8);
         }
 
+        // Print servo position to telemetry
+        telemetry.addData("Before - Servo Position", intakeElevation.getPosition());
+        telemetry.update();
+
+        // Adjust servo position
         intakeElevation.setPosition(newPosition);
-    }
-/**
-    private void clawControl(Servo grab1, Servo grab2) {
-        if (gamepad2.dpad_right && !dpadRightPressed) {
-            grab1.setPosition(1.0);
-            dpadRightPressed = true;
-        } else if (gamepad2.dpad_up && !gamepad2.dpad_right) {
-            grab1.setPosition(0.0);
-            dpadRightPressed = false;
-        }
 
-        if (gamepad2.dpad_left && !dpadLeftPressed) {
-            grab2.setPosition(1.0);
-            dpadLeftPressed = true;
-        } else if (gamepad2.dpad_down && !gamepad2.dpad_left) {
-            grab2.setPosition(0.0);
-            dpadLeftPressed = false;
-        }
+        // Print servo position after adjustment to telemetry
+        telemetry.addData("After - Servo Position", intakeElevation.getPosition());
+        telemetry.update();
     }
-**/
+
+    private void intakeElevationControl(Servo intakeElevation, Motor intake) {
+        double elevationPower = gamepad2.right_stick_y;
+        double intakePower = gamepad2.right_trigger > 1.0 ? 1.0 : 0.9;
+        double maxPower = 1.0;
+
+        // Print servo position to telemetry
+        telemetry.addData("Before - Servo Position", intakeElevation.getPosition());
+        telemetry.update();
+
+        double newPosition = intakeElevation.getPosition() + elevationPower * 1.0;
+        newPosition = Range.clip(newPosition, 0.4, 1.0);
+        intakeElevation.setPosition(newPosition);
+
+        telemetry.addData("After - Servo Position", intakeElevation.getPosition());
+        telemetry.update();
+
+        intakePower = Range.clip(intakePower / maxPower, 1, 1);
+        intake.set(intakePower);
+    }
+
     private void droneControl(Servo drone) {
         if (gamepad1.dpad_right && !dpadRightPressed) {
             drone.setPosition(1.0);
