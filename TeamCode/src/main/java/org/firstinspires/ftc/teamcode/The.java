@@ -70,7 +70,7 @@ public class The extends LinearOpMode {
         hanger.setRunMode(Motor.RunMode.VelocityControl);
 
 
-        claw.setRunMode(Motor.RunMode.VelocityControl);
+       /** claw.setRunMode(Motor.RunMode.VelocityControl);**/
 
 
         lifty.setRunMode(Motor.RunMode.VelocityControl);
