@@ -25,6 +25,7 @@ android {
 
 dependencies {
     implementation project(':FtcRobotController')
+    implementation 'com.google.firebase:firebase-inappmessaging:20.4.0'
     annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
     implementation 'org.ftclib.ftclib:core:2.1.1' // core
     implementation 'org.ftclib.ftclib:vision:2.1.0' //Paragon help me
