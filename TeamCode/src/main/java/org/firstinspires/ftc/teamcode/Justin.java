@@ -5,6 +5,7 @@ import com.arcrobotics.ftclib.command.OdometrySubsystem;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
+import com.arcrobotics.ftclib.kinematics.Odometry;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -25,12 +26,15 @@ public abstract class Justin extends LinearOpMode{
 
             // wait for start
             waitForStart();
-
+            Odometry.resetPose();//?
             // Autonomous routine
             while (opModeIsActive()) {
                 // while match woah
 
-            }
+                telemetry.addData("X Position (in)", Odometry.getX());
+                telemetry.addData("Y Position (in)", Odometry.getY());
+                telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
+                telemetry.update();            }
         }
 
         private void initializeHardware() {
@@ -60,6 +64,11 @@ public abstract class Justin extends LinearOpMode{
             // Create the odometry subsystem
             OdometrySubsystem odometry = new OdometrySubsystem(holOdom);
 
+            //update
+            odometry.update();
+
+
+            }
         }
-    }
+
 
