@@ -152,20 +152,20 @@ public class The extends LinearOpMode {
 
     private void intakeElevationControl(Servo intakeElevation) {
         double position = intakeElevation.getPosition();
-        double newPosition = position + gamepad2.left_stick_y * 0;
+        double newPosition = position + gamepad2.left_stick_y * 0.4;
 
-        newPosition = Range.clip(newPosition, 0.0, 1.0);
+        newPosition = Range.clip(newPosition, 0.4, 1.0);
 
-        if (newPosition < 0.2) {
-            newPosition = Range.clip(newPosition, 0.0, 0.2);
-        } else if (newPosition < 0.4) {
-            newPosition = Range.clip(newPosition, 0.2, 0.4);
-        } else if (newPosition < 0.6) {
+        if (newPosition < 0.4) {
             newPosition = Range.clip(newPosition, 0.4, 0.6);
         } else if (newPosition < 0.8) {
             newPosition = Range.clip(newPosition, 0.6, 0.8);
+        } else if (newPosition < 1.2) {
+            newPosition = Range.clip(newPosition, 1.0, 1.2);
+        } else if (newPosition < 1.6) {
+            newPosition = Range.clip(newPosition, 1.4, 1.6);
         } else {
-            newPosition = Range.clip(newPosition, 0.8, 1.0);
+            newPosition = Range.clip(newPosition, 1.6, 1.8);
         }
 
         intakeElevation.setPosition(newPosition);
