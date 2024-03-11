@@ -44,6 +44,8 @@ public abstract class help extends CommandOpMode {
     private double forwardSpeed;
     private double turn;
     private double heading;
+    private PurePursuitCommand ppCommand;
+
 
     @Override
     public void runOpMode() {
@@ -58,6 +60,7 @@ public abstract class help extends CommandOpMode {
             odometry.updatePose();
             m_path.followPath(driveTrain, odometry);
         }
+        ppCommand.schedule();
         m_path.init();
     }
 
@@ -113,6 +116,7 @@ public abstract class help extends CommandOpMode {
         // Initial odometry update
         odometry.update();
 
+
         // Create pure pursuit command
         PurePursuitCommand ppCommand = new PurePursuitCommand(
                 driveTrain, odometry,
@@ -122,6 +126,5 @@ public abstract class help extends CommandOpMode {
         );
 
         // Schedule the command
-        ppCommand.schedule();
     }
 }
