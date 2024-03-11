@@ -46,7 +46,9 @@ public class The extends LinearOpMode {
             liftyControl(lifty);
             drivetrainControl(drive);
             intakeElevationControl(intake_elevation);
+            /**
             clawControl(grab1, grab2);
+             **/
             droneControl(drone);
 
             double intakePower = gamepad2.right_trigger > 0.2 ? 1.0 : 0.9;
@@ -171,7 +173,7 @@ public class The extends LinearOpMode {
 
         intakeElevation.setPosition(newPosition);
     }
-
+/**
     private void clawControl(Servo grab1, Servo grab2) {
         if (gamepad2.dpad_right && !dpadRightPressed) {
             grab1.setPosition(1.0);
@@ -189,7 +191,7 @@ public class The extends LinearOpMode {
             dpadLeftPressed = false;
         }
     }
-
+**/
     private void droneControl(Servo drone) {
         if (gamepad1.dpad_right && !dpadRightPressed) {
             drone.setPosition(1.0);
