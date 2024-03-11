@@ -58,7 +58,7 @@ public abstract class help extends CommandOpMode {
             odometry.updatePose();
             m_path.followPath(driveTrain, odometry);
         }
-
+        m_path.init();
     }
 
     private void initializeHardware() {
