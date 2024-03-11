@@ -24,8 +24,8 @@ public class The extends LinearOpMode {
         Motor lifty = new Motor(hardwareMap, "lifty");
         Motor intake = new Motor(hardwareMap, "intake");
         Servo intake_elevation = hardwareMap.get(Servo.class, "intake_elevation");
-        Servo grab1 = hardwareMap.get(Servo.class, "grab1");
-        Servo grab2 = hardwareMap.get(Servo.class, "grab2");
+        /**Servo grab1 = hardwareMap.get(Servo.class, "grab1");
+        Servo grab2 = hardwareMap.get(Servo.class, "grab2");**/
         Servo drone = hardwareMap.get(Servo.class, "drone");
         Motor front_left = new Motor(hardwareMap, "front_left");
         Motor front_right = new Motor(hardwareMap, "front_right");
@@ -58,7 +58,7 @@ public class The extends LinearOpMode {
 
             stopAllMotorsAndServos(hanger, lifty, claw, intake,
                     front_left, front_right, back_left, back_right);
-            stopAllServos(intake_elevation, grab1, grab2, drone);
+            stopAllServos(intake_elevation /**grab1, grab2**/, drone);
         }
     }
 
@@ -106,7 +106,7 @@ public class The extends LinearOpMode {
 
     private void hangerControl(Motor hanger) {
         hanger.setRunMode(Motor.RunMode.VelocityControl);
-        // If needed, set velocity coefficients here
+
 
         double hangerPower = 1.0;
 
