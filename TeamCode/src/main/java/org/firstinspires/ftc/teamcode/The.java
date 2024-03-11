@@ -3,10 +3,12 @@ package org.firstinspires.ftc.teamcode;
 import com.arcrobotics.ftclib.drivebase.HDrive;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
+@TeleOp(name = "the")
 public class The extends LinearOpMode {
     private static final double LIFTY_POWER = 1.0;
 
