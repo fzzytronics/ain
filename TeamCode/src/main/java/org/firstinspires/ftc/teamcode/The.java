@@ -15,6 +15,8 @@ public class The extends LinearOpMode {
     private boolean dpadUpPressed = false;
     private boolean dpadRightPressed = false;
     private boolean dpadLeftPressed = false;
+    private Servo intakeElevation;
+    private Motor intake;
 
     @Override
     public void runOpMode() {
@@ -119,7 +121,7 @@ public class The extends LinearOpMode {
             dpadUpPressed = false;
             hanger.set(0);
         } else {
-            hanger.set(-hangerPower);
+            hanger.set(hangerPower);
         }
     }
     private void liftyControl(Motor lifty) {
@@ -131,7 +133,7 @@ public class The extends LinearOpMode {
 
         lifty.set(targetVelocity);
     }
-
+/**
     private void drivetrainControl(HDrive drive) {
         double driveY = gamepad1.left_stick_y;
         double turnX = gamepad1.right_stick_x;
@@ -147,6 +149,22 @@ public class The extends LinearOpMode {
 
         sleep(20);
     }
+**/
+private void drivetrainControl(HDrive drive) {
+    this.intakeElevation = intakeElevation;
+    this.intake = intake;
+    double elevationPower = gamepad2.right_stick_y;
+
+
+    double newPosition = intakeElevation.getPosition() + elevationPower * 0.02;
+    newPosition = Range.clip(newPosition, 0.0, 1.0);
+    intakeElevation.setPosition(newPosition);
+
+
+    double intakePower = gamepad2.right_trigger;
+    intakePower = Range.clip(intakePower, 0.0, 1.0);
+    intake.set(intakePower);
+}
 
 
 
@@ -189,6 +207,22 @@ public class The extends LinearOpMode {
         }
     }
 **/
+private void intakeElevationControl(Servo intakeElevation, Motor intake) {
+    double elevationPower = gamepad2.right_stick_y;
+    double intakePower = gamepad2.right_trigger > 1.0 ? 1.0 : 0.9;
+
+
+    double maxPower = 1.0;
+
+
+    double newPosition = intakeElevation.getPosition() + elevationPower * 1.0;
+    newPosition = Range.clip(newPosition, 0.4, 1.0);
+    intakeElevation.setPosition(newPosition);
+
+
+    intakePower = Range.clip(intakePower / maxPower, 1, 1);
+    intake.set(intakePower);
+}
     private void droneControl(Servo drone) {
         if (gamepad1.dpad_right && !dpadRightPressed) {
             drone.setPosition(1.0);
