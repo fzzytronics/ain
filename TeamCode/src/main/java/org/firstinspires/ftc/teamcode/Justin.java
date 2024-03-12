@@ -12,9 +12,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @Autonomous
 public abstract class Justin extends LinearOpMode{
     public class OdometrySubsystem extends SubsystemBase {
-        public OdometrySubsystem(Odometry odometry) {
-            OdometrySubsystem = odometry;
-        }
 
         public Pose2d getPose() {
             return OdometrySubsystem.getPose();
