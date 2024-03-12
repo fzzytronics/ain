@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @Autonomous
 public abstract class Justin extends LinearOpMode{
     public class OdometrySubsystem extends SubsystemBase {
-        private MotorEx frontLeft;
+/*      private MotorEx frontLeft;
         private MotorEx frontRight;
         private MotorEx backLeft;
         private MotorEx backRight;
@@ -20,6 +20,7 @@ public abstract class Justin extends LinearOpMode{
         private MotorEx encoderRight;
         private MotorEx encoderPerp;
         private HolonomicOdometry holOdom;
+            ermmmmmm what the scallops*/
      }
         // Constants
         private static final double TRACKWIDTH = 13.7;
