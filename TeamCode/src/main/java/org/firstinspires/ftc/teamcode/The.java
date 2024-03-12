@@ -113,14 +113,25 @@ public class The extends LinearOpMode {
     }
 
     private void drivetrainControl(HDrive drive) {
-        double driveY = -gamepad1.left_stick_y;
-        double turnX = gamepad1.right_stick_x;
         double maxPower = 1.0;
-        double forwardPower = Range.clip(driveY / maxPower, -1, 1);
-        double turnPower = Range.clip(turnX / maxPower, -1, 1);
-        drive.setMaxSpeed(forwardPower);
-        sleep(20);
+        double forwardPower = -gamepad1.left_stick_y;
+        double turnPower = gamepad1.left_stick_x;
+
+        if (gamepad2.left_bumper) {
+            drive.toString();
+        } else if (gamepad2.right_bumper) {
+            drive.toString();
+        } else {
+
+            double leftSpeed = Range.clip(forwardPower - turnPower, -maxPower, maxPower);
+            double rightSpeed = Range.clip(forwardPower + turnPower, -maxPower, maxPower);
+
+
+            drive.toString();
+        }
     }
+
+
 
     private void intakeElevationControl(Servo intakeElevation) {
         double elevationPower = 0.0;
