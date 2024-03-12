@@ -1,13 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 //justin is not life
 //hel
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
+import com.arcrobotics.ftclib.geometry.Pose2d;
+import com.arcrobotics.ftclib.geometry.Rotation2d;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
 import com.arcrobotics.ftclib.kinematics.Odometry;
+import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveWheelSpeeds;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Autonomous
 //do not have it be an abstract class
@@ -22,7 +28,7 @@ public class Justin extends LinearOpMode{
          * Call this at the end of every loop
          */
         public void update() {
-            OdometrySubsystem.updatePose();
+            OdometrySubsystem.update();
         }
      }
         // Constants
@@ -36,11 +42,24 @@ public class Justin extends LinearOpMode{
             initializeHardware( );
             initializeOdometry();
             //big brain tbh
+           /* public void periodic(); {
+                // this snippet from ftclib doubled the errors D:
+                MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds
+                        (
+                                left_encoder.getRate(), right_encoder.getRate(),
+                                m_backLeftEncoder.getRate(), m_backRightEncoder.getRate()
+                        );
 
+                // Get my gyro angle.
+                Rotation2d gyroAngle = Rotation2d.fromDegrees(/*m_gyro.getAngle());
+
+                // Update the pose
+                Pose2d = Odometry.update(gyroAngle, wheelSpeeds);
+            }*/
 
             // wait for start
             waitForStart();
-            Odometry.resetPose();//?
+            Odometry.reset();//?
             // Autonomous routine
             while (opModeIsActive()) {
                 // while match woah
@@ -50,6 +69,7 @@ public class Justin extends LinearOpMode{
                 telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
                 telemetry.update();
                 Odometry.update();
+
                             }
         }
 
@@ -84,7 +104,7 @@ public class Justin extends LinearOpMode{
             );
 
             // Create the odometry subsystem
-                OdometrySubsystem odometry = new OdometrySubsystem(/*hol0dom??*/);
+                OdometrySubsystem odometry = new OdometrySubsystem(/*=??*/);
             }
 
         }
