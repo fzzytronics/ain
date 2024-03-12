@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 //justin is not life
 //hel
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.command.OdometrySubsystem;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
@@ -81,8 +80,7 @@ public abstract class Justin extends LinearOpMode{
             );
 
             // Create the odometry subsystem
-                OdometrySubsystem odometry = new OdometrySubsystem(hol0dom);
+                OdometrySubsystem odometry = new OdometrySubsystem(/*hol0dom??*/);
             }
 
         }
-}
