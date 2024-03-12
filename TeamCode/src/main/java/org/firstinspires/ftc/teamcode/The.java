@@ -118,18 +118,25 @@ public class The extends LinearOpMode {
         double turnPower = gamepad1.left_stick_x;
 
         if (gamepad2.left_bumper) {
-            drive.toString();
+            // Move all the way left
+            drive.tankDrive(-maxPower, maxPower);
         } else if (gamepad2.right_bumper) {
-            drive.toString();
+            // Move all the way right
+            drive.tankDrive(maxPower, -maxPower);
         } else {
-
+            // Continue with regular control
             double leftSpeed = Range.clip(forwardPower - turnPower, -maxPower, maxPower);
             double rightSpeed = Range.clip(forwardPower + turnPower, -maxPower, maxPower);
-
-
-            drive.toString();
+            drive.tankDrive(leftSpeed, rightSpeed);
         }
     }
+
+
+
+
+
+
+
 
 
 
