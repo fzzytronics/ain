@@ -10,7 +10,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous
-public abstract class Justin extends LinearOpMode{
+//do not have it be an abstract class
+public class Justin extends LinearOpMode{
     public class OdometrySubsystem extends SubsystemBase {
 /*      private MotorEx frontLeft;
         private MotorEx frontRight;

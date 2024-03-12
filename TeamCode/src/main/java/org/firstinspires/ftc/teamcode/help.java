@@ -53,6 +53,7 @@ public class help extends CommandOpMode {
     public void initialize() {
         // Initialization
         initializeHardware();
+        initializeOdometry();
 
         waitForStart();
 
