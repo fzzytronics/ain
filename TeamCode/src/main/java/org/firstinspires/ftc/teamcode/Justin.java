@@ -40,7 +40,7 @@ public abstract class Justin extends LinearOpMode{
             // Autonomous routine
             while (opModeIsActive()) {
                 // while match woah
-                //update
+                //update WHY IS IT RED :(
                 telemetry.addData("X Position (in)", Odometry.getX());
                 telemetry.addData("Y Position (in)", Odometry.getY());
                 telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
