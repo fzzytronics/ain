@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.OdometrySubsystem;
+import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.PurePursuitCommand;
 import com.arcrobotics.ftclib.drivebase.HDrive;
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
@@ -53,6 +54,7 @@ public class help extends CommandOpMode {
     public void initialize() {
         // Initialization
         initializeHardware();
+        initializeOdometry();
 
         waitForStart();
 
