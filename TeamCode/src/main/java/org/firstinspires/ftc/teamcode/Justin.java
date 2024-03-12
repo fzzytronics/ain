@@ -41,7 +41,12 @@ public abstract class Justin extends LinearOpMode{
             // Autonomous routine
             while (opModeIsActive()) {
                 // while match woah
-
+                //update
+                telemetry.addData("X Position (in)", Odometry.getX());
+                telemetry.addData("Y Position (in)", Odometry.getY());
+                telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
+                telemetry.update();
+                Odometry.update();
                             }
         }
 
@@ -78,11 +83,6 @@ public abstract class Justin extends LinearOpMode{
             // Create the odometry subsystem
                 OdometrySubsystem odometry = new OdometrySubsystem(hol0dom);
             }
-            //update
-                telemetry.addData("X Position (in)", Odometry.getX());
-                telemetry.addData("Y Position (in)", Odometry.getY());
-                telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
-                telemetry.update();
-                Odometry.update();
+
         }
 }
