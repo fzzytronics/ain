@@ -37,13 +37,24 @@ public class Justin extends LinearOpMode{
         private static final double CENTER_WHEEL_OFFSET = 2.4;
 
         @Override
+        //REMEMBER: runOpMode() --> LinearOpMode
+        //initialize() is for other stuff, namely CommandOpMode
         public void runOpMode() {
             // init hardware and odometry
             initializeHardware( );
             initializeOdometry();
             //big brain tbh
-           /* public void periodic(); {
+            public void periodic(); {
                 // this snippet from ftclib doubled the errors D:
+                /*
+                encoders are undeclared, m_encoders are also undeclared
+                Pose2d is also unrecognized, as well as anything gyro, which is WPlib and FTC core, not ftclib
+                You also cant apply update to odometry, so yall missing something
+                also the code has no idea what periodic means, make sure everything yall need is defined and/or imported
+                 */
+
+
+
                 MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds
                         (
                                 left_encoder.getRate(), right_encoder.getRate(),
@@ -51,11 +62,11 @@ public class Justin extends LinearOpMode{
                         );
 
                 // Get my gyro angle.
-                Rotation2d gyroAngle = Rotation2d.fromDegrees(/*m_gyro.getAngle());
+                Rotation2d gyroAngle = Rotation2d.fromDegrees(m_gyro.getAngle());
 
                 // Update the pose
                 Pose2d = Odometry.update(gyroAngle, wheelSpeeds);
-            }*/
+            }
 
             // wait for start
             waitForStart();
