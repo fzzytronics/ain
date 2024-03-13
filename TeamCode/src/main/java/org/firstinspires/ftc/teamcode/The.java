@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.arcrobotics.ftclib.drivebase.DifferentialDrive;
 import com.arcrobotics.ftclib.drivebase.HDrive;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -8,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "the")
+@TeleOp(name = "The")
 public class The extends LinearOpMode {
 
     private static final double LIFTY_POWER = 0.5;
@@ -23,6 +24,10 @@ public class The extends LinearOpMode {
 
     private double manualControl = 0.0;
     private boolean isManualControlActive = false;
+    private Motor front_right;
+    private Motor front_left;
+    private Motor back_right;
+    private Motor back_left;
 
     @Override
     public void runOpMode() {
@@ -112,32 +117,33 @@ public class The extends LinearOpMode {
         lifty.set(targetVelocity);
     }
 
-    private void drivetrainControl(HDrive drive) {
+    private void joystickControl(HDrive drive) {
         double maxPower = 1.0;
         double forwardPower = -gamepad1.left_stick_y;
         double turnPower = gamepad1.left_stick_x;
 
+        DifferentialDrive m_drive = new DifferentialDrive(front_right, front_left);
+
+        double leftSpeed = Range.clip(forwardPower - turnPower, -maxPower, maxPower);
+        double rightSpeed = Range.clip(forwardPower + turnPower, -maxPower, maxPower);
+        m_drive.tankDrive(leftSpeed, rightSpeed);
+    }
+
+    private void bumperControl(HDrive drive) {
+        DifferentialDrive m_drive = new DifferentialDrive(front_right, front_left, back_right, back_left);
+        double maxPower = 1.0;
+
         if (gamepad2.left_bumper) {
-            // Move all the way left
-            drive.tankDrive(-maxPower, maxPower);
+            m_drive.tankDrive(-maxPower, maxPower);
         } else if (gamepad2.right_bumper) {
-            // Move all the way right
-            drive.tankDrive(maxPower, -maxPower);
-        } else {
-            // Continue with regular control
-            double leftSpeed = Range.clip(forwardPower - turnPower, -maxPower, maxPower);
-            double rightSpeed = Range.clip(forwardPower + turnPower, -maxPower, maxPower);
-            drive.tankDrive(leftSpeed, rightSpeed);
+            m_drive.tankDrive(maxPower, -maxPower);
         }
     }
 
-
-
-
-
-
-
-
+    private void drivetrainControl(HDrive drive) {
+        joystickControl(drive);
+        bumperControl(drive);
+    }
 
 
     private void intakeElevationControl(Servo intakeElevation) {
