@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 //justin is not life
 //hel
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.command.OdometrySubsystem;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
@@ -14,14 +13,17 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //do not have it be an abstract class
 public class Justin extends LinearOpMode{
     public class OdometrySubsystem extends SubsystemBase {
-        private MotorEx frontLeft;
-        private MotorEx frontRight;
-        private MotorEx backLeft;
-        private MotorEx backRight;
-        private MotorEx encoderLeft;
-        private MotorEx encoderRight;
-        private MotorEx encoderPerp;
-        private HolonomicOdometry holOdom;
+
+        public Pose2d getPose() {
+            return OdometrySubsystem.getPose();
+        }
+
+        /**
+         * Call this at the end of every loop
+         */
+        public void update() {
+            OdometrySubsystem.updatePose();
+        }
      }
         // Constants
         private static final double TRACKWIDTH = 13.7;
@@ -42,7 +44,12 @@ public class Justin extends LinearOpMode{
             // Autonomous routine
             while (opModeIsActive()) {
                 // while match woah
-
+                //update WHY IS IT RED :(
+                telemetry.addData("X Position (in)", Odometry.getX());
+                telemetry.addData("Y Position (in)", Odometry.getY());
+                telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
+                telemetry.update();
+                Odometry.update();
                             }
         }
 
@@ -77,12 +84,7 @@ public class Justin extends LinearOpMode{
             );
 
             // Create the odometry subsystem
-                OdometrySubsystem odometry = new OdometrySubsystem(hol0dom);
+                OdometrySubsystem odometry = new OdometrySubsystem(/*hol0dom??*/);
             }
-            //update
-                telemetry.addData("X Position (in)", Odometry.getX());
-                telemetry.addData("Y Position (in)", Odometry.getY());
-                telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
-                telemetry.update();
-                Odometry.update();
+
         }
