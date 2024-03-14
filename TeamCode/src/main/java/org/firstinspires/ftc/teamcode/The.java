@@ -182,7 +182,7 @@ public class The extends LinearOpMode {
             intakePower = 1.0;
         }
 
-        intake.set(intakePower);
+        intake.set(0);
     }
 
     private void droneControl(Servo drone) {
