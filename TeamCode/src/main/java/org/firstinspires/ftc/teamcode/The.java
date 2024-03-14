@@ -115,6 +115,7 @@ public class The extends LinearOpMode {
         double leftStickY = -gamepad2.left_stick_x;
         double targetVelocity = LIFTY_POWER * leftStickY;
         lifty.set(targetVelocity);
+        lifty.set(0);
     }
 
     private void joystickControl(HDrive drive) {
@@ -123,12 +124,15 @@ public class The extends LinearOpMode {
         double forwardPower = -gamepad1.left_stick_y;
         double turnPower = gamepad1.left_stick_x;
 
-        DifferentialDrive m_drive = new DifferentialDrive(front_right, front_left);
+        HDrive m_drive = new HDrive(front_right, front_left);
 
         double leftSpeed = Range.clip(forwardPower - turnPower, -maxPower, maxPower);
         double rightSpeed = Range.clip(forwardPower + turnPower, -maxPower, maxPower);
-        m_drive.tankDrive(leftSpeed, rightSpeed);
+        front_right.set(0);
+        front_left.set(0);
+
     }
+
 
     private void bumperControl(HDrive drive) {
         DifferentialDrive m_drive = new DifferentialDrive(front_right, front_left, back_right, back_left);
