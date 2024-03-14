@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
 import com.arcrobotics.ftclib.kinematics.Odometry;
@@ -65,10 +66,27 @@ public class Justin extends CommandOpMode {
             MotorEx encoderPerp = new MotorEx(hardwareMap, "center_encoder");
             // Initialize other motors and encoders...
         }
+    private void initializeOdometry() {
+        // Initialize encoders
+        MotorEx encoderLeft = new MotorEx(hardwareMap, "front_left");
+        MotorEx encoderRight = new MotorEx(hardwareMap, "front_right");
+        MotorEx encoderCenter = new MotorEx(hardwareMap, "back_left");
 
+        // Set distance per pulse for encoders
+        double ticksToInches = WHEEL_DIAMETER * Math.PI / TICKS_PER_INCH;
+        encoderLeft.setDistancePerPulse(ticksToInches);
+        encoderRight.setDistancePerPulse(ticksToInches);
+        Motor.Encoder distance = encoderCenter.setDistancePerPulse(ticksToInches);
+
+        // Create odometry object
+        HolonomicOdometry holOdom = new HolonomicOdometry(
+                encoderLeft::getDistance,
+                encoderRight::getDistance,
+                encoderCenter::getDistance,
+                TRACKWIDTH, CENTER_WHEEL_OFFSET
         private void initializeOdometry() {
-            MotorEx encoderLeft = new MotorEx(hardwareMap, "left_encoder");
-            MotorEx encoderRight = new MotorEx(hardwareMap, "right_encoder");
+            encoderLeft = new MotorEx(hardwareMap, "left_encoder");
+            encoderRight = new MotorEx(hardwareMap, "right_encoder");
             MotorEx encoderPerp = new MotorEx(hardwareMap, "center_encoder");
 
             // Set distance per pulse for encoders
@@ -76,18 +94,9 @@ public class Justin extends CommandOpMode {
             encoderRight.setDistancePerPulse(TICKS_TO_INCHES);
             encoderPerp.setDistancePerPulse(TICKS_TO_INCHES);
 
-            // Create the odometry object
-            HolonomicOdometry holOdom = new HolonomicOdometry(
-                    encoderLeft::getDistance,
-                    encoderRight::getDistance,
-                    encoderPerp::getDistance,
-                    TRACKWIDTH, CENTER_WHEEL_OFFSET
-            );
 
             // Create the odometry subsystem
                 OdometrySubsystem odometry = new OdometrySubsystem(/*hol0dom??*/);
 
 
             }
-
-        }
