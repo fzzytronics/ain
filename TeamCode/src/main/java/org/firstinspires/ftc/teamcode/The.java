@@ -128,22 +128,27 @@ public class The extends LinearOpMode {
 
         double leftSpeed = Range.clip(forwardPower - turnPower, -maxPower, maxPower);
         double rightSpeed = Range.clip(forwardPower + turnPower, -maxPower, maxPower);
-        front_right.set(0);
-        front_left.set(0);
+
+
 
     }
 
 
     private void bumperControl(HDrive drive) {
-        DifferentialDrive m_drive = new DifferentialDrive(front_right, front_left, back_right, back_left);
+        HDrive m_drive = new HDrive(front_right, front_left, back_right, back_left);
+
         double maxPower = 1.0;
 
         if (gamepad2.left_bumper) {
-            m_drive.tankDrive(-maxPower, maxPower);
+            m_drive.setMaxSpeed(-maxPower);
         } else if (gamepad2.right_bumper) {
-            m_drive.tankDrive(maxPower, -maxPower);
+            m_drive.setMaxSpeed(maxPower);
+        } else {
+
+            m_drive.setMaxSpeed(0.0);
         }
     }
+
 
     private void drivetrainControl(HDrive drive) {
         joystickControl(drive);
