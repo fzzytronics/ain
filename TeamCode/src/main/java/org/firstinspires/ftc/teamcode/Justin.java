@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 //justin is not life
 //hel
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
@@ -11,7 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous
 //do not have it be an abstract class
-public class Justin extends LinearOpMode{
+public class Justin extends CommandOpMode {
     public class OdometrySubsystem extends SubsystemBase {
 
         public Pose2d getPose() {
@@ -31,7 +32,7 @@ public class Justin extends LinearOpMode{
         private static final double CENTER_WHEEL_OFFSET = 2.4;
 
         @Override
-        public void runOpMode() {
+        public void initialize() {
             // init hardware and odometry
             initializeHardware( );
             initializeOdometry();
@@ -85,6 +86,8 @@ public class Justin extends LinearOpMode{
 
             // Create the odometry subsystem
                 OdometrySubsystem odometry = new OdometrySubsystem(/*hol0dom??*/);
+
+
             }
 
         }
