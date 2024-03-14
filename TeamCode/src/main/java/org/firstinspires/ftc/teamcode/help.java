@@ -3,23 +3,18 @@ package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.OdometrySubsystem;
-import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.PurePursuitCommand;
-import com.arcrobotics.ftclib.drivebase.HDrive;
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
-import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.arcrobotics.ftclib.kinematics.DifferentialOdometry;
+import com.arcrobotics.ftclib.hardware.motors.MotorEx;
+import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
 import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveKinematics;
 import com.arcrobotics.ftclib.purepursuit.Path;
 import com.arcrobotics.ftclib.purepursuit.waypoints.EndWaypoint;
 import com.arcrobotics.ftclib.purepursuit.waypoints.GeneralWaypoint;
 import com.arcrobotics.ftclib.purepursuit.waypoints.StartWaypoint;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
-import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 
 //the problem child presents itself...
 
@@ -27,9 +22,6 @@ import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 @Autonomous(name = "Mogging")
 
 public class help extends CommandOpMode {
-    // Hardware components
-    private MotorEx frontLeft, backLeft, backRight, frontRight;
-    private Motor intake;
 
     // Constants
     private static final double TRACKWIDTH = 9.1;
@@ -71,11 +63,13 @@ public class help extends CommandOpMode {
 
     private void initializeHardware() {
         // Initialize motors
-        frontLeft = new MotorEx(hardwareMap, "front_left");
-        backLeft = new MotorEx(hardwareMap, "back_left");
-        backRight = new MotorEx(hardwareMap, "back_right");
-        frontRight = new MotorEx(hardwareMap, "front_right");
-        intake = new Motor(hardwareMap, "intake");
+        // Hardware components
+        MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
+        MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
+        MotorEx backRight = new MotorEx(hardwareMap, "back_right");
+        MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
+
+        Motor intake = new Motor(hardwareMap, "intake");
 
         // Initialize drive train
         driveTrain = new MecanumDrive(frontLeft, backLeft, backRight, frontRight);
