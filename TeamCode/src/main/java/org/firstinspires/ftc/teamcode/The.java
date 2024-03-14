@@ -52,11 +52,24 @@ public class The extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+            final double LIFTY_POWER = 0.5;
+            intake.set(0);
+            intakeElevation.setPosition(0);
+            boolean dpadUpPressed = false;
+            boolean dpadRightPressed = false;
+            boolean dpadLeftPressed = false;
+            boolean dpadDownPressed = false;
+
+            Servo intakeElevation = null;
+            Motor intake = new Motor();
+
+            double manualControl = 0.0;
+            boolean isManualControlActive = false;
+
             hangerControl(hanger);
             liftyControl(lifty);
             drivetrainControl(drive);
-            intakeElevationControl(intakeElevation);
-            intakeControl(intake);
+
             droneControl(drone);
 
             stopAllMotorsAndServos(hanger, lifty, claw, intake, front_left, front_right, back_left, back_right);
@@ -128,22 +141,27 @@ public class The extends LinearOpMode {
 
         double leftSpeed = Range.clip(forwardPower - turnPower, -maxPower, maxPower);
         double rightSpeed = Range.clip(forwardPower + turnPower, -maxPower, maxPower);
-        front_right.set(0);
-        front_left.set(0);
+
+
 
     }
 
 
     private void bumperControl(HDrive drive) {
-        DifferentialDrive m_drive = new DifferentialDrive(front_right, front_left, back_right, back_left);
+        HDrive m_drive = new HDrive(front_right, front_left, back_right, back_left);
+
         double maxPower = 1.0;
 
         if (gamepad2.left_bumper) {
-            m_drive.tankDrive(-maxPower, maxPower);
+            m_drive.setMaxSpeed(-maxPower);
         } else if (gamepad2.right_bumper) {
-            m_drive.tankDrive(maxPower, -maxPower);
+            m_drive.setMaxSpeed(maxPower);
+        } else {
+
+            m_drive.setMaxSpeed(0.0);
         }
     }
+
 
     private void drivetrainControl(HDrive drive) {
         joystickControl(drive);
@@ -177,7 +195,7 @@ public class The extends LinearOpMode {
             intakePower = 1.0;
         }
 
-        intake.set(intakePower);
+        intake.set(0);
     }
 
     private void droneControl(Servo drone) {
