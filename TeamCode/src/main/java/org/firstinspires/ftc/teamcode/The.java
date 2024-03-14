@@ -52,11 +52,24 @@ public class The extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+            final double LIFTY_POWER = 0.5;
+            intake.set(0);
+            intakeElevation.setPosition(0);
+            boolean dpadUpPressed = false;
+            boolean dpadRightPressed = false;
+            boolean dpadLeftPressed = false;
+            boolean dpadDownPressed = false;
+
+            Servo intakeElevation = null;
+            Motor intake = new Motor();
+
+            double manualControl = 0.0;
+            boolean isManualControlActive = false;
+
             hangerControl(hanger);
             liftyControl(lifty);
             drivetrainControl(drive);
-            intakeElevationControl(intakeElevation);
-            intakeControl(intake);
+
             droneControl(drone);
 
             stopAllMotorsAndServos(hanger, lifty, claw, intake, front_left, front_right, back_left, back_right);
