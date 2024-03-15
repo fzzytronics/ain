@@ -13,17 +13,28 @@ import com.arcrobotics.ftclib.kinematics.Odometry;
 import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveWheelSpeeds;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Autonomous
 //do not have it be an abstract class
 public class Justin extends LinearOpMode{
     public class OdometrySubsystem extends SubsystemBase {
+        public class Pose2d{
+            public Pose2d getInstance() {
+                Pose2d Pose2d = Pose2d;//iwi idk wgaat im doing w my life
+                return Pose2d;
+            }
 
-        public Pose2d getPose() {
-            return OdometrySubsystem.getPose();
         }
 
+        public class periodic{
+
+        }
+        public class MecanumDriveWheels{
+
+        }
         /**
          * Call this at the end of every loop
          */
@@ -43,6 +54,7 @@ public class Justin extends LinearOpMode{
             // init hardware and odometry
             initializeHardware( );
             initializeOdometry();
+            initializePose2d();
             //big brain tbh
             public void periodic(); {
                 // this snippet from ftclib doubled the errors D:
