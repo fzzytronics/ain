@@ -1,19 +1,23 @@
 package org.firstinspires.ftc.teamcode;
 //justin is not life
 //hel
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.arcrobotics.ftclib.geometry.Pose2d;
+import com.arcrobotics.ftclib.geometry.Rotation2d;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
 import com.arcrobotics.ftclib.kinematics.Odometry;
+import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveWheelSpeeds;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Autonomous
 //do not have it be an abstract class
-public class Justin extends CommandOpMode {
+public class Justin extends LinearOpMode{
     public class OdometrySubsystem extends SubsystemBase {
 
         public Pose2d getPose() {
@@ -24,7 +28,7 @@ public class Justin extends CommandOpMode {
          * Call this at the end of every loop
          */
         public void update() {
-            OdometrySubsystem.updatePose();
+            OdometrySubsystem.update();
         }
      }
         // Constants
@@ -33,16 +37,40 @@ public class Justin extends CommandOpMode {
         private static final double CENTER_WHEEL_OFFSET = 2.4;
 
         @Override
-        public void initialize() {
+        //REMEMBER: runOpMode() --> LinearOpMode
+        //initialize() is for other stuff, namely CommandOpMode
+        public void runOpMode() {
             // init hardware and odometry
             initializeHardware( );
             initializeOdometry();
             //big brain tbh
+            public void periodic(); {
+                // this snippet from ftclib doubled the errors D:
+                /*
+                encoders are undeclared, m_encoders are also undeclared
+                Pose2d is also unrecognized, as well as anything gyro, which is WPlib and FTC core, not ftclib
+                You also cant apply update to odometry, so yall missing something
+                also the code has no idea what periodic means, make sure everything yall need is defined and/or imported
+                 */
 
+
+
+                MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds
+                        (
+                                left_encoder.getRate(), right_encoder.getRate(),
+                                m_backLeftEncoder.getRate(), m_backRightEncoder.getRate()
+                        );
+
+                // Get my gyro angle.
+                Rotation2d gyroAngle = Rotation2d.fromDegrees(m_gyro.getAngle());
+
+                // Update the pose
+                Pose2d = Odometry.update(gyroAngle, wheelSpeeds);
+            }
 
             // wait for start
             waitForStart();
-            Odometry.resetPose();//?
+            Odometry.reset();//?
             // Autonomous routine
             while (opModeIsActive()) {
                 // while match woah
@@ -52,6 +80,7 @@ public class Justin extends CommandOpMode {
                 telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
                 telemetry.update();
                 Odometry.update();
+
                             }
         }
 
@@ -66,27 +95,10 @@ public class Justin extends CommandOpMode {
             MotorEx encoderPerp = new MotorEx(hardwareMap, "center_encoder");
             // Initialize other motors and encoders...
         }
-    private void initializeOdometry() {
-        // Initialize encoders
-        MotorEx encoderLeft = new MotorEx(hardwareMap, "front_left");
-        MotorEx encoderRight = new MotorEx(hardwareMap, "front_right");
-        MotorEx encoderCenter = new MotorEx(hardwareMap, "back_left");
 
-        // Set distance per pulse for encoders
-        double ticksToInches = WHEEL_DIAMETER * Math.PI / TICKS_PER_INCH;
-        encoderLeft.setDistancePerPulse(ticksToInches);
-        encoderRight.setDistancePerPulse(ticksToInches);
-        Motor.Encoder distance = encoderCenter.setDistancePerPulse(ticksToInches);
-
-        // Create odometry object
-        HolonomicOdometry holOdom = new HolonomicOdometry(
-                encoderLeft::getDistance,
-                encoderRight::getDistance,
-                encoderCenter::getDistance,
-                TRACKWIDTH, CENTER_WHEEL_OFFSET
         private void initializeOdometry() {
-            encoderLeft = new MotorEx(hardwareMap, "left_encoder");
-            encoderRight = new MotorEx(hardwareMap, "right_encoder");
+            MotorEx encoderLeft = new MotorEx(hardwareMap, "left_encoder");
+            MotorEx encoderRight = new MotorEx(hardwareMap, "right_encoder");
             MotorEx encoderPerp = new MotorEx(hardwareMap, "center_encoder");
 
             // Set distance per pulse for encoders
@@ -95,8 +107,16 @@ public class Justin extends CommandOpMode {
             encoderPerp.setDistancePerPulse(TICKS_TO_INCHES);
 
 
+            // Create the odometry object
+            HolonomicOdometry holOdom = new HolonomicOdometry(
+                    encoderLeft::getDistance,
+                    encoderRight::getDistance,
+                    encoderPerp::getDistance,
+                    TRACKWIDTH, CENTER_WHEEL_OFFSET
+            );
+
             // Create the odometry subsystem
-                OdometrySubsystem odometry = new OdometrySubsystem(/*hol0dom??*/);
-
-
+                OdometrySubsystem odometry = new OdometrySubsystem(/*=??*/);
             }
+
+        }
