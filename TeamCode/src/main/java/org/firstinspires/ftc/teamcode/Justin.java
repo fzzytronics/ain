@@ -19,7 +19,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Autonomous
 //do not have it be an abstract class
-public class Justin extends LinearOpMode{
+public class Justin extends LinearOpMode implements override {
     public class OdometrySubsystem extends SubsystemBase {
         public class Pose2d{
             public Pose2d getInstance() {
@@ -39,7 +39,6 @@ public class Justin extends LinearOpMode{
          * Call this at the end of every loop
          */
         public void update() {
-            OdometrySubsystem.update();
         }
      }
         // Constants
@@ -96,7 +95,10 @@ public class Justin extends LinearOpMode{
                             }
         }
 
-        private void initializeHardware() {
+    private void initializePose2d() {
+    }
+
+    private void initializeHardware() {
             // Member variables, so like motors and stuff
             MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
             MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
@@ -130,5 +132,14 @@ public class Justin extends LinearOpMode{
             // Create the odometry subsystem
                 OdometrySubsystem odometry = new OdometrySubsystem(/*=??*/);
             }
+    @Override
+    public void periodic() {
+        // Get the rotation of the robot from the gyro.
+        var gyroAngle = m_gyro.getRotation2d();
 
+        // Update the pose
+        m_pose = m_odometry.update(gyroAngle,
+                m_leftEncoder.getDistance(),
+                m_rightEncoder.getDistance());
+    }
         }
