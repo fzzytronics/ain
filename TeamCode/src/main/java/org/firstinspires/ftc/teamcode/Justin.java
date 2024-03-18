@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 //justin is not life
 //hel
-import statstatic org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
