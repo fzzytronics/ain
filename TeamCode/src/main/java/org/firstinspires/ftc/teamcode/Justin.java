@@ -1,14 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 //justin is not life
 //hel
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import androidx.annotation.NonNull;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.drivebase.RobotDrive;
-import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.geometry.Rotation2d;
+import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
@@ -17,7 +15,6 @@ import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveWheelSpeed
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Autonomous
@@ -26,6 +23,7 @@ public class Justin extends LinearOpMode{
     private Motor.Encoder m_backLeftEncoder;
     private Motor.Encoder m_backRightEncoder;
     private Motor.Encoder right_encoder;
+    private ServoEx m_gyro;
 
     public static class OdometrySubsystem extends SubsystemBase {
         public class Pose2d{
@@ -35,7 +33,7 @@ public class Justin extends LinearOpMode{
             }
 
         }
-
+///i want to die rn 
         public class periodic{
             // Get my wheel positionswheelPositions;
 
@@ -94,8 +92,9 @@ public class Justin extends LinearOpMode{
                 // while match woah
                 //update WHY IS IT RED :(
                 telemetry.addData("X Position (in)", Odometry.getX());
-                telemetry.addData("Y Position (in)", Odometry.y());
-                telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
+                telemetry.addData("Y Position (in)",
+                        Odometry.y());
+                Telemetry.Item addData = telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
                 telemetry.update();
                
 
