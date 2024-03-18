@@ -7,6 +7,7 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
 import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.geometry.Rotation2d;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
 import com.arcrobotics.ftclib.kinematics.Odometry;
@@ -23,17 +24,17 @@ public class Justin extends LinearOpMode{
     public static class OdometrySubsystem extends SubsystemBase {
         public class Pose2d{
             public Pose2d getInstance() {
-                Pose2d Pose2d = Pose2d;//iwi idk wgaat im doing w my life
+                Pose2d Pose2d = new Pose2d();//iwi idk wgaat im doing w my life
                 return Pose2d;
             }
 
         }
 
         public class periodic{
-            // Get my wheel positions
-            var wheelPositions = new MecanumDriveWheelPositions(
-                    m_frontLeftEncoder.getDistance(), m_frontRightEncoder.getDistance(),
-                    m_backLeftEncoder.getDistance(), m_backRightEncoder.getDistance());
+            // Get my wheel positionswheelPositions;
+
+            public periodic() {
+            }
         }
         public class MecanumDriveWheels{
 
@@ -57,9 +58,10 @@ public class Justin extends LinearOpMode{
             // init hardware and odometry
             initializeHardware( );
             initializeOdometry();
-            initializePose2d();
+            initializeOdometry();
             //big brain tbh
-            public void periodic(); {
+            ( )
+            ; {
                 // this snippet from ftclib doubled the errors D:
                 /*
                 encoders are undeclared, m_encoders are also undeclared
@@ -69,7 +71,7 @@ public class Justin extends LinearOpMode{
                  */
 
 
-
+                Motor.Encoder left_encoder = null;
                 MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds
                         (left_encoder.getRate(), right_encoder.getRate(),
                                 m_backLeftEncoder.getRate(), m_backRightEncoder.getRate()
@@ -79,7 +81,7 @@ public class Justin extends LinearOpMode{
                 Rotation2d gyroAngle = Rotation2d.fromDegrees(m_gyro.getAngle());
 
                 // Update the pose
-                Pose2d = Odometry.update(gyroAngle, wheelSpeeds);
+                Object Pose2d = Odometry.update(gyroAngle, wheelSpeeds);
             }
 
             // wait for start
@@ -90,10 +92,10 @@ public class Justin extends LinearOpMode{
                 // while match woah
                 //update WHY IS IT RED :(
                 telemetry.addData("X Position (in)", Odometry.getX());
-                telemetry.addData("Y Position (in)", Odometry.getY());
+                telemetry.addData("Y Position (in)", Odometry.y());
                 telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
                 telemetry.update();
-                Odometry.update();
+               
 
                             }
         }
