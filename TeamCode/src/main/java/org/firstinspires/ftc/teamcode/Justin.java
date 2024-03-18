@@ -20,7 +20,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Autonomous
 //do not have it be an abstract class
 public class Justin extends LinearOpMode{
-    public class OdometrySubsystem extends SubsystemBase {
+    public static class OdometrySubsystem extends SubsystemBase {
         public class Pose2d{
             public Pose2d getInstance() {
                 Pose2d Pose2d = Pose2d;//iwi idk wgaat im doing w my life
@@ -41,7 +41,7 @@ public class Justin extends LinearOpMode{
         /**
          * Call this at the end of every loop
          */
-        public void update() {
+        public static void update() {
             OdometrySubsystem.update();
         }
      }
@@ -71,8 +71,7 @@ public class Justin extends LinearOpMode{
 
 
                 MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds
-                        (
-                                left_encoder.getRate(), right_encoder.getRate(),
+                        (left_encoder.getRate(), right_encoder.getRate(),
                                 m_backLeftEncoder.getRate(), m_backRightEncoder.getRate()
                         );
 
