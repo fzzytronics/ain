@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 //justin is not life
 //hel
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+import statstatic org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
@@ -30,7 +30,10 @@ public class Justin extends LinearOpMode{
         }
 
         public class periodic{
-
+            // Get my wheel positions
+            var wheelPositions = new MecanumDriveWheelPositions(
+                    m_frontLeftEncoder.getDistance(), m_frontRightEncoder.getDistance(),
+                    m_backLeftEncoder.getDistance(), m_backRightEncoder.getDistance());
         }
         public class MecanumDriveWheels{
 
