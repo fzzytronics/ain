@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 //hel
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
+import androidx.annotation.NonNull;
+
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.drivebase.RobotDrive;
 import com.arcrobotics.ftclib.geometry.Pose2d;
@@ -21,6 +23,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Autonomous
 //do not have it be an abstract class
 public class Justin extends LinearOpMode{
+    private Motor.Encoder m_backLeftEncoder;
+    private Motor.Encoder m_backRightEncoder;
+    private Motor.Encoder right_encoder;
+
     public static class OdometrySubsystem extends SubsystemBase {
         public class Pose2d{
             public Pose2d getInstance() {
@@ -60,7 +66,7 @@ public class Justin extends LinearOpMode{
             initializeOdometry();
             initializeOdometry();
             //big brain tbh
-            ( )
+
             ; {
                 // this snippet from ftclib doubled the errors D:
                 /*
@@ -71,11 +77,7 @@ public class Justin extends LinearOpMode{
                  */
 
 
-                Motor.Encoder left_encoder = null;
-                MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds
-                        (left_encoder.getRate(), right_encoder.getRate(),
-                                m_backLeftEncoder.getRate(), m_backRightEncoder.getRate()
-                        );
+                MecanumDriveWheelSpeeds wheelSpeeds = getMecanumDriveWheelSpeeds();
 
                 // Get my gyro angle.
                 Rotation2d gyroAngle = Rotation2d.fromDegrees(m_gyro.getAngle());
@@ -100,7 +102,17 @@ public class Justin extends LinearOpMode{
                             }
         }
 
-        private void initializeHardware() {
+    @NonNull
+    private MecanumDriveWheelSpeeds getMecanumDriveWheelSpeeds() {
+        Motor.Encoder left_encoder = null;
+        MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds
+                (left_encoder.getRate(), right_encoder.getRate(),
+                        m_backLeftEncoder.getRate(), m_backRightEncoder.getRate()
+                );
+        return wheelSpeeds;
+    }
+
+    private void initializeHardware() {
             // Member variables, so like motors and stuff
             MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
             MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
