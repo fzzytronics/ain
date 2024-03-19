@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 //hel
 
 
+import static com.arcrobotics.ftclib.geometry.Pose2d.*;
+
 import androidx.annotation.NonNull;
 
 
@@ -55,11 +57,11 @@ public class POKEMON151 extends LinearOpMode{
             getPoseMeters().getHeading();
             return null;
         }
-        private void telemetry{
+        /*private void telemetry;{
             telemetry.addData ("getX"), com.arcrobotics.ftclib.geometry.Pose2d.getX();
             telemetry.addData ("getY"), com.arcrobotics.ftclib.geometry.Pose2d.getY();
             telemetry.addData ("getAngle"), com.arcrobotics.ftclib.geometry.Pose2d.getHeading();
-        }
+        }*/
         ///i want to die rn
         public class periodic{
             // Get my wheel positionswheelPositions;
@@ -95,7 +97,7 @@ public class POKEMON151 extends LinearOpMode{
         //big brain tbh
 
 
-        ; {
+         {
             // this snippet from ftclib doubled the errors D:
                /*
                encoders are , m_encoders are also undeclared
@@ -129,7 +131,7 @@ public class POKEMON151 extends LinearOpMode{
             Pose2d getPoseMeters = null;
             telemetry.addData("X Position (in)", getPoseMeters.getX());
             telemetry.addData("Y Position (in)", getPoseMeters.getY());
-            telemetry.addData("Theta (deg)", Math.toDegrees(getPoseMeters.getTheta()));
+            Telemetry.Item addData = telemetry.addData("Theta (deg)", Math.toDegrees(getPoseMeters.getHeading()));
             telemetry.update();
 
 
