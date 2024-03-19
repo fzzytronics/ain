@@ -26,12 +26,29 @@ public class Justin extends LinearOpMode{
     private ServoEx m_gyro;
 
     public static class OdometrySubsystem extends SubsystemBase {
-        public class Pose2d{
-            public Pose2d getInstance() {
-                Pose2d Pose2d = new Pose2d();//iwi idk wgaat im doing w my life
-                return Pose2d;
-            }
+        public class Pose2d {
 
+            public void Pose2d(double x,
+                               double y) {
+                double getX;
+                double getY;
+                double getHeading;
+            }
+        }
+        private Pose2d Pose2d() {
+            Pose2d Pose2d = new Pose2d();//iwi idk wgaat im doing w my life
+            return Pose2d;
+        }
+        private com.arcrobotics.ftclib.geometry.Pose2d getPoseMeters() {
+            getPoseMeters().getX();
+            getPoseMeters().getY();
+            getPoseMeters().getHeading();
+            return null;
+        }
+            private void telemetry{
+            telemetry.addData ("getX"), com.arcrobotics.ftclib.geometry.Pose2d.getX();
+            telemetry.addData ("getY"), com.arcrobotics.ftclib.geometry.Pose2d.getY();
+            telemetry.addData ("getAngle"), com.arcrobotics.ftclib.geometry.Pose2d.getHeading();
         }
 ///i want to die rn 
         public class periodic{
@@ -62,7 +79,6 @@ public class Justin extends LinearOpMode{
             // init hardware and odometry
             initializeHardware( );
             initializeOdometry();
-            initializeOdometry();
             //big brain tbh
 
             ; {
@@ -81,20 +97,19 @@ public class Justin extends LinearOpMode{
                 Rotation2d gyroAngle = Rotation2d.fromDegrees(m_gyro.getAngle());
 
                 // Update the pose
-                Object Pose2d = Odometry.update(gyroAngle, wheelSpeeds);
+                Pose2d.update(gyroAngle, wheelSpeeds);
             }
 
             // wait for start
             waitForStart();
-            Odometry.reset();//?
+            Pose2d.reset();//?
             // Autonomous routine
             while (opModeIsActive()) {
                 // while match woah
                 //update WHY IS IT RED :(
-                telemetry.addData("X Position (in)", Odometry.getX());
-                telemetry.addData("Y Position (in)",
-                        Odometry.y());
-                Telemetry.Item addData = telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
+                telemetry.addData("X Position (in)", getPoseMeters.getX());
+                telemetry.addData("Y Position (in)", getPoseMeters.getY());
+                telemetry.addData("Theta (deg)", Math.toDegrees(getPoseMeters.getTheta()));
                 telemetry.update();
                
 
