@@ -40,7 +40,7 @@ public class help extends CommandOpMode {
     private double turn;
     private double heading;
     private PurePursuitCommand ppCommand;
-//yurr
+//yurr b
     //rebase test
 
     @Override
@@ -54,8 +54,14 @@ public class help extends CommandOpMode {
         while (opModeIsActive()) {
             // Autonomous actions
             // Update odometry
+            Pose2d pose = odometry.getPose();
+            telemetry.addData("X Position (in)", pose.getX());
+            telemetry.addData("Y Position (in)", pose.getY());
+            telemetry.addData("Angle", pose.getHeading());
             odometry.updatePose();
+
             m_path.followPath(driveTrain, odometry);
+            telemetry.update();
 
             ppCommand.schedule(); // Schedule the command
             m_path.init();
