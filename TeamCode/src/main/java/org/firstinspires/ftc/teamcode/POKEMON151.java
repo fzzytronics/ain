@@ -54,11 +54,11 @@ public class POKEMON151 extends LinearOpMode{
             getPoseMeters().getHeading();
             return null;
         }
-        private void telemetry;{
+        /*private void telemetry;{
             telemetry.addData ("getX"), com.arcrobotics.ftclib.geometry.Pose2d.getX();
             telemetry.addData ("getY"), com.arcrobotics.ftclib.geometry.Pose2d.getY();
             telemetry.addData ("getAngle"), com.arcrobotics.ftclib.geometry.Pose2d.getHeading();
-        }
+        }*/
         ///i want to die rn
         public class periodic{
             // Get my wheel positionswheelPositions;
