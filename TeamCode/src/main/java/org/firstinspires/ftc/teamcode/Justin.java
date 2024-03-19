@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 //justin is not life
 //hel
-import statstatic org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
+import androidx.annotation.NonNull;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.drivebase.RobotDrive;
-import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.geometry.Rotation2d;
+import com.arcrobotics.ftclib.hardware.ServoEx;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
 import com.arcrobotics.ftclib.kinematics.Odometry;
@@ -14,26 +15,30 @@ import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveWheelSpeed
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Autonomous
 //do not have it be an abstract class
 public class Justin extends LinearOpMode{
-    public class OdometrySubsystem extends SubsystemBase {
+    private Motor.Encoder m_backLeftEncoder;
+    private Motor.Encoder m_backRightEncoder;
+    private Motor.Encoder right_encoder;
+    private ServoEx m_gyro;
+
+    public static class OdometrySubsystem extends SubsystemBase {
         public class Pose2d{
             public Pose2d getInstance() {
-                Pose2d Pose2d = Pose2d;//iwi idk wgaat im doing w my life
+                Pose2d Pose2d = new Pose2d();//iwi idk wgaat im doing w my life
                 return Pose2d;
             }
 
         }
-
+///i want to die rn 
         public class periodic{
-            // Get my wheel positions
-            var wheelPositions = new MecanumDriveWheelPositions(
-                    m_frontLeftEncoder.getDistance(), m_frontRightEncoder.getDistance(),
-                    m_backLeftEncoder.getDistance(), m_backRightEncoder.getDistance());
+            // Get my wheel positionswheelPositions;
+
+            public periodic() {
+            }
         }
         public class MecanumDriveWheels{
 
@@ -41,7 +46,7 @@ public class Justin extends LinearOpMode{
         /**
          * Call this at the end of every loop
          */
-        public void update() {
+        public static void update() {
             OdometrySubsystem.update();
         }
      }
@@ -57,30 +62,26 @@ public class Justin extends LinearOpMode{
             // init hardware and odometry
             initializeHardware( );
             initializeOdometry();
-            initializePose2d();
+            initializeOdometry();
             //big brain tbh
-            public void periodic(); {
+
+            ; {
                 // this snippet from ftclib doubled the errors D:
                 /*
-                encoders are undeclared, m_encoders are also undeclared
+                encoders are , m_encoders are also undeclared
                 Pose2d is also unrecognized, as well as anything gyro, which is WPlib and FTC core, not ftclib
-                You also cant apply update to odometry, so yall missing something
+                You also cant appundeclaredly update to odometry, so yall missing something
                 also the code has no idea what periodic means, make sure everything yall need is defined and/or imported
                  */
 
 
-
-                MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds
-                        (
-                                left_encoder.getRate(), right_encoder.getRate(),
-                                m_backLeftEncoder.getRate(), m_backRightEncoder.getRate()
-                        );
+                MecanumDriveWheelSpeeds wheelSpeeds = getMecanumDriveWheelSpeeds();
 
                 // Get my gyro angle.
                 Rotation2d gyroAngle = Rotation2d.fromDegrees(m_gyro.getAngle());
 
                 // Update the pose
-                Pose2d = Odometry.update(gyroAngle, wheelSpeeds);
+                Object Pose2d = Odometry.update(gyroAngle, wheelSpeeds);
             }
 
             // wait for start
@@ -91,15 +92,26 @@ public class Justin extends LinearOpMode{
                 // while match woah
                 //update WHY IS IT RED :(
                 telemetry.addData("X Position (in)", Odometry.getX());
-                telemetry.addData("Y Position (in)", Odometry.getY());
-                telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
+                telemetry.addData("Y Position (in)",
+                        Odometry.y());
+                Telemetry.Item addData = telemetry.addData("Theta (deg)", Math.toDegrees(Odometry.getTheta()));
                 telemetry.update();
-                Odometry.update();
+               
 
                             }
         }
 
-        private void initializeHardware() {
+    @NonNull
+    private MecanumDriveWheelSpeeds getMecanumDriveWheelSpeeds() {
+        Motor.Encoder left_encoder = null;
+        MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds
+                (left_encoder.getRate(), right_encoder.getRate(),
+                        m_backLeftEncoder.getRate(), m_backRightEncoder.getRate()
+                );
+        return wheelSpeeds;
+    }
+
+    private void initializeHardware() {
             // Member variables, so like motors and stuff
             MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
             MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
