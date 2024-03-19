@@ -1,0 +1,94 @@
+package org.firstinspires.ftc.teamcode;
+
+
+import com.arcrobotics.ftclib.geometry.Pose2d;
+import com.arcrobotics.ftclib.geometry.Rotation2d;
+import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+
+
+@Autonomous
+public class mechageist extends LinearOpMode {
+
+
+   private DcMotorEx frontLeft;
+   private DcMotorEx frontRight;
+   private DcMotorEx backLeft;
+   private DcMotorEx backRight;
+
+
+   private static final double TICKS_PER_REV = 1440.0;
+   private static final double WHEEL_DIAMETER = 2.0; // inches
+   private static final double GEAR_RATIO = 1.0;
+   private static final double TICKS_PER_INCH = TICKS_PER_REV * GEAR_RATIO / (WHEEL_DIAMETER * Math.PI);
+
+
+   private static final double TRACK_WIDTH = 13.7; // inches
+   private static final double CENTER_WHEEL_OFFSET = 2.4; // inches
+
+
+   @Override
+   public void runOpMode() {
+       frontLeft = hardwareMap.get(DcMotorEx.class, "front_left");
+       frontRight = hardwareMap.get(DcMotorEx.class, "front_right");
+       backLeft = hardwareMap.get(DcMotorEx.class, "back_left");
+       backRight = hardwareMap.get(DcMotorEx.class, "back_right");
+
+
+       HolonomicOdometry odometry = new HolonomicOdometry(
+               () -> frontLeft.getCurrentPosition() / TICKS_PER_INCH,
+               () -> frontRight.getCurrentPosition() / TICKS_PER_INCH,
+               () -> backLeft.getCurrentPosition() / TICKS_PER_INCH,
+               TRACK_WIDTH, CENTER_WHEEL_OFFSET
+       );
+
+
+       waitForStart();
+
+
+       while (opModeIsActive()) {
+           odometry.updatePose();
+
+
+           // Perform autonomous tasks here
+           // Move the robot forward for 12 in.
+           moveForward(odometry, 12.0);
+
+
+           telemetry.addData("X Position (in)", odometry.getPose().getX());
+           telemetry.addData("Y Position (in)", odometry.getPose().getY());
+           telemetry.addData("Heading (deg)", odometry.getPose().getRotation().getDegrees());
+           telemetry.update();
+       }
+   }
+
+
+   private void moveForward(HolonomicOdometry odometry, double distance) {
+       // Calculate target position
+       double targetPosition = odometry.getPose().getX() + distance * TICKS_PER_INCH;
+
+
+       // Set motor powers to move forward
+       while (opModeIsActive() && odometry.getPose().getX() < targetPosition) {
+           frontLeft.setPower(0.5);
+           frontRight.setPower(0.5);
+           backLeft.setPower(0.5);
+           backRight.setPower(0.5);
+       }
+
+
+       stopRobot();
+   }
+
+
+   private void stopRobot() {
+       // Set motor powers to zero to stop the robot
+       frontLeft.setPower(0);
+       frontRight.setPower(0);
+       backLeft.setPower(0);
+       backRight.setPower(0);
+   }
+}
+
