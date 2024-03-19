@@ -5,6 +5,7 @@ package org.firstinspires.ftc.teamcode;
 import androidx.annotation.NonNull;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.geometry.Rotation2d;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
@@ -107,6 +108,7 @@ public class Justin extends LinearOpMode{
             while (opModeIsActive()) {
                 // while match woah
                 //update WHY IS IT RED :(
+                Pose2d getPoseMeters = null;
                 telemetry.addData("X Position (in)", getPoseMeters.getX());
                 telemetry.addData("Y Position (in)", getPoseMeters.getY());
                 telemetry.addData("Theta (deg)", Math.toDegrees(getPoseMeters.getTheta()));
