@@ -32,6 +32,9 @@ public class POKEMON151 extends LinearOpMode{
 
 
     public static class OdometrySubsystem extends SubsystemBase {
+        public OdometrySubsystem() {
+        }
+
         public class Pose2d {
 
 
