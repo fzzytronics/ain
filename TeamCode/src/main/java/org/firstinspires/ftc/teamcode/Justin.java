@@ -68,9 +68,9 @@ public class Justin extends LinearOpMode{
             ; {
                 // this snippet from ftclib doubled the errors D:
                 /*
-                encoders are undeclared, m_encoders are also undeclared
+                encoders are , m_encoders are also undeclared
                 Pose2d is also unrecognized, as well as anything gyro, which is WPlib and FTC core, not ftclib
-                You also cant apply update to odometry, so yall missing something
+                You also cant appundeclaredly update to odometry, so yall missing something
                 also the code has no idea what periodic means, make sure everything yall need is defined and/or imported
                  */
 
