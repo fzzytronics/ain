@@ -17,7 +17,7 @@ public class JHKUOHUOHOH extends LinearOpMode {
     DcMotorEx back_right;
 
     double ticksPerRev = 1440;
-    double wheelDiameter = 2.0;
+    double wheelDiameter = 3.0;
     double gearRatio = 1.0;
 
     double ticksPerInch = ticksPerRev / (wheelDiameter * Math.PI * gearRatio);
