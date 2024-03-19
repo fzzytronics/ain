@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 
 @Autonomous
+//CommandOpMode
 public class mechageist extends LinearOpMode {
 
 
@@ -30,6 +31,7 @@ public class mechageist extends LinearOpMode {
 
 
    @Override
+   //initialize, not runOpMode
    public void runOpMode() {
        frontLeft = hardwareMap.get(DcMotorEx.class, "front_left");
        frontRight = hardwareMap.get(DcMotorEx.class, "front_right");
