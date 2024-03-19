@@ -1,4 +1,5 @@
-package org.firstinspires.ftc.teamcode;
+/*
+// package org.firstinspires.ftc.teamcode;
 //justin is not life
 //hel
 
@@ -17,6 +18,7 @@ import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
 import com.arcrobotics.ftclib.kinematics.Odometry;
 import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveWheelSpeeds;
+import com.google.blocks.ftcrobotcontroller.runtime.BNO055IMUAccess;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -63,11 +65,21 @@ public class POKEMON151 extends LinearOpMode{
             telemetry.addData ("getAngle"), com.arcrobotics.ftclib.geometry.Pose2d.getHeading();
         }*/
         ///i want to die rn
-        public class periodic{
+  /*      public class periodic{
             // Get my wheel positionswheelPositions;
 
 
             public periodic() {
+                // Get the rotation of the robot from the gyro.
+                var gyroAngle = m_gyro.getRotation2d();
+
+                // Update the pose
+                m_pose = m_odometry.update(gyroAngle,
+                        new SwerveModulePosition[] {
+                                m_frontLeftModule.getPosition(), m_frontRightModule.getPosition(),
+                                m_backLeftModule.getPosition(), m_backRightModule.getPosition()
+                        });
+            }
             }
         }
         public class MecanumDriveWheels{
@@ -77,7 +89,7 @@ public class POKEMON151 extends LinearOpMode{
         /**
          * Call this at the end of every loop
          */
-        public static void update() {
+    /*    public static void update() {
             OdometrySubsystem.update();
         }
     }
@@ -109,12 +121,10 @@ public class POKEMON151 extends LinearOpMode{
 
 
 
-            MecanumDriveWheelSpeeds wheelSpeeds = getMecanumDriveWheelSpeeds();
-
+      /*      MecanumDriveWheelSpeeds wheelSpeeds = getMecanumDriveWheelSpeeds();
 
             // Get my gyro angle.
             Rotation2d gyroAngle = Rotation2d.fromDegrees(m_gyro.getAngle());
-
 
             // Update the pose
             Pose2d.update(gyroAngle, wheelSpeeds);
@@ -191,11 +201,6 @@ public class POKEMON151 extends LinearOpMode{
 
 
         // Create the odometry subsystem
-        OdometrySubsystem odometry = new OdometrySubsystem(/*=??*/);
+        OdometrySubsystem odometry = new OdometrySubsystem(/*=??*//*);
     }
-
-
-}
-
-
-
+}*/
