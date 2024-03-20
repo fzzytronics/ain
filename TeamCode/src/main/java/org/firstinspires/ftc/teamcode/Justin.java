@@ -22,6 +22,9 @@ public class Justin extends LinearOpMode {
 
     public static class OdometrySubsystem extends SubsystemBase {
         private Pose2d pose;
+        double getX;
+        double getY;
+        double getHeading;
 
         public OdometrySubsystem(double initialX, double initialY) {
             this.pose = new Pose2d();
@@ -30,7 +33,12 @@ public class Justin extends LinearOpMode {
         public Pose2d getPose() {
             return pose;
         }
+        public void periodic() {
+            //KMS
+        }
+
     }
+
 
     OdometrySubsystem odometrySubsystem = new OdometrySubsystem(0, 0);
 
@@ -50,7 +58,6 @@ public class Justin extends LinearOpMode {
             MotorEx encoderCenter = new MotorEx(hardwareMap, "center_encoder");
         }
         initializeOdometry();
-
         waitForStart();
 
         while (opModeIsActive()) {
