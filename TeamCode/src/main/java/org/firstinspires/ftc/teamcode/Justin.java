@@ -40,7 +40,15 @@ public class Justin extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        initializeHardware();
+        initializeHardware() ;{
+            MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
+            MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
+            MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
+            MotorEx backRight = new MotorEx (hardwareMap, "back_right");
+            MotorEx encoderLeft = new MotorEx(hardwareMap, "left_encoder");
+            MotorEx encoderRight = new MotorEx(hardwareMap, "right_encoder");
+            MotorEx encoderPerp = new MotorEx(hardwareMap, "center_encoder");
+        }
         initializeOdometry();
 
         waitForStart();
@@ -70,9 +78,10 @@ public class Justin extends LinearOpMode {
         MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
         MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
         MotorEx backRight = new MotorEx(hardwareMap, "back_right");
-        MotorEx encoderLeft = new MotorEx(hardwareMap, "left_encoder");
-        MotorEx encoderRight = new MotorEx(hardwareMap, "right_encoder");
-        MotorEx encoderPerp = new MotorEx(hardwareMap, "center_encoder");
+
+        MotorEx encoderLeft = new MotorEx(hardwareMap, "front_left");
+        MotorEx encoderRight = new MotorEx(hardwareMap, "front_right");
+        MotorEx encoderPerp = new MotorEx(hardwareMap, "back_right");
         // Initialize other motors and encoders...
     }
 
