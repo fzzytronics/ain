@@ -1,23 +1,24 @@
 package org.firstinspires.ftc.teamcode;
 
-
+import androidx.annotation.NonNull;
+import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.geometry.Rotation2d;
+import com.arcrobotics.ftclib.hardware.ServoEx;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
+import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveWheelSpeeds;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-
 
 @Autonomous
-//CommandOpMode
-public class mechageist extends LinearOpMode {
+public class mechageist extends LinearOpMode{
 
-
-   private DcMotorEx frontLeft;
-   private DcMotorEx frontRight;
-   private DcMotorEx backLeft;
-   private DcMotorEx backRight;
+    private Motor.Encoder encoderLeft;
+    private Motor.Encoder encoderRight;
+    private Motor.Encoder encoderCenter;
+    private ServoEx m_gyro;
 
 
    private static final double TICKS_PER_REV = 1440.0;
