@@ -141,6 +141,7 @@ public class POKEMON151 extends LinearOpMode{
             update WHY IS IT RED :(
             /not much red 
             */
+/*
             Pose2d getPoseMeters = null;
             telemetry.addData("X Position (in)", getPoseMeters.getX());
             telemetry.addData("Y Position (in)", getPoseMeters.getY());
