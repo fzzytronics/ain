@@ -71,7 +71,6 @@ public class Justin extends LinearOpMode {
 
     @NonNull
     private MecanumDriveWheelSpeeds getMecanumDriveWheelSpeeds() {
-        Motor.Encoder encoderLeft = null;
         MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds(
                 encoderLeft.getRate(), encoderCenter.getRate(),
                 encoderLeft.getRate(), encoderRight.getRate()
