@@ -53,9 +53,9 @@ public class Justin extends LinearOpMode {
             MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
             MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
             MotorEx backRight = new MotorEx (hardwareMap, "back_right");
-            MotorEx encoderLeft = new MotorEx(hardwareMap, "left_encoder");
-            MotorEx encoderRight = new MotorEx(hardwareMap, "right_encoder");
-            MotorEx encoderCenter = new MotorEx(hardwareMap, "center_encoder");
+            MotorEx encoderLeft = new MotorEx(hardwareMap, "encoderLeft");
+            MotorEx encoderRight = new MotorEx(hardwareMap, "encoderRight");
+            MotorEx encoderCenter = new MotorEx(hardwareMap, "encodeCenter");
         }
         initializeOdometry();
         waitForStart();
@@ -86,16 +86,16 @@ public class Justin extends LinearOpMode {
         MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
         MotorEx backRight = new MotorEx(hardwareMap, "back_right");
 
-        MotorEx encoderLeft = new MotorEx(hardwareMap, "front_left");
-        MotorEx encoderRight = new MotorEx(hardwareMap, "front_right");
-        MotorEx encoderCenter = new MotorEx(hardwareMap, "back_right");
+        MotorEx encoderLeft = new MotorEx(hardwareMap, "encoderLeft");
+        MotorEx encoderRight = new MotorEx(hardwareMap, "encoderRight");
+        MotorEx encoderCenter = new MotorEx(hardwareMap, "encoderCenter");
         // Initialize other motors and encoders...
     }
 
     private void initializeOdometry() {
-        MotorEx encoderLeft = new MotorEx(hardwareMap, "left_encoder");
-        MotorEx encoderRight = new MotorEx(hardwareMap, "right_encoder");
-        MotorEx encoderCenter = new MotorEx(hardwareMap, "center_encoder");
+        MotorEx encoderLeft = new MotorEx(hardwareMap, "encoderLeft");
+        MotorEx encoderRight = new MotorEx(hardwareMap, "encoderRight");
+        MotorEx encoderCenter = new MotorEx(hardwareMap, "encoderCenter");
 
         // Set distance per pulse for encoders
         encoderLeft.setDistancePerPulse(TICKS_TO_INCHES);
