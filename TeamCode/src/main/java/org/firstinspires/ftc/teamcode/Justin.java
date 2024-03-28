@@ -49,6 +49,7 @@ public class Justin extends LinearOpMode {
     @Override
     public void runOpMode() {
         initializeHardware() ;{
+
             MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
             MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
             MotorEx backLeft = new MotorEx(hardwareMap, "back_left");

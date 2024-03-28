@@ -22,8 +22,7 @@ public class The extends LinearOpMode {
     private Servo intakeElevation;
     private Motor intake;
 
-    private double manualControl = 0.0;
-    private boolean isManualControlActive = false;
+
     private Motor front_right;
     private Motor front_left;
     private Motor back_right;
@@ -31,51 +30,53 @@ public class The extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+            Gamepad gamepad1 = this.gamepad1;
+            Gamepad gamepad2 = this.gamepad2;
+            intake = new Motor(hardwareMap, "intake");
+            intakeElevation = hardwareMap.get(Servo.class, "intake_elevation");
+            Servo drone = hardwareMap.get(Servo.class, "drone");
+            Motor hanger = new Motor(hardwareMap, "hanger");
+            Motor claw = new Motor(hardwareMap, "claw");
+            Motor lifty = new Motor(hardwareMap, "lifty");
+            Motor front_left = new Motor(hardwareMap, "front_left");
+            Motor front_right = new Motor(hardwareMap, "front_right");
+            Motor back_left = new Motor(hardwareMap, "back_left");
+            Motor back_right = new Motor(hardwareMap, "back_right");
+            HDrive drive = new HDrive(front_left, front_right, back_left, back_right);
 
-        Gamepad gamepad1 = this.gamepad1;
-        Gamepad gamepad2 = this.gamepad2;
+            initializeMotorsAndServos(hanger, claw, lifty, intake, intakeElevation, drone, front_left, front_right, back_left, back_right);
 
-        Motor hanger = new Motor(hardwareMap, "hanger");
-        Motor claw = new Motor(hardwareMap, "claw");
-        Motor lifty = new Motor(hardwareMap, "lifty");
-        intake = new Motor(hardwareMap, "intake");
-        intakeElevation = hardwareMap.get(Servo.class, "intake_elevation");
-        Servo drone = hardwareMap.get(Servo.class, "drone");
-        Motor front_left = new Motor(hardwareMap, "front_left");
-        Motor front_right = new Motor(hardwareMap, "front_right");
-        Motor back_left = new Motor(hardwareMap, "back_left");
-        Motor back_right = new Motor(hardwareMap, "back_right");
-        HDrive drive = new HDrive(front_left, front_right, back_left, back_right);
+            waitForStart();
 
-        initializeMotorsAndServos(hanger, claw, lifty, intake, intakeElevation, drone, front_left, front_right, back_left, back_right);
+            while (opModeIsActive()) {
+                final double LIFTY_POWER = 0.5;
+                intake.set(0);
+                intakeElevation.setPosition(0);
+                boolean dpadUpPressed = false;
+                boolean dpadRightPressed = false;
+                boolean dpadLeftPressed = false;
+                boolean dpadDownPressed = false;
 
-        waitForStart();
+                if (intakeElevation == null) {
+                    telemetry.addLine("intakeElevation is null!");
+                    telemetry.update();
+                } else {
+                    intakeElevation.setPosition(0);
+                }
 
-        while (opModeIsActive()) {
-            final double LIFTY_POWER = 0.5;
-            intake.set(0);
-            intakeElevation.setPosition(0);
-            boolean dpadUpPressed = false;
-            boolean dpadRightPressed = false;
-            boolean dpadLeftPressed = false;
-            boolean dpadDownPressed = false;
 
-            Servo intakeElevation = null;
-            Motor intake = new Motor();
 
-            double manualControl = 0.0;
-            boolean isManualControlActive = false;
+                hangerControl(hanger);
+                liftyControl(lifty);
+                drivetrainControl(drive);
 
-            hangerControl(hanger);
-            liftyControl(lifty);
-            drivetrainControl(drive);
+                droneControl(drone);
 
-            droneControl(drone);
-
-            stopAllMotorsAndServos(hanger, lifty, claw, intake, front_left, front_right, back_left, back_right);
-            stopAllServos(intakeElevation, drone);
+                stopAllMotorsAndServos(hanger, lifty, claw, intake, front_left, front_right, back_left, back_right);
+                stopAllServos(intakeElevation, drone);
+            }
         }
-    }
+
 
     private void initializeMotorsAndServos(Motor hanger, Motor claw, Motor lifty, Motor intake, Servo intakeElevation, Servo drone, Motor frontLeft, Motor frontRight, Motor backLeft, Motor backRight) {
         hanger.setRunMode(Motor.RunMode.VelocityControl);
@@ -87,10 +88,10 @@ public class The extends LinearOpMode {
         backLeft.setRunMode(Motor.RunMode.RawPower);
         backRight.setRunMode(Motor.RunMode.RawPower);
 
-        frontLeft.set(1);
-        frontRight.set(1);
-        backLeft.set(1);
-        backRight.set(1);
+        frontLeft.set(0);
+        frontRight.set(0);
+        backLeft.set(0);
+        backRight.set(0);
 
         intakeElevation.setPosition(0.0);
         drone.setPosition(0.0);
@@ -132,19 +133,20 @@ public class The extends LinearOpMode {
     }
 
     private void joystickControl(HDrive drive) {
-
         double maxPower = 1.0;
-        double forwardPower = -gamepad1.left_stick_y;
-        double turnPower = gamepad1.left_stick_x;
+        double turnPower = -gamepad1.right_stick_y;
+        double forwardPower = gamepad1.left_stick_x;
 
-        HDrive m_drive = new HDrive(front_right, front_left);
 
-        double leftSpeed = Range.clip(forwardPower - turnPower, -maxPower, maxPower);
-        double rightSpeed = Range.clip(forwardPower + turnPower, -maxPower, maxPower);
+        double frontLeftPower = Range.clip(1 + 1, -1, 1);
+        double frontRightPower = Range.clip(1 - 1, -1, 1);
+        double backLeftPower = Range.clip(1 + 1, -1, 1);
+        double backRightPower = Range.clip(1 - 1, -1,1);
 
 
 
     }
+
 
 
     private void bumperControl(HDrive drive) {
@@ -158,9 +160,10 @@ public class The extends LinearOpMode {
             m_drive.setMaxSpeed(maxPower);
         } else {
 
-            m_drive.setMaxSpeed(0.0);
+            m_drive.setMaxSpeed(1.0);
         }
     }
+
 
 
     private void drivetrainControl(HDrive drive) {
@@ -170,7 +173,7 @@ public class The extends LinearOpMode {
 
 
     private void intakeElevationControl(Servo intakeElevation) {
-        double elevationPower = 0.0;
+        double elevationPower = 1.0;
 
         if (gamepad2.dpad_up && !dpadUpPressed) {
             elevationPower = 0.824;
@@ -189,7 +192,7 @@ public class The extends LinearOpMode {
     }
 
     private void intakeControl(Motor intake) {
-        double intakePower = 0.0;
+        double intakePower = 1.0;
 
         if (gamepad1.right_trigger > 0.1) {
             intakePower = 1.0;
