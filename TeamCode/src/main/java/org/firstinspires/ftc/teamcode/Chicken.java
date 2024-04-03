@@ -26,34 +26,36 @@ public class Chicken extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            double frontLeftPower = 0;
-            double frontRightPower = 0;
-            double backLeftPower = 0;
-            double backRightPower = 0;
+            double strafe = gamepad1.left_stick_x;
+            double turn = gamepad1.right_stick_x;
+            double forward = -gamepad1.left_stick_y;
 
+            double frontLeftPower, frontRightPower, backLeftPower, backRightPower;
 
-            double strafe = (Math.abs(gamepad1.left_stick_x) >= 0.9) ? Math.signum(gamepad1.left_stick_x) : 0;
-            double turn = (Math.abs(gamepad1.right_stick_x) >= 0.9) ? Math.signum(gamepad1.right_stick_x) : 0;
+            if (Math.abs(strafe) >= 1.0) {
 
+                frontLeftPower = Range.clip(-strafe, -1.0, 1.0);
+                frontRightPower = Range.clip(strafe, -1.0, 1.0);
+                backLeftPower = Range.clip(strafe, -1.0, 1.0);
+                backRightPower = Range.clip(-strafe, -1.0, 1.0);
+            } else if (Math.abs(turn) >= 1.0) {
 
-            if (strafe != 0) {
-                frontLeftPower = Range.clip(-1 + 1, -1.0, 1.0);
-                frontRightPower = Range.clip(1 - 1, -1.0, 1.0);
-                backLeftPower = Range.clip(1 + 1, -1.0, 1.0);
-                backRightPower = Range.clip(-1 - 1, -1.0, 1.0);
-            } else if (turn != 0) {
-                frontLeftPower = Range.clip(1, -1.0, 1.0);
-                frontRightPower = Range.clip(-1, -1.0, 1.0);
-                backLeftPower = Range.clip(1, -1.0, 1.0);
-                backRightPower = Range.clip(-1, -1.0, 1.0);
+                frontLeftPower = Range.clip(turn, -1.0, 1.0);
+                frontRightPower = Range.clip(-turn, -1.0, 1.0);
+                backLeftPower = Range.clip(turn, -1.0, 1.0);
+                backRightPower = Range.clip(-turn, -1.0, 1.0);
+            } else {
+
+                frontLeftPower = Range.clip(forward, -1.0, 1.0);
+                frontRightPower = Range.clip(forward, -1.0, 1.0);
+                backLeftPower = Range.clip(forward, -1.0, 1.0);
+                backRightPower = Range.clip(forward, -1.0, 1.0);
             }
 
-
-            frontLeft.set(1);
-            frontRight.set(1);
-            backLeft.set(1);
-            backRight.set(1);
-
+            frontLeft.set(frontLeftPower);
+            frontRight.set(frontRightPower);
+            backLeft.set(backLeftPower);
+            backRight.set(backRightPower);
 
             telemetry.addData("Front Left Power", frontLeftPower);
             telemetry.addData("Front Right Power", frontRightPower);
