@@ -70,7 +70,6 @@ public class Justin extends LinearOpMode {
         }
     }
 
-    @NonNull
     private MecanumDriveWheelSpeeds getMecanumDriveWheelSpeeds() {
         MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds(
                 encoderLeft.getRate(), encoderCenter.getRate(),
