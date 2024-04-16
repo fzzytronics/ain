@@ -12,13 +12,17 @@ import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
 import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveWheelSpeeds;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 
 @Autonomous
 public class Justin extends LinearOpMode {
-    private Motor.Encoder encoderLeft;
-    private Motor.Encoder encoderRight;
-    private Motor.Encoder encoderCenter;
-    private ServoEx m_gyro;
+    Motor motor = new Motor(hardwareMap, "motor encoder");
+    Motor.Encoder encoder = motor.encoder;
+    Motor.Encoder encoderLeft;
+    Motor.Encoder encoderRight;
+    Motor.Encoder encoderCenter;
+    ServoEx m_gyro;
 
     public static class OdometrySubsystem extends SubsystemBase {
         private Pose2d pose;
@@ -33,6 +37,7 @@ public class Justin extends LinearOpMode {
         public Pose2d getPose() {
             return pose;
         }
+
         public void periodic() {
             //KMS
         }
@@ -48,12 +53,13 @@ public class Justin extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        initializeHardware() ;{
+        initializeHardware();
+        {
 
             MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
             MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
             MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
-            MotorEx backRight = new MotorEx (hardwareMap, "back_right");
+            MotorEx backRight = new MotorEx(hardwareMap, "back_right");
             MotorEx encoderLeft = new MotorEx(hardwareMap, "encoderLeft");
             MotorEx encoderRight = new MotorEx(hardwareMap, "encoderRight");
             MotorEx encoderCenter = new MotorEx(hardwareMap, "encodeCenter");
@@ -111,6 +117,6 @@ public class Justin extends LinearOpMode {
         );
 
         // Create the odometry subsystem
-        OdometrySubsystem odometry = new OdometrySubsystem(0,0);
+        OdometrySubsystem odometry = new OdometrySubsystem(0, 0);
     }
 }
