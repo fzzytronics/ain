@@ -66,15 +66,16 @@ public class Justin extends LinearOpMode {
     }
     private void initializeHardware()
     {
-
-        MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
-        MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
-        MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
-        MotorEx backRight = new MotorEx(hardwareMap, "back_right");
-        MotorEx encoderLeft = new MotorEx(hardwareMap, "encoderLeft");
-        MotorEx encoderRight = new MotorEx(hardwareMap, "encoderRight");
-        MotorEx encoderCenter = new MotorEx(hardwareMap, "encodeCenter");
+        Motor encoder = new Motor(hardwareMap, "encoder");
+        Motor frontLeft = new Motor(hardwareMap, "front_left");
+        Motor frontRight = new Motor(hardwareMap, "front_right");
+        Motor backLeft = new Motor(hardwareMap, "back_left");
+        Motor backRight = new Motor(hardwareMap, "back_right");
+        Motor encoderLeft = new Motor(hardwareMap, "encoderLeft");
+        Motor encoderRight = new Motor(hardwareMap, "encoderRight");
+        Motor encoderCenter = new Motor(hardwareMap, "encodeCenter");
     }
+
 
 
     private MecanumDriveWheelSpeeds getMecanumDriveWheelSpeeds() {
