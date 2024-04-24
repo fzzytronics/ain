@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-
+//testing testing one two three
 @Autonomous
 public class Justin extends LinearOpMode {
     Motor motor = new Motor(hardwareMap, "motor encoder");
@@ -25,7 +25,7 @@ public class Justin extends LinearOpMode {
     ServoEx m_gyro;
 
     public static class OdometrySubsystem extends SubsystemBase {
-        private Pose2d pose;
+        Pose2d pose;
         double getX;
         double getY;
         double getHeading;
@@ -54,20 +54,9 @@ public class Justin extends LinearOpMode {
     @Override
     public void runOpMode() {
         initializeHardware();
-        {
-
-            MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
-            MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
-            MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
-            MotorEx backRight = new MotorEx(hardwareMap, "back_right");
-            MotorEx encoderLeft = new MotorEx(hardwareMap, "encoderLeft");
-            MotorEx encoderRight = new MotorEx(hardwareMap, "encoderRight");
-            MotorEx encoderCenter = new MotorEx(hardwareMap, "encodeCenter");
-        }
         initializeOdometry();
         waitForStart();
-
-        while (opModeIsActive()) {
+               while (opModeIsActive()) {
             Pose2d pose = odometrySubsystem.getPose();
             telemetry.addData("X Position (in)", pose.getX());
             telemetry.addData("Y Position (in)", pose.getY());
@@ -75,6 +64,18 @@ public class Justin extends LinearOpMode {
             telemetry.update();
         }
     }
+    private void initializeHardware()
+    {
+
+        MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
+        MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
+        MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
+        MotorEx backRight = new MotorEx(hardwareMap, "back_right");
+        MotorEx encoderLeft = new MotorEx(hardwareMap, "encoderLeft");
+        MotorEx encoderRight = new MotorEx(hardwareMap, "encoderRight");
+        MotorEx encoderCenter = new MotorEx(hardwareMap, "encodeCenter");
+    }
+
 
     private MecanumDriveWheelSpeeds getMecanumDriveWheelSpeeds() {
         MecanumDriveWheelSpeeds wheelSpeeds = new MecanumDriveWheelSpeeds(
@@ -82,19 +83,6 @@ public class Justin extends LinearOpMode {
                 encoderLeft.getRate(), encoderRight.getRate()
         );
         return wheelSpeeds;
-    }
-
-    private void initializeHardware() {
-        // Member variables, so like motors and stuff
-        MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
-        MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
-        MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
-        MotorEx backRight = new MotorEx(hardwareMap, "back_right");
-
-        MotorEx encoderLeft = new MotorEx(hardwareMap, "encoderLeft");
-        MotorEx encoderRight = new MotorEx(hardwareMap, "encoderRight");
-        MotorEx encoderCenter = new MotorEx(hardwareMap, "encoderCenter");
-        // Initialize other motors and encoders...
     }
 
     private void initializeOdometry() {
