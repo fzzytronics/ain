@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.geometry.Rotation2d;
 import com.arcrobotics.ftclib.hardware.ServoEx;
@@ -51,7 +52,7 @@ public class Justin extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        initializeHardware();
+        initializeHardwareMap();
         initializeOdometry();
         waitForStart();
                while (opModeIsActive()) {
@@ -62,7 +63,7 @@ public class Justin extends LinearOpMode {
             telemetry.update();
         }
     }
-    private void initializeHardware()
+    private void initializeHardwareMap()
     {
         Motor encoder = new Motor(hardwareMap, "encoder");
         Motor frontLeft = new Motor(hardwareMap, "front_left");
