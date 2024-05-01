@@ -91,12 +91,18 @@ public class Justin extends LinearOpMode {
                 TRACKWIDTH,CENTER_WHEEL_OFFSET
         );
 
+        odometry.updatePose(PositionTracker.robotPose); //POsiiton tracjer?
+
+        telemetry.addData("Robot Position at Init: ", PositionTracker.robotPose);
+        telemetry.update();
+
         waitForStart();
 
         while(opModeIsActive()&& !isStopRequested()) {
             //control loops :3333
 
             odometry.updatePose();
+            PositionTracker.robotPose = odometry.getPose();
         }
     }
 }
