@@ -50,7 +50,6 @@ import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 
 
 @Autonomous
-@Override
 public class Justin extends LinearOpMode {
 
     public static final double TRACKWIDTH = 14.7;
@@ -61,6 +60,42 @@ public class Justin extends LinearOpMode {
 
     private MotorEx frontLeft, frontRight, backLeft, backRight;
     private MecanumDrive drivetrain;
+    private Motor intakeLeft,intakeRight,liftLeft,liftRight;
+    private Encoder OdoLeft,OdoRight,OdoCenter;
     private HolonomicOdometry odometry;
+    @Override
+    public void runOpMode() throws InterruptedException{
+        frontLeft = new MotorEx(hardwareMap, "front_left");
+        frontRight = new MotorEx(hardwareMap, "front_right");
+        backLeft = new MotorEx(hardwareMap, "back_left");
+        backRight = new MotorEx(hardwareMap, "back_right");
 
+        drivetrain = new MecanumDrive(frontLeft,frontRight,backLeft,backRight);
+
+        intakeLeft = new Motor(hardwareMap, "intake_left");
+        intakeRight = new Motor(hardwareMap, "intake_right");
+        liftLeft = new Motor(hardwareMap, "lift_left");
+        liftRight = new Motor(hardwareMap, "liftright");
+
+        OdoLeft = frontLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+        OdoRight = frontRight.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+        OdoCenter = backLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+
+        OdoRight.setDirection(Motor.Direction.REVERSE);
+
+        odometry = new HolonomicOdometry(
+                OdoLeft::getDistance,
+                OdoRight::getDistance,
+                OdoCenter::getDistance,
+                TRACKWIDTH,CENTER_WHEEL_OFFSET
+        );
+
+        waitForStart();
+
+        while(opModeIsActive()&& !isStopRequested()) {
+            //control loops :3333
+
+            odometry.updatePose();
+        }
+    }
 }
