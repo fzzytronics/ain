@@ -52,11 +52,12 @@ import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 @Autonomous
 public class Justin extends LinearOpMode {
 
-    public static final double TRACKWIDTH = 14.7;
-    public static final double CENTER_WHEEL_OFFSET = -2.1;
-    public static final double WHEEL_DIAMETER = 2.0;
-    public static final double TICKS_PER_REV = 8192;
+    public static final double TRACKWIDTH = 13.7;
+    public static final double CENTER_WHEEL_OFFSET = 2.4;
+    public static final double WHEEL_DIAMETER = 0.075;
+    public static final double TICKS_PER_REV = 15.3;
     public static final double DISTANCE_PER_PULSE = Math.PI * WHEEL_DIAMETER / TICKS_PER_REV;
+    public static Pose2d robotPose;
 
     private MotorEx frontLeft, frontRight, backLeft, backRight;
     private MecanumDrive drivetrain;
