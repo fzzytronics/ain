@@ -76,7 +76,7 @@ public class Justin extends LinearOpMode {
         intakeLeft = new Motor(hardwareMap, "intake_left");
         intakeRight = new Motor(hardwareMap, "intake_right");
         liftLeft = new Motor(hardwareMap, "lift_left");
-        liftRight = new Motor(hardwareMap, "liftright");
+        liftRight = new Motor(hardwareMap, "lift_right");
 
         OdoLeft = frontLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
         OdoRight = frontRight.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
@@ -94,7 +94,6 @@ public class Justin extends LinearOpMode {
         waitForStart();
 
         while(opModeIsActive()&& !isStopRequested()) {
-            //control loops :3333
 
             odometry.updatePose();
             telemetry.update();
