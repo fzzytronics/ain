@@ -1,57 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.OdometrySubsystem;
-import com.arcrobotics.ftclib.command.PurePursuitCommand;
 import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
-import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
-import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveKinematics;
-import com.arcrobotics.ftclib.purepursuit.Path;
-import com.arcrobotics.ftclib.purepursuit.Waypoint;
-import com.arcrobotics.ftclib.purepursuit.waypoints.EndWaypoint;
-import com.arcrobotics.ftclib.purepursuit.waypoints.GeneralWaypoint;
-import com.arcrobotics.ftclib.purepursuit.waypoints.StartWaypoint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.Range;
-import com.arcrobotics.ftclib.drivebase.MecanumDrive;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
-import com.arcrobotics.ftclib.hardware.motors.MotorEx;
-import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.arcrobotics.ftclib.command.OdometrySubsystem;
-import com.arcrobotics.ftclib.command.PurePursuitCommand;
-import com.arcrobotics.ftclib.drivebase.HDrive;
-import com.arcrobotics.ftclib.drivebase.MecanumDrive;
-import com.arcrobotics.ftclib.geometry.Pose2d;
-import com.arcrobotics.ftclib.geometry.Translation2d;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.arcrobotics.ftclib.kinematics.DifferentialOdometry;
-import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveKinematics;
-import com.arcrobotics.ftclib.purepursuit.Path;
-import com.arcrobotics.ftclib.purepursuit.waypoints.EndWaypoint;
-import com.arcrobotics.ftclib.purepursuit.waypoints.GeneralWaypoint;
-import com.arcrobotics.ftclib.purepursuit.waypoints.StartWaypoint;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
-import com.arcrobotics.ftclib.hardware.motors.MotorEx;
+
 
 
 @Autonomous
-public class Justin extends LinearOpMode {
-
+    public class Justin extends LinearOpMode {
     public static final double TRACKWIDTH = 13.7;
     public static final double CENTER_WHEEL_OFFSET = 2.4;
     public static final double WHEEL_DIAMETER = 0.075;
@@ -65,6 +27,17 @@ public class Justin extends LinearOpMode {
     //include intake elevation??  change to lifty
     private Encoder OdoLeft,OdoRight,OdoCenter;
     private HolonomicOdometry odometry;
+
+    private Pose2d Pose;
+    double getX;
+    double getY;
+    double getHeading;
+    public void OdometrySubsystem(double intialX, double intialY) {
+        this.Pose = new Pose2d();
+    }
+    public Pose2d getPose() {
+        return Pose;
+    }
     @Override
     public void runOpMode() throws InterruptedException{
         frontLeft = new MotorEx(hardwareMap, "front_left");
@@ -90,10 +63,15 @@ public class Justin extends LinearOpMode {
                 TRACKWIDTH,CENTER_WHEEL_OFFSET
         );
 
+
         waitForStart();
 
         while(opModeIsActive()&& !isStopRequested()) {
-
+            Pose2d Pose = getPose();
+            telemetry.addData("X Position (in)", Pose.getX());
+            telemetry.addData("Y Position (in)", Pose.getY());
+            telemetry.addData("Angle", Pose.getHeading());
+            telemetry.update();
             odometry.updatePose();
             telemetry.update();
 
