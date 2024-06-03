@@ -61,7 +61,7 @@ public class Justin extends LinearOpMode {
 
     private MotorEx frontLeft, frontRight, backLeft, backRight;
     private MecanumDrive drivetrain;
-    private Motor grab1, grab2,liftLeft,liftRight;
+    private Motor intake,liftLeft,liftRight;
     private Encoder OdoLeft,OdoRight,OdoCenter;
     private HolonomicOdometry odometry;
     @Override
@@ -73,8 +73,7 @@ public class Justin extends LinearOpMode {
 
         drivetrain = new MecanumDrive(frontLeft,frontRight,backLeft,backRight);
 
-        grab1 = new Motor(hardwareMap, "grab_1");
-        grab2 = new Motor(hardwareMap, "grab_2");
+        intake = new Motor(hardwareMap, "intake");
         liftLeft = new Motor(hardwareMap, "lift_left");
         liftRight = new Motor(hardwareMap, "lift_right");
 
