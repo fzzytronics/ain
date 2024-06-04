@@ -57,11 +57,10 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
 
         waitForStart();
 
-        while(opModeIsActive()&& !isStopRequested()) {
+        while(opModeIsActive()) {
             odometry.updatePose();
             PositionTracker.robotPose = odometry.getPose();
             telemetry.update();
         }
     }
 }
-//current issue
