@@ -33,6 +33,8 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
         backLeft = new MotorEx(hardwareMap, "back_left");
         backRight = new MotorEx(hardwareMap, "back_right");
 
+        Pose2d getRotation = new Pose2d();
+
         drivetrain = new MecanumDrive(frontLeft,frontRight,backLeft,backRight);
 
         intake = new Motor(hardwareMap, "intake");
@@ -51,8 +53,6 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
                 TRACKWIDTH,CENTER_WHEEL_OFFSET
         );
         odometry.updatePose(PositionTracker.robotPose);
-        Pose2d getRotation = new Pose2d();
-        odometry.updatePose(getRotation);
 
         telemetry.addData("Robot Position at Init: ", (PositionTracker.robotPose));
         telemetry.update();
