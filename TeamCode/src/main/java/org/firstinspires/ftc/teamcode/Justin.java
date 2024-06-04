@@ -18,7 +18,6 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
     public static final double WHEEL_DIAMETER = 0.075;
     public static final double TICKS_PER_REV = 15.3;
     public static final double DISTANCE_PER_PULSE = Math.PI * WHEEL_DIAMETER / TICKS_PER_REV;
-    public static Pose2d robotPose;
 
     private MotorEx frontLeft, frontRight, backLeft, backRight;
     private MecanumDrive drivetrain;
@@ -27,31 +26,14 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
     private Encoder OdoLeft,OdoRight,OdoCenter;
     private HolonomicOdometry odometry;
 
-    private Pose2d Pose;
-    double getX;
-    double getY;
-    double getHeading;
-    public void OdometrySubsystem(double intialX, double intialY) {
-        this.Pose = new Pose2d();
-    }
-    public Pose2d getPose() {
-        return Pose;
-    }
-    public double getX() {
-        return getX;
-    }
-    public double getY() {
-        return getY;
-    }
-    public double getHeading() {
-        return getHeading;
-    }
     @Override
     public void runOpMode() throws InterruptedException{
         frontLeft = new MotorEx(hardwareMap, "front_left");
         frontRight = new MotorEx(hardwareMap, "front_right");
         backLeft = new MotorEx(hardwareMap, "back_left");
         backRight = new MotorEx(hardwareMap, "back_right");
+
+        //getHeading = new Pose2d("heading");
 
         drivetrain = new MecanumDrive(frontLeft,frontRight,backLeft,backRight);
 
@@ -70,19 +52,18 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
                 OdoCenter::getDistance,
                 TRACKWIDTH,CENTER_WHEEL_OFFSET
         );
+        odometry.updatePose(PositionTracker.robotPose);
 
+        telemetry.addData("Robot Position at Init: ", (PositionTracker.robotPose));
+        telemetry.update();
 
         waitForStart();
 
         while(opModeIsActive()&& !isStopRequested()) {
-            Pose2d Pose = getPose();
-            telemetry.addData("X Position (in)", Pose.getX());
-            telemetry.addData("Y Position (in)", Pose.getY());
-            telemetry.addData("Angle", Pose.getHeading());
-            telemetry.update();
             odometry.updatePose();
+            PositionTracker.robotPose = odometry.getPose();
             telemetry.update();
-
         }
     }
 }
+//current issue
