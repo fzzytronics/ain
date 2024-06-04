@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
+import com.arcrobotics.ftclib.geometry.Rotation2d;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
@@ -23,6 +25,7 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
     private Motor intake,lifty;
     private Encoder OdoLeft,OdoRight,OdoCenter;
     private HolonomicOdometry odometry;
+    private Rotation2d rotation2d;
 
     @Override
     public void runOpMode(){
@@ -30,8 +33,6 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
         frontRight = new MotorEx(hardwareMap, "front_right");
         backLeft = new MotorEx(hardwareMap, "back_left");
         backRight = new MotorEx(hardwareMap, "back_right");
-
-        //getHeading = new Pose2d("heading");
 
         drivetrain = new MecanumDrive(frontLeft,frontRight,backLeft,backRight);
 
