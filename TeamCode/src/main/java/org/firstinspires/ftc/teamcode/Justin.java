@@ -21,12 +21,11 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
     private MotorEx frontLeft, frontRight, backLeft, backRight;
     private MecanumDrive drivetrain;
     private Motor intake,lifty;
-    //include intake elevation??  change to lifty
     private Encoder OdoLeft,OdoRight,OdoCenter;
     private HolonomicOdometry odometry;
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode(){
         frontLeft = new MotorEx(hardwareMap, "front_left");
         frontRight = new MotorEx(hardwareMap, "front_right");
         backLeft = new MotorEx(hardwareMap, "back_left");
