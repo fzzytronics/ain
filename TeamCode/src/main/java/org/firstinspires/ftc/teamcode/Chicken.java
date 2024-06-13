@@ -30,26 +30,29 @@ public class Chicken extends LinearOpMode {
             double turn = gamepad1.right_stick_x;
             double forward = -gamepad1.left_stick_y;
 
+
+            double clippedStrafe = Range.clip(strafe, -1.0, 1.0);
+            double clippedTurn = Range.clip(turn, -1.0, 1.0);
+            double clippedForward = Range.clip(forward, -1.0, 1.0);
+
+
             double frontLeftPower, frontRightPower, backLeftPower, backRightPower;
 
-            if (Math.abs(strafe) >= 1.0) {
-
-                frontLeftPower = Range.clip(-strafe, -1.0, 1.0);
-                frontRightPower = Range.clip(strafe, -1.0, 1.0);
-                backLeftPower = Range.clip(strafe, -1.0, 1.0);
-                backRightPower = Range.clip(-strafe, -1.0, 1.0);
-            } else if (Math.abs(turn) >= 1.0) {
-
-                frontLeftPower = Range.clip(turn, -1.0, 1.0);
-                frontRightPower = Range.clip(-turn, -1.0, 1.0);
-                backLeftPower = Range.clip(turn, -1.0, 1.0);
-                backRightPower = Range.clip(-turn, -1.0, 1.0);
+            if (Math.abs(clippedStrafe) >= 1.0) {
+                frontLeftPower = -clippedStrafe;
+                frontRightPower = clippedStrafe;
+                backLeftPower = clippedStrafe;
+                backRightPower = -clippedStrafe;
+            } else if (Math.abs(clippedTurn) >= 1.0) {
+                frontLeftPower = clippedTurn;
+                frontRightPower = -clippedTurn;
+                backLeftPower = clippedTurn;
+                backRightPower = -clippedTurn;
             } else {
-
-                frontLeftPower = Range.clip(forward, -1.0, 1.0);
-                frontRightPower = Range.clip(forward, -1.0, 1.0);
-                backLeftPower = Range.clip(forward, -1.0, 1.0);
-                backRightPower = Range.clip(forward, -1.0, 1.0);
+                frontLeftPower = clippedForward;
+                frontRightPower = clippedForward;
+                backLeftPower = clippedForward;
+                backRightPower = clippedForward;
             }
 
             frontLeft.set(frontLeftPower);
