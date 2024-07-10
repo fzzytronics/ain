@@ -99,6 +99,7 @@ public class Justin2 extends LinearOpMode {
                 odoLeft.getDistance(),
                 odoRight.getDistance(),
                 odoCenter.getDistance()
+                //using HoloOdom instead of the translation 2d stuff, it killed the bugs but this might be a bad idea, test and lmk -P
         );
     }
 }
