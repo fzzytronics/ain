@@ -65,6 +65,9 @@ public class Chicken extends LinearOpMode {
             telemetry.addData("Back Left Power", backLeftPower);
             telemetry.addData("Back Right Power", backRightPower);
             telemetry.update();
+
+            /**
+            hi**/
         }
     }
 }
