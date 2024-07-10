@@ -86,17 +86,21 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
             telemetry.update();
         }
     }
+
     public void periodic(){
         /**
          * GOAL - get gyro rotation and update it cont. in odometry portion
          * current issue  - declaring .getPosition
          * getPosition = (distance and angle) /We need distance is my guess(?)
          *
-         *
-        **/
+         */
+        /** might not have to put getPostion because its already
+         * getting its position from the robots center
+         **/
         Rotation2d gyroAngle = Rotation2d.fromDegrees(gyro.getAngle());
         Pose2d = odometry.update(gyroAngle,
-                new SwerveDriveKinematics(
+
+                kinematics = new SwerveDriveKinematics(
                         fLeft.getPosition(), fRight.getPosition(),
                         bLeft.getPosition(), bRight.getPosition()
                 ));
