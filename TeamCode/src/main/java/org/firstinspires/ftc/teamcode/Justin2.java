@@ -10,15 +10,12 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
 import com.arcrobotics.ftclib.kinematics.wpilibkinematics.SwerveDriveKinematics;
-import com.arcrobotics.ftclib.kinematics.wpilibkinematics.SwerveDriveOdometry;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
 
-
-
 @Autonomous
-    public class Justin extends LinearOpMode {
+public class Justin2 extends LinearOpMode {
     public static final double TRACKWIDTH = 13.7;
     public static final double CENTER_WHEEL_OFFSET = 2.4;
     public static final double WHEEL_DIAMETER = 0.075;
@@ -27,78 +24,81 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
 
     private MotorEx frontLeft, frontRight, backLeft, backRight;
     private ServoEx gyro;
-    private Translation2d fLeft;
-    private Translation2d fRight;
-    private Translation2d bLeft;
-    private Translation2d bRight;
+    private Translation2d fLeft, fRight, bLeft, bRight;
     private SwerveDriveKinematics kinematics;
     private MecanumDrive drivetrain;
-    private Motor intake,lifty;
-    private Pose2d Pose2d;
-    private Encoder OdoLeft,OdoRight,OdoCenter;
+    private Motor intake, lifty;
+    private Pose2d robotPose;
+    private Encoder odoLeft, odoRight, odoCenter;
     private HolonomicOdometry odometry;
-    @Override
 
-    public void runOpMode(){
+    @Override
+    public void runOpMode() {
         frontLeft = new MotorEx(hardwareMap, "front_left");
         frontRight = new MotorEx(hardwareMap, "front_right");
         backLeft = new MotorEx(hardwareMap, "back_left");
         backRight = new MotorEx(hardwareMap, "back_right");
 
-        //NOTE - add robot center in parenthesis (quad 1, 4, 2, 3)
-        fLeft = new Translation2d(0.381,-0.381);
-        fRight = new Translation2d();
-        bLeft = new Translation2d();
-        bRight = new Translation2d();
+        // Initialize the positions for the translations
+        fLeft = new Translation2d(0.381, -0.381);
+        fRight = new Translation2d(-0.381, -0.381);
+        bLeft = new Translation2d(0.381, 0.381);
+        bRight = new Translation2d(-0.381, 0.381);
 
-        drivetrain = new MecanumDrive(frontLeft,frontRight,backLeft,backRight);
+        drivetrain = new MecanumDrive(frontLeft, frontRight, backLeft, backRight);
 
         intake = new Motor(hardwareMap, "intake");
         lifty = new Motor(hardwareMap, "lifty");
 
-        kinematics = new SwerveDriveKinematics(
-                fLeft, fRight, bLeft, bRight
-        );
+        kinematics = new SwerveDriveKinematics(fLeft, fRight, bLeft, bRight);
 
-        OdoLeft = frontLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-        OdoRight = frontRight.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-        OdoCenter = backLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+        odoLeft = frontLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+        odoRight = frontRight.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+        odoCenter = backLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 
-        OdoRight.setDirection(Motor.Direction.REVERSE);
+        odoRight.setDirection(Motor.Direction.REVERSE);
 
-        //trying to fix gyro angle, how will it effect /odometry()/
         odometry = new HolonomicOdometry(
-                OdoLeft::getDistance,
-                OdoRight::getDistance,
-                OdoCenter::getDistance,
-                TRACKWIDTH,CENTER_WHEEL_OFFSET
+                odoLeft::getDistance,
+                odoRight::getDistance,
+                odoCenter::getDistance,
+                TRACKWIDTH, CENTER_WHEEL_OFFSET
         );
-        odometry.updatePose(PositionTracker.robotPose);
 
-        telemetry.addData("Robot Position at Init: ", (PositionTracker.robotPose));
+        robotPose = new Pose2d();
+        //updated: robotPose as a Pose2d() to avoid confusion and null shennanigans -P
+        odometry.updatePose(robotPose);
+
+        telemetry.addData("Robot Position at Init: ", robotPose);
         telemetry.update();
 
         waitForStart();
 
-        while(opModeIsActive()) {
+        while (opModeIsActive()) {
             odometry.updatePose();
-            PositionTracker.robotPose = odometry.getPose();
+            robotPose = odometry.getPose();
+            telemetry.addData("Robot Position: ", robotPose);
             telemetry.update();
         }
     }
-    public void periodic(){
+
+    public void periodic() {
         /**
          * GOAL - get gyro rotation and update it cont. in odometry portion
          * current issue  - declaring .getPosition
          * getPosition = (distance and angle) /We need distance is my guess(?)
          *
+         * Yep, chanced odo to .getDistance to mitigate problem, idk how that would transfer to live testing tho
+         * Also, gyroAngle is supposed to be a double here, but it's flagging it as a different type, not sure if
+         * we just need to declare or if there's smth else going on cuz this is not a problem in Justin -P
          *
-        **/
+         */
         Rotation2d gyroAngle = Rotation2d.fromDegrees(gyro.getAngle());
-        Pose2d = odometry.update(gyroAngle,
-                new SwerveDriveKinematics(
-                        fLeft.getPosition(), fRight.getPosition(),
-                        bLeft.getPosition(), bRight.getPosition()
-                ));
+        robotPose = odometry.update(
+                gyroAngle,
+                odoLeft.getDistance(),
+                odoRight.getDistance(),
+                odoCenter.getDistance()
+        );
     }
 }
