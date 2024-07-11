@@ -92,14 +92,17 @@ public class Justin2 extends LinearOpMode {
          * Also, gyroAngle is supposed to be a double here, but it's flagging it as a different type, not sure if
          * we just need to declare or if there's smth else going on cuz this is not a problem in Justin -P
          *
+         * UPDATE: figured out that the error isnt gyroAngle itself, but rather that update.Pose can't handle >3 arguments
+         *
+         * UPDATE: gyroAngle is no longer in the odometry.update and has been moved to a seperate call for robotPose
+         * it fixed the problem of updatePose only accepting three doubles and nothing more, ready for live test 7/11/24. -P
+         *
          */
         Rotation2d gyroAngle = Rotation2d.fromDegrees(gyro.getAngle());
-        robotPose = odometry.update(
-                gyroAngle,
-                odoLeft.getDistance(),
-                odoRight.getDistance(),
-                odoCenter.getDistance()
-                //using HoloOdom instead of the translation 2d stuff, it killed the bugs but this might be a bad idea, test and lmk -P
+        odometry.updatePose();
+        robotPose = new Pose2d(
+                robotPose.getTranslation(),
+                gyroAngle
         );
     }
 }
