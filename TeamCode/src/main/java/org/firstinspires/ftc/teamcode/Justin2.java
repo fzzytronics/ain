@@ -34,10 +34,10 @@ public class Justin2 extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        frontLeft = new MotorEx(hardwareMap, "front_left");
-        frontRight = new MotorEx(hardwareMap, "front_right");
-        backLeft = new MotorEx(hardwareMap, "back_left");
-        backRight = new MotorEx(hardwareMap, "back_right");
+        frontLeft = new MotorEx(hardwareMap, "frontLeft");
+        frontRight = new MotorEx(hardwareMap, "frontRight");
+        backLeft = new MotorEx(hardwareMap, "backLeft");
+        backRight = new MotorEx(hardwareMap, "backRight");
 
         // Initialize the positions for the translations
         fLeft = new Translation2d(0.381, -0.381);
@@ -47,8 +47,8 @@ public class Justin2 extends LinearOpMode {
 
         drivetrain = new MecanumDrive(frontLeft, frontRight, backLeft, backRight);
 
-        intake = new Motor(hardwareMap, "intake");
-        lifty = new Motor(hardwareMap, "lifty");
+        //intake = new Motor(hardwareMap, "intake");
+        //lifty = new Motor(hardwareMap, "lifty");
 
         kinematics = new SwerveDriveKinematics(fLeft, fRight, bLeft, bRight);
 
@@ -97,6 +97,7 @@ public class Justin2 extends LinearOpMode {
          * UPDATE: gyroAngle is no longer in the odometry.update and has been moved to a seperate call for robotPose
          * it fixed the problem of updatePose only accepting three doubles and nothing more, ready for live test 7/11/24. -P
          *
+         * UPDATE: JUSTIN LIVES!!! Just Telemetry for now -P 8/22/24
          */
         Rotation2d gyroAngle = Rotation2d.fromDegrees(gyro.getAngle());
         odometry.updatePose();
