@@ -97,7 +97,7 @@ public class Justin2 extends LinearOpMode {
          * UPDATE: gyroAngle is no longer in the odometry.update and has been moved to a seperate call for robotPose
          * it fixed the problem of updatePose only accepting three doubles and nothing more, ready for live test 7/11/24. -P
          *
-         * UPDATE: JUSTIN LIVES!!! Just Telemetry for now -P 8/22/24
+         * UPDATE: JUSTIN LIVES!!! Just Telemetry of current position for now -P 8/22/24
          */
         Rotation2d gyroAngle = Rotation2d.fromDegrees(gyro.getAngle());
         odometry.updatePose();
