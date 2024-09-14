@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.Justin2;
             idk how speed (mulitplication mototrrrr)
     we need calculus
 
-
+yippppepeee
     **/
     @Autonomous
 public class ChaosControl extends LinearOpMode {
