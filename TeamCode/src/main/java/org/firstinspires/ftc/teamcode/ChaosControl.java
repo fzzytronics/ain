@@ -2,6 +2,10 @@ package org.firstinspires.ftc.teamcode;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
+import com.arcrobotics.ftclib.geometry.Pose2d;
+import com.arcrobotics.ftclib.geometry.Translation2d;
+import com.arcrobotics.ftclib.hardware.ServoEx;
+import com.arcrobotics.ftclib.kinematics.wpilibkinematics.SwerveDriveKinematics;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -24,6 +28,24 @@ yippppepeee
     **/
     @Autonomous
 public class ChaosControl extends LinearOpMode {
+        public static final double TRACKWIDTH = 13.7;
+        public static final double CENTER_WHEEL_OFFSET = 2.4;
+        public static final double WHEEL_DIAMETER = 0.075;
+        public static final double TICKS_PER_REV = 15.3;
+        public static final double DISTANCE_PER_PULSE = Math.PI * WHEEL_DIAMETER / TICKS_PER_REV;
+
+        private MotorEx frontLeft, frontRight, backLeft, backRight;
+        private ServoEx gyro;
+        public Translation2d fLeft, fRight, bLeft, bRight;
+        public SwerveDriveKinematics kinematics;
+        private MecanumDrive drivetrain;
+        private Motor intake, lifty;
+        public Pose2d robotPose;
+        private Encoder odoLeft, odoRight, odoCenter;
+        public HolonomicOdometry odometry;
+
+
+
     private ElapsedTime timer = new ElapsedTime(); // Declare timer as a class member
     @Override
     public void runOpMode() {
@@ -46,5 +68,8 @@ public class ChaosControl extends LinearOpMode {
         } else {
             return 1.0;  // Full speed initially
         }
+    }
+    public void explode(){
+
     }
 }

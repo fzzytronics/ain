@@ -24,13 +24,13 @@ public class Justin2 extends LinearOpMode {
 
     private MotorEx frontLeft, frontRight, backLeft, backRight;
     private ServoEx gyro;
-    private Translation2d fLeft, fRight, bLeft, bRight;
-    private SwerveDriveKinematics kinematics;
+    public Translation2d fLeft, fRight, bLeft, bRight;
+    public SwerveDriveKinematics kinematics;
     private MecanumDrive drivetrain;
     private Motor intake, lifty;
-    private Pose2d robotPose;
+    public Pose2d robotPose;
     private Encoder odoLeft, odoRight, odoCenter;
-    private HolonomicOdometry odometry;
+    public HolonomicOdometry odometry;
 
     @Override
     public void runOpMode() {
