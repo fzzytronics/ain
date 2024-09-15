@@ -14,15 +14,7 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import org.firstinspires.ftc.teamcode.Justin2;
 
-    /** timer //
-    we need map out coords ///
-    justin = cord
-            idk how speed (mulitplication mototrrrr)
-    we need calculus
-
-yippppepeee
-    **/
-    @Autonomous
+@Autonomous(name = "CHAOS CONTROL!!!")
 public class ChaosControl extends LinearOpMode {
     private ElapsedTime timer = new ElapsedTime(); // Declare timer as a class member
     @Override

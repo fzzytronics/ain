@@ -33,24 +33,7 @@ public class Wawah extends LinearOpMode {
                 Do something else if not following path*/
             }
         }
-    /*public static double yPosB(double time) {
-        double yPosedB;
-        //interpolated thing below...later..
-        yPosedB = bruh*bruh;
-        double yPosedB1 = yPosedB;
-        return yPosedB1;
-        //This might have some logic issues, double yPosedB could be handled better, but it's fine for now.
-    }
 
-    public static double yDeriveB(double yPosed, double t) {
-        t = bruh;
-        yPosed = yPosedB;
-
-        double ySpeed = (yPoseB(t+0.01)-yPosedB) *100;
-
-        ySpeedB = Math.abs(ySpeed);
-        return ySpeedB;
-    } */
     private double calculateSpeedModifier(double seconds) {
      //testing testing one two three testing testing one two three
         if (timer.seconds() > 5) {
