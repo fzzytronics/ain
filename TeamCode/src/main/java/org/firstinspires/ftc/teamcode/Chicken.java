@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -12,11 +13,11 @@ public class Chicken extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        Motor frontLeft = new Motor(hardwareMap, "frontLeft");
-        Motor frontRight = new Motor(hardwareMap, "frontRight");
-        Motor backLeft = new Motor(hardwareMap, "backLeft");
-       Motor backRight = new Motor(hardwareMap, "backRight");
-       Motor IntakeElevation = new Motor(hardwareMap, "IntakeElevation");
+        frontLeft = new MotorEx(hardwareMap, "frontLeft");
+        frontRight = new MotorEx(hardwareMap, "frontRight");
+        backLeft = new MotorEx(hardwareMap, "backLeft");
+       backRight = new MotorEx(hardwareMap, "backRight");
+       Motor IntakeElevation = new MotorEx(hardwareMap, "IntakeElevation");
 
                
         frontLeft.setRunMode(Motor.RunMode.RawPower);
