@@ -12,9 +12,7 @@ public class Chicken extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-
-        Motor frontLeft;
-        frontLeft = new Motor(hardwareMap, "front_left");
+        Motor frontLeft = new Motor(hardwareMap, "frontLeft");
         Motor frontRight = new Motor(hardwareMap, "front_right");
         Motor backLeft = new Motor(hardwareMap, "back_left");
        Motor backRight = new Motor(hardwareMap, "back_right");
