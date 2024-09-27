@@ -33,25 +33,26 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
     private Translation2d bRight;
     private SwerveDriveKinematics kinematics;
     private MecanumDrive drivetrain;
-    private Motor intake,lifty;
+    private Motor intake, lifty;
     private Pose2d Pose2d;
-    private Encoder OdoLeft,OdoRight,OdoCenter;
+    private Encoder OdoLeft, OdoRight, OdoCenter;
     private HolonomicOdometry odometry;
+
     @Override
 
-    public void runOpMode(){
+    public void runOpMode() {
         frontLeft = new MotorEx(hardwareMap, "front_left");
         frontRight = new MotorEx(hardwareMap, "front_right");
         backLeft = new MotorEx(hardwareMap, "back_left");
         backRight = new MotorEx(hardwareMap, "back_right");
 
         //NOTE - add robot center in parenthesis (quad 1, 4, 2, 3)
-        fLeft = new Translation2d(0.381,-0.381);
+        fLeft = new Translation2d(0.381, -0.381);
         fRight = new Translation2d();
         bLeft = new Translation2d();
         bRight = new Translation2d();
 
-        drivetrain = new MecanumDrive(frontLeft,frontRight,backLeft,backRight);
+        drivetrain = new MecanumDrive(frontLeft, frontRight, backLeft, backRight);
 
         intake = new Motor(hardwareMap, "intake");
         lifty = new Motor(hardwareMap, "lifty");
@@ -71,7 +72,7 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
                 OdoLeft::getDistance,
                 OdoRight::getDistance,
                 OdoCenter::getDistance,
-                TRACKWIDTH,CENTER_WHEEL_OFFSET
+                TRACKWIDTH, CENTER_WHEEL_OFFSET
         );
         odometry.updatePose(PositionTracker.robotPose);
 
@@ -80,29 +81,31 @@ import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
 
         waitForStart();
 
-        while(opModeIsActive()) {
+        while (opModeIsActive()) {
             odometry.updatePose();
             PositionTracker.robotPose = odometry.getPose();
             telemetry.update();
         }
     }
 
+    /*
     public void periodic(){
         /**
          * GOAL - get gyro rotation and update it cont. in odometry portion
          * current issue  - declaring .getPosition
          * getPosition = (distance and angle) /We need distance is my guess(?)
          *
-         */
-        /** might not have to put getPostion because its already
-         * getting its position from the robots center
-         **/
+         *
+        **
+
         Rotation2d gyroAngle = Rotation2d.fromDegrees(gyro.getAngle());
         Pose2d = odometry.update(gyroAngle,
-
-                kinematics = new SwerveDriveKinematics(
+                new SwerveDriveKinematics(
                         fLeft.getPosition(), fRight.getPosition(),
                         bLeft.getPosition(), bRight.getPosition()
                 ));
     }
+    */
+
 }
+//temp disabling of justin for testing -P
