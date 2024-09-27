@@ -58,11 +58,12 @@ public class Chicken extends LinearOpMode {
                 backRightPower = clippedForward;
             }
 
-
-            frontLeft.set(frontLeftPower);
-            frontRight.set(frontRightPower);
-            backLeft.set(backLeftPower);
-            backRight.set(backRightPower);
+            /*backRightPower
+             */
+            frontLeft.set(1);
+            frontRight.set(1);
+            backLeft.set(1);
+            backRight.set(1);
 
             telemetry.addData("Front Left Power", frontLeftPower);
             telemetry.addData("Front Right Power", frontRightPower);
