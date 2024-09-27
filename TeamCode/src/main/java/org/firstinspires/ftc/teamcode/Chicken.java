@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "Chicken")
@@ -12,11 +13,13 @@ public class Chicken extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        frontLeft = new Motor(hardwareMap, "front_left");
-        frontRight = new Motor(hardwareMap, "front_right");
-        backLeft = new Motor(hardwareMap, "back_left");
-        backRight = new Motor(hardwareMap, "back_right");
+        Motor frontLeft = new Motor(hardwareMap, "front_left");
+        Motor frontRight = new Motor(hardwareMap, "front_right");
+        Motor backLeft = new Motor(hardwareMap, "back_left");
+       Motor backRight = new Motor(hardwareMap, "back_right");
+       Motor IntakeElevation = new Motor(hardwareMap, "IntakeElevation");
 
+               
         frontLeft.setRunMode(Motor.RunMode.RawPower);
         frontRight.setRunMode(Motor.RunMode.RawPower);
         backLeft.setRunMode(Motor.RunMode.RawPower);
@@ -27,7 +30,7 @@ public class Chicken extends LinearOpMode {
         while (opModeIsActive()) {
 
             double strafe = gamepad1.left_stick_x;
-            double turn = gamepad1.right_stick_x;
+            double turn = -gamepad1.right_stick_x;
             double forward = -gamepad1.left_stick_y;
 
 
@@ -55,6 +58,7 @@ public class Chicken extends LinearOpMode {
                 backRightPower = clippedForward;
             }
 
+
             frontLeft.set(frontLeftPower);
             frontRight.set(frontRightPower);
             backLeft.set(backLeftPower);
@@ -66,8 +70,7 @@ public class Chicken extends LinearOpMode {
             telemetry.addData("Back Right Power", backRightPower);
             telemetry.update();
 
-            /**
-            hi**/
+
         }
     }
 }
