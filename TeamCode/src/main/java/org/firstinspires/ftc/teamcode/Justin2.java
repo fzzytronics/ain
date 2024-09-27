@@ -47,8 +47,8 @@ public class Justin2 extends LinearOpMode {
 
         drivetrain = new MecanumDrive(frontLeft, frontRight, backLeft, backRight);
 
-        //intake = new Motor(hardwareMap, "intake");
-        //lifty = new Motor(hardwareMap, "lifty");
+        intake = new Motor(hardwareMap, "intake");
+        lifty = new Motor(hardwareMap, "lifty");
 
         kinematics = new SwerveDriveKinematics(fLeft, fRight, bLeft, bRight);
 

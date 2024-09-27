@@ -26,8 +26,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 public class help extends CommandOpMode {
 
     // Constants
-    private static final double TRACKWIDTH = 9.1;
-    private static final double WHEEL_DIAMETER = 4.0;
+    private static final double TRACKWIDTH = 13.7;
+    private static final double WHEEL_DIAMETER = 0.075;
     private static final double CENTER_WHEEL_OFFSET = 2.4;
     private static final double TICKS_PER_INCH = 15.3;
 
@@ -122,7 +122,6 @@ public class help extends CommandOpMode {
         OdometrySubsystem odometry = new OdometrySubsystem(holOdom);
         // Initial odometry update
         odometry.update();
-
 
         // Create pure pursuit command
         PurePursuitCommand ppCommand = new PurePursuitCommand(
