@@ -127,7 +127,7 @@ public class help extends CommandOpMode {
         PurePursuitCommand ppCommand = new PurePursuitCommand(
                 driveTrain, odometry,
                 new StartWaypoint(0, 0),
-                new GeneralWaypoint(200, 0, 0.8, 0.8, 30),
+                new GeneralWaypoint(200, 0, 0.8, 0.8, 30), 
                 new EndWaypoint(400, 0, 0, 0.5, 0.5, 30, 0.8, 1)
         );
         // Schedule the command
