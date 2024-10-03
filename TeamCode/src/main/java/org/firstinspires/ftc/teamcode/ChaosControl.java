@@ -128,4 +128,9 @@ public class ChaosControl extends LinearOpMode {
         );
 
     }
+    public static void celeste(double x, double y, double z, double movementSpeed){
+
+        double absoluteAngleTT = Math.atan(y);
+
+    }
 }
