@@ -41,6 +41,7 @@ public class help extends CommandOpMode {
     private double turn;
     private double heading;
     private PurePursuitCommand ppCommand;
+    private MotorEx frontLeft, frontRight, backLeft, backRight;
 //yurr b
     //rebase test
 
@@ -72,10 +73,10 @@ public class help extends CommandOpMode {
     private void initializeHardware() {
         // Initialize motors
         // Hardware components
-        MotorEx frontLeft = new MotorEx(hardwareMap, "frontLeft");
-        MotorEx backLeft = new MotorEx(hardwareMap, "backLeft");
-        MotorEx backRight = new MotorEx(hardwareMap, "backRight");
-        MotorEx frontRight = new MotorEx(hardwareMap, "frontRight");
+        frontLeft = new MotorEx(hardwareMap, "frontLeft");
+        backLeft = new MotorEx(hardwareMap, "backLeft");
+        backRight = new MotorEx(hardwareMap, "backRight");
+        frontRight = new MotorEx(hardwareMap, "frontRight");
 
         Motor intake = new Motor(hardwareMap, "intake");
 
