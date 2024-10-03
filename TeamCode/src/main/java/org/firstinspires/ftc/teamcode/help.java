@@ -42,6 +42,7 @@ public class help extends CommandOpMode {
     private double heading;
     private PurePursuitCommand ppCommand;
     private MotorEx frontLeft, frontRight, backLeft, backRight;
+    private MotorEx encoderLeft, encoderRight, encoderCenter;
 //yurr b
     //rebase test
 
@@ -100,9 +101,9 @@ public class help extends CommandOpMode {
 
     private void initializeOdometry() {
         // Initialize encoders
-        MotorEx encoderLeft = new MotorEx(hardwareMap, "frontLeft");
-        MotorEx encoderRight = new MotorEx(hardwareMap, "frontRight");
-        MotorEx encoderCenter = new MotorEx(hardwareMap, "backLeft");
+        encoderLeft = new MotorEx(hardwareMap, "frontLeft");
+        encoderRight = new MotorEx(hardwareMap, "frontRight");
+        encoderCenter = new MotorEx(hardwareMap, "backLeft");
 
         // Set distance per pulse for encoders
         double ticksToInches = WHEEL_DIAMETER * Math.PI / TICKS_PER_INCH;
