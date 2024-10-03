@@ -72,10 +72,10 @@ public class help extends CommandOpMode {
     private void initializeHardware() {
         // Initialize motors
         // Hardware components
-        MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
-        MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
-        MotorEx backRight = new MotorEx(hardwareMap, "back_right");
-        MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
+        MotorEx frontLeft = new MotorEx(hardwareMap, "frontLeft");
+        MotorEx backLeft = new MotorEx(hardwareMap, "backLeft");
+        MotorEx backRight = new MotorEx(hardwareMap, "backRight");
+        MotorEx frontRight = new MotorEx(hardwareMap, "frontRight");
 
         Motor intake = new Motor(hardwareMap, "intake");
 
@@ -99,9 +99,9 @@ public class help extends CommandOpMode {
 
     private void initializeOdometry() {
         // Initialize encoders
-        MotorEx encoderLeft = new MotorEx(hardwareMap, "front_left");
-        MotorEx encoderRight = new MotorEx(hardwareMap, "front_right");
-        MotorEx encoderCenter = new MotorEx(hardwareMap, "back_left");
+        MotorEx encoderLeft = new MotorEx(hardwareMap, "frontLeft");
+        MotorEx encoderRight = new MotorEx(hardwareMap, "frontRight");
+        MotorEx encoderCenter = new MotorEx(hardwareMap, "backLeft");
 
         // Set distance per pulse for encoders
         double ticksToInches = WHEEL_DIAMETER * Math.PI / TICKS_PER_INCH;
