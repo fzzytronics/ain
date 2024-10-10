@@ -41,7 +41,8 @@ public class help extends CommandOpMode {
     private double turn;
     private double heading;
     private PurePursuitCommand ppCommand;
-    private MotorEx frontLeft, frontRight, backLeft, backRight;
+    private MotorEx front_left, front_right, back_left, back_right;
+    private MotorEx encoderLeft, encoderRight, encoderCenter;
 //yurr b
     //rebase test
 
@@ -73,36 +74,36 @@ public class help extends CommandOpMode {
     private void initializeHardware() {
         // Initialize motors
         // Hardware components
-        frontLeft = new MotorEx(hardwareMap, "frontLeft");
-        backLeft = new MotorEx(hardwareMap, "backLeft");
-        backRight = new MotorEx(hardwareMap, "backRight");
-        frontRight = new MotorEx(hardwareMap, "frontRight");
+        front_left = new MotorEx(hardwareMap, "front_left");
+        back_left = new MotorEx(hardwareMap, "back_left");
+        back_right = new MotorEx(hardwareMap, "back_right");
+        front_right = new MotorEx(hardwareMap, "front_right");
 
         Motor intake = new Motor(hardwareMap, "intake");
 
         // Initialize drive train
-        driveTrain = new MecanumDrive(frontLeft, backLeft, backRight, frontRight);
+        driveTrain = new MecanumDrive(front_left, back_left, back_right, front_right);
 
         // Set motor modes and other configurations
 
         // Motor locations for kinematics
-        Translation2d frontLeftLocation = new Translation2d(0.381, 0.381);
-        Translation2d frontRightLocation = new Translation2d(0.381, -0.381);
-        Translation2d backLeftLocation = new Translation2d(-0.381, 0.381);
-        Translation2d backRightLocation = new Translation2d(-0.381, -0.381);
+        Translation2d front_leftLocation = new Translation2d(0.381, 0.381);
+        Translation2d front_rightLocation = new Translation2d(0.381, -0.381);
+        Translation2d back_leftLocation = new Translation2d(-0.381, 0.381);
+        Translation2d back_rightLocation = new Translation2d(-0.381, -0.381);
 
         // Creating kinematics object
         MecanumDriveKinematics kinematics = new MecanumDriveKinematics(
-                frontLeftLocation, frontRightLocation, backLeftLocation, backRightLocation);
+                front_leftLocation, front_rightLocation, back_leftLocation, back_rightLocation);
 
         driveTrain.driveFieldCentric(strafeSpeed, forwardSpeed, turn, heading);
     }
 
     private void initializeOdometry() {
         // Initialize encoders
-        MotorEx encoderLeft = new MotorEx(hardwareMap, "frontLeft");
-        MotorEx encoderRight = new MotorEx(hardwareMap, "frontRight");
-        MotorEx encoderCenter = new MotorEx(hardwareMap, "backLeft");
+        encoderLeft = new MotorEx(hardwareMap, "front_left");
+        encoderRight = new MotorEx(hardwareMap, "front_right");
+        encoderCenter = new MotorEx(hardwareMap, "back_left");
 
         // Set distance per pulse for encoders
         double ticksToInches = WHEEL_DIAMETER * Math.PI / TICKS_PER_INCH;
