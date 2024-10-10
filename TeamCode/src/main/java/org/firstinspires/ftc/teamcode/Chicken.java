@@ -1,11 +1,26 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.OdometrySubsystem;
+import com.arcrobotics.ftclib.command.PurePursuitCommand;
+import com.arcrobotics.ftclib.drivebase.HDrive;
+import com.arcrobotics.ftclib.drivebase.MecanumDrive;
+import com.arcrobotics.ftclib.geometry.Pose2d;
+import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.arcrobotics.ftclib.hardware.motors.MotorEx;
+import com.arcrobotics.ftclib.kinematics.DifferentialOdometry;
+import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveKinematics;
+import com.arcrobotics.ftclib.purepursuit.Path;
+import com.arcrobotics.ftclib.purepursuit.waypoints.EndWaypoint;
+import com.arcrobotics.ftclib.purepursuit.waypoints.GeneralWaypoint;
+import com.arcrobotics.ftclib.purepursuit.waypoints.StartWaypoint;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
+import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
+
 
 @TeleOp(name = "Chicken")
 public class Chicken extends LinearOpMode {
@@ -19,7 +34,6 @@ public class Chicken extends LinearOpMode {
        backRight = new MotorEx(hardwareMap, "backRight");
        Motor IntakeElevation = new MotorEx(hardwareMap, "IntakeElevation");
 
-               
         frontLeft.setRunMode(Motor.RunMode.RawPower);
         frontRight.setRunMode(Motor.RunMode.RawPower);
         backLeft.setRunMode(Motor.RunMode.RawPower);
@@ -29,15 +43,13 @@ public class Chicken extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            double strafe = gamepad1.left_stick_x;
-            double turn = -gamepad1.right_stick_x;
-            double forward = -gamepad1.left_stick_y;
-
+            double strafe = gamepad1.left_stick_y;
+            double turn = -gamepad1.right_stick_y;
+            double forward = -gamepad1.left_stick_x;
 
             double clippedStrafe = Range.clip(strafe, -1.0, 1.0);
             double clippedTurn = Range.clip(turn, -1.0, 1.0);
             double clippedForward = Range.clip(forward, -1.0, 1.0);
-
 
             double frontLeftPower, frontRightPower, backLeftPower, backRightPower;
 
@@ -51,13 +63,13 @@ public class Chicken extends LinearOpMode {
                 frontRightPower = -clippedTurn;
                 backLeftPower = clippedTurn;
                 backRightPower = -clippedTurn;
-            } else {
+            } else { 
                 frontLeftPower = clippedForward;
                 frontRightPower = clippedForward;
                 backLeftPower = clippedForward;
                 backRightPower = clippedForward;
             }
-
+ 
             /*backRightPower
              */
             frontLeft.set(1);
