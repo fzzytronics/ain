@@ -41,6 +41,7 @@ public class help extends CommandOpMode {
     private double turn;
     private double heading;
     private PurePursuitCommand ppCommand;
+    private MotorEx frontLeft, frontRight, backLeft, backRight;
 //yurr b
     //rebase test
 
@@ -72,10 +73,10 @@ public class help extends CommandOpMode {
     private void initializeHardware() {
         // Initialize motors
         // Hardware components
-        MotorEx frontLeft = new MotorEx(hardwareMap, "front_left");
-        MotorEx backLeft = new MotorEx(hardwareMap, "back_left");
-        MotorEx backRight = new MotorEx(hardwareMap, "back_right");
-        MotorEx frontRight = new MotorEx(hardwareMap, "front_right");
+        frontLeft = new MotorEx(hardwareMap, "frontLeft");
+        backLeft = new MotorEx(hardwareMap, "backLeft");
+        backRight = new MotorEx(hardwareMap, "backRight");
+        frontRight = new MotorEx(hardwareMap, "frontRight");
 
         Motor intake = new Motor(hardwareMap, "intake");
 
@@ -99,9 +100,9 @@ public class help extends CommandOpMode {
 
     private void initializeOdometry() {
         // Initialize encoders
-        MotorEx encoderLeft = new MotorEx(hardwareMap, "front_left");
-        MotorEx encoderRight = new MotorEx(hardwareMap, "front_right");
-        MotorEx encoderCenter = new MotorEx(hardwareMap, "back_left");
+        MotorEx encoderLeft = new MotorEx(hardwareMap, "frontLeft");
+        MotorEx encoderRight = new MotorEx(hardwareMap, "frontRight");
+        MotorEx encoderCenter = new MotorEx(hardwareMap, "backLeft");
 
         // Set distance per pulse for encoders
         double ticksToInches = WHEEL_DIAMETER * Math.PI / TICKS_PER_INCH;
@@ -127,7 +128,7 @@ public class help extends CommandOpMode {
         PurePursuitCommand ppCommand = new PurePursuitCommand(
                 driveTrain, odometry,
                 new StartWaypoint(0, 0),
-                new GeneralWaypoint(200, 0, 0.8, 0.8, 30),
+                new GeneralWaypoint(200, 0, 0.8, 0.8, 30), 
                 new EndWaypoint(400, 0, 0, 0.5, 0.5, 30, 0.8, 1)
         );
         // Schedule the command
