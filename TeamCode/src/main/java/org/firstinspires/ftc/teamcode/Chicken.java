@@ -28,10 +28,10 @@ public class Chicken extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        frontLeft = new MotorEx(hardwareMap, "frontLeft");
-        frontRight = new MotorEx(hardwareMap, "frontRight");
-        backLeft = new MotorEx(hardwareMap, "backLeft");
-       backRight = new MotorEx(hardwareMap, "backRight");
+        MotorEx front_left = new MotorEx(hardwareMap, "front_left");
+        MotorEx front_right = new MotorEx(hardwareMap, "front_right");
+        MotorEx back_left = new MotorEx(hardwareMap, "back_left");
+        MotorEx back_right = new MotorEx(hardwareMap, "back_right");
        Motor IntakeElevation = new MotorEx(hardwareMap, "IntakeElevation");
 
         frontLeft.setRunMode(Motor.RunMode.RawPower);
@@ -51,23 +51,23 @@ public class Chicken extends LinearOpMode {
             double clippedTurn = Range.clip(turn, -1.0, 1.0);
             double clippedForward = Range.clip(forward, -1.0, 1.0);
 
-            double frontLeftPower, frontRightPower, backLeftPower, backRightPower;
+            double front_leftPower, front_rightPower, back_leftPower, back_rightPower;
 
             if (Math.abs(clippedStrafe) >= 1.0) {
-                frontLeftPower = -clippedStrafe;
-                frontRightPower = clippedStrafe;
-                backLeftPower = clippedStrafe;
-                backRightPower = -clippedStrafe;
+                front_leftPower = -clippedStrafe;
+                front_rightPower = clippedStrafe;
+                back_leftPower = clippedStrafe;
+                back_rightPower = -clippedStrafe;
             } else if (Math.abs(clippedTurn) >= 1.0) {
-                frontLeftPower = clippedTurn;
-                frontRightPower = -clippedTurn;
-                backLeftPower = clippedTurn;
-                backRightPower = -clippedTurn;
+                front_leftPower = clippedTurn;
+                front_rightPower = -clippedTurn;
+                back_leftPower = clippedTurn;
+                back_rightPower = -clippedTurn;
             } else { 
-                frontLeftPower = clippedForward;
-                frontRightPower = clippedForward;
-                backLeftPower = clippedForward;
-                backRightPower = clippedForward;
+                front_leftPower = clippedForward;
+                front_rightPower = clippedForward;
+                back_leftPower = clippedForward;
+                back_rightPower = clippedForward;
             }
  
             /*backRightPower
@@ -77,10 +77,10 @@ public class Chicken extends LinearOpMode {
             backLeft.set(1);
             backRight.set(1);
 
-            telemetry.addData("Front Left Power", frontLeftPower);
-            telemetry.addData("Front Right Power", frontRightPower);
-            telemetry.addData("Back Left Power", backLeftPower);
-            telemetry.addData("Back Right Power", backRightPower);
+            telemetry.addData("Front Left Power", front_leftPower);
+            telemetry.addData("Front Right Power", front_rightPower);
+            telemetry.addData("Back Left Power", back_leftPower);
+            telemetry.addData("Back Right Power", back_rightPower);
             telemetry.update();
 
 
