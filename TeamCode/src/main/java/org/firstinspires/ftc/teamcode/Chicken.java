@@ -24,20 +24,20 @@ import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "Chicken")
 public class Chicken extends LinearOpMode {
-    private Motor frontLeft, frontRight, backLeft, backRight;
+
 
     @Override
     public void runOpMode() {
-        MotorEx front_left = new MotorEx(hardwareMap, "front_left");
-        MotorEx front_right = new MotorEx(hardwareMap, "front_right");
-        MotorEx back_left = new MotorEx(hardwareMap, "back_left");
-        MotorEx back_right = new MotorEx(hardwareMap, "back_right");
+        Motor front_left = new MotorEx(hardwareMap, "front_left");
+        Motor front_right = new MotorEx(hardwareMap, "front_right");
+        Motor back_left = new MotorEx(hardwareMap, "back_left");
+        Motor back_right = new MotorEx(hardwareMap, "back_right");
        Motor IntakeElevation = new MotorEx(hardwareMap, "IntakeElevation");
 
-        frontLeft.setRunMode(Motor.RunMode.RawPower);
-        frontRight.setRunMode(Motor.RunMode.RawPower);
-        backLeft.setRunMode(Motor.RunMode.RawPower);
-        backRight.setRunMode(Motor.RunMode.RawPower);
+        front_left.setRunMode(Motor.RunMode.RawPower);
+        front_right.setRunMode(Motor.RunMode.RawPower);
+        back_left.setRunMode(Motor.RunMode.RawPower);
+        back_right.setRunMode(Motor.RunMode.RawPower);
 
         waitForStart();
 
@@ -72,10 +72,10 @@ public class Chicken extends LinearOpMode {
  
             /*backRightPower
              */
-            frontLeft.set(1);
-            frontRight.set(1);
-            backLeft.set(1);
-            backRight.set(1);
+            front_left.set(1);
+            front_right.set(1);
+            back_left.set(1);
+            back_right.set(1);
 
             telemetry.addData("Front Left Power", front_leftPower);
             telemetry.addData("Front Right Power", front_rightPower);
