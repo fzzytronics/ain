@@ -78,7 +78,7 @@ public class help extends CommandOpMode {
         backRight = new MotorEx(hardwareMap, "backRight");
         frontRight = new MotorEx(hardwareMap, "frontRight");
 
-        Motor intake = new Motor(hardwareMap, "intake");
+        //Motor intake = new Motor(hardwareMap, "intake");
 
         // Initialize drive train
         driveTrain = new MecanumDrive(frontLeft, backLeft, backRight, frontRight);
