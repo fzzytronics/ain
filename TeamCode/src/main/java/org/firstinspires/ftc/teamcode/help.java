@@ -12,7 +12,6 @@ import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
 import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveKinematics;
 import com.arcrobotics.ftclib.purepursuit.Path;
-import com.arcrobotics.ftclib.purepursuit.Waypoint;
 import com.arcrobotics.ftclib.purepursuit.waypoints.EndWaypoint;
 import com.arcrobotics.ftclib.purepursuit.waypoints.GeneralWaypoint;
 import com.arcrobotics.ftclib.purepursuit.waypoints.StartWaypoint;
@@ -35,13 +34,13 @@ public class help extends CommandOpMode {
     private MecanumDrive driveTrain;
     private HolonomicOdometry odometry;
     private OdometrySubsystem odometrySubsystem;
-    private Path m_path;
+    private Path mPath;
     private double strafeSpeed;
     private double forwardSpeed;
     private double turn;
     private double heading;
     private PurePursuitCommand ppCommand;
-    private MotorEx front_left, front_right, back_left, back_right;
+    private MotorEx frontLeft, frontRight, backLeft, backRight;
     private MotorEx encoderLeft, encoderRight, encoderCenter;
 //yurr b
     //rebase test
@@ -63,47 +62,47 @@ public class help extends CommandOpMode {
             telemetry.addData("Angle", pose.getHeading());
             odometry.updatePose();
 
-            m_path.followPath(driveTrain, odometry);
+            mPath.followPath(driveTrain, odometry);
             telemetry.update();
 
             ppCommand.schedule(); // Schedule the command
-            m_path.init();
+            mPath.init();
         }
     }
 
     private void initializeHardware() {
         // Initialize motors
         // Hardware components
-        front_left = new MotorEx(hardwareMap, "front_left");
-        back_left = new MotorEx(hardwareMap, "back_left");
-        back_right = new MotorEx(hardwareMap, "back_right");
-        front_right = new MotorEx(hardwareMap, "front_right");
+        frontLeft = new MotorEx(hardwareMap, "frontLeft");
+        backLeft = new MotorEx(hardwareMap, "backLeft");
+        backRight = new MotorEx(hardwareMap, "backRight");
+        frontRight = new MotorEx(hardwareMap, "frontRight");
 
         Motor intake = new Motor(hardwareMap, "intake");
 
         // Initialize drive train
-        driveTrain = new MecanumDrive(front_left, back_left, back_right, front_right);
+        driveTrain = new MecanumDrive(frontLeft, backLeft, backRight, frontRight);
 
         // Set motor modes and other configurations
 
         // Motor locations for kinematics
-        Translation2d front_leftLocation = new Translation2d(0.381, 0.381);
-        Translation2d front_rightLocation = new Translation2d(0.381, -0.381);
-        Translation2d back_leftLocation = new Translation2d(-0.381, 0.381);
-        Translation2d back_rightLocation = new Translation2d(-0.381, -0.381);
+        Translation2d frontLeftLocation = new Translation2d(0.381, 0.381);
+        Translation2d frontRightLocation = new Translation2d(0.381, -0.381);
+        Translation2d backLeftLocation = new Translation2d(-0.381, 0.381);
+        Translation2d backRightLocation = new Translation2d(-0.381, -0.381);
 
         // Creating kinematics object
         MecanumDriveKinematics kinematics = new MecanumDriveKinematics(
-                front_leftLocation, front_rightLocation, back_leftLocation, back_rightLocation);
+                frontLeftLocation, frontRightLocation, backLeftLocation, backRightLocation);
 
         driveTrain.driveFieldCentric(strafeSpeed, forwardSpeed, turn, heading);
     }
 
     private void initializeOdometry() {
         // Initialize encoders
-        encoderLeft = new MotorEx(hardwareMap, "front_left");
-        encoderRight = new MotorEx(hardwareMap, "front_right");
-        encoderCenter = new MotorEx(hardwareMap, "back_left");
+        encoderLeft = new MotorEx(hardwareMap, "frontLeft");
+        encoderRight = new MotorEx(hardwareMap, "frontRight");
+        encoderCenter = new MotorEx(hardwareMap, "backLeft");
 
         // Set distance per pulse for encoders
         double ticksToInches = WHEEL_DIAMETER * Math.PI / TICKS_PER_INCH;
