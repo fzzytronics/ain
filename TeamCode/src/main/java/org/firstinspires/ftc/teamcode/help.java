@@ -1,6 +1,7 @@
 //this is now full spaghetti code, best of luck, o programmers
 package org.firstinspires.ftc.teamcode;
 
+
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.OdometrySubsystem;
 import com.arcrobotics.ftclib.command.PurePursuitCommand;
@@ -23,12 +24,16 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
 import org.firstinspires.ftc.teamcode.Justin2;
 
+
 //the problem child presents itself...
+
 
 //mew
 @Autonomous(name = "Mogging")
 
+
 public class help extends CommandOpMode {
+
 
     // Constants
     private static final double TRACKWIDTH = 13.7;
@@ -36,6 +41,7 @@ public class help extends CommandOpMode {
     private static final double CENTER_WHEEL_OFFSET = 2.4;
     private static final double TICKS_PER_REV = 15.3;
     public static final double DISTANCE_PER_PULSE = Math.PI * WHEEL_DIAMETER / TICKS_PER_REV;
+
 
     // Odometry
     private MecanumDrive driveTrain;
@@ -56,8 +62,10 @@ public class help extends CommandOpMode {
     private Motor intake, lifty;
     private Encoder odoLeft, odoRight, odoCenter;
 
+
 //yurr b
     //rebase test
+
 
     @Override
     public void initialize() {
@@ -65,7 +73,9 @@ public class help extends CommandOpMode {
         initializeHardware();
         initializeOdometry();
 
+
         waitForStart();
+
 
         while (opModeIsActive()) {
             // Autonomous actions
@@ -76,13 +86,16 @@ public class help extends CommandOpMode {
             telemetry.addData("Angle", pose.getHeading());
             odometry.updatePose();
 
+
             mPath.followPath(driveTrain, odometry);
             telemetry.update();
+
 
             ppCommand.schedule(); // Schedule the command
             mPath.init();
         }
     }
+
 
     private void initializeHardware() {
         // Initialize motors
@@ -92,71 +105,59 @@ public class help extends CommandOpMode {
         backRight = new MotorEx(hardwareMap, "backRight");
         frontRight = new MotorEx(hardwareMap, "frontRight");
 
+
         intake = new Motor(hardwareMap, "intake");
         lifty = new Motor(hardwareMap, "lifty");
         // Initialize drive train
         driveTrain = new MecanumDrive(frontLeft, backLeft, backRight, frontRight);
 
+
         odoLeft = frontLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
         odoRight = frontRight.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
         odoCenter = backLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 
+
         odoRight.setDirection(Motor.Direction.REVERSE);
+
 
         odometry = new HolonomicOdometry(
                 odoLeft::getDistance,
                 odoRight::getDistance,
                 odoCenter::getDistance,
-                TRACKWIDTH, CENTER_WHEEL_OFFSET,
-
+                TRACKWIDTH, CENTER_WHEEL_OFFSET)
         // Set motor modes and other configurations
 
+
         // Motor locations for kinematics
-        fLeft = new Translation2d(0.381, -0.381);
+        ;
         fRight = new Translation2d(-0.381, -0.381);
         bLeft = new Translation2d(0.381, 0.381);
         bRight = new Translation2d(-0.381, 0.381);
+
 
         // Creating kinematics object
         MecanumDriveKinematics kinematics = new MecanumDriveKinematics(
                 fLeft, fRight, bLeft, bRight);
 
+
         driveTrain.driveFieldCentric(strafeSpeed, forwardSpeed, turn, heading);
     }
 
+
     private void initializeOdometry() {
-        /*
-        waitForStart();
-
-        while (opModeIsActive()) {
-            odometry.updatePose();
-            robotPose = odometry.getPose();
-            telemetry.addData("Robot Position: ", robotPose);
-            telemetry.update();
-        }
-    }
-
-    public void periodic() {
-
-        Rotation2d gyroAngle = Rotation2d.fromDegrees(gyro.getAngle());
-        odometry.updatePose();
-        robotPose = new Pose2d(
-                robotPose.getTranslation(),
-                gyroAngle
-        );
-    }
-}**/
-        // Initialize encoders
         encoderLeft = new MotorEx(hardwareMap, "frontLeft");
         encoderRight = new MotorEx(hardwareMap, "frontRight");
         encoderCenter = new MotorEx(hardwareMap, "backLeft");
 
+
         // Set distance per pulse for encoders
         double ticksToInches = WHEEL_DIAMETER * Math.PI / TICKS_PER_REV;
+
 
         encoderLeft.setDistancePerPulse(ticksToInches);
         encoderRight.setDistancePerPulse(ticksToInches);
         encoderCenter.setDistancePerPulse(ticksToInches);
+
 
         // Create odometry object
         HolonomicOdometry holOdom = new HolonomicOdometry(
@@ -166,18 +167,38 @@ public class help extends CommandOpMode {
                 TRACKWIDTH, CENTER_WHEEL_OFFSET
         );
 
+        waitForStart();
         // Create odometry subsystem
         OdometrySubsystem odometry = new OdometrySubsystem(holOdom);
         // Initial odometry update
         odometry.update();
 
-        // Create pure pursuit command
-        PurePursuitCommand ppCommand = new PurePursuitCommand(
-                driveTrain, odometry,
-                new StartWaypoint(0, 0),
-                new GeneralWaypoint(200, 0, 0.8, 0.8, 30), 
-                new EndWaypoint(400, 0, 0, 0.5, 0.5, 30, 0.8, 1)
-        );
-        // Schedule the command
+
+        while (opModeIsActive()) {
+            odometry.updatePose();
+            robotPose = odometry.getPose();
+            telemetry.addData("Robot Position: ", robotPose);
+            telemetry.update();
+
+
+            public void periodic () {
+
+
+                Rotation2d gyroAngle = Rotation2d.fromDegrees(gyro.getAngle());
+                odometry.updatePose();
+                robotPose = new Pose2d(
+                        robotPose.getTranslation(),
+                        gyroAngle
+                );
+                // Create pure pursuit command
+                PurePursuitCommand ppCommand = new PurePursuitCommand(
+                        driveTrain, odometry,
+                        new StartWaypoint(0, 0),
+                        new GeneralWaypoint(200, 0, 0.8, 0.8, 30),
+                        new EndWaypoint(400, 0, 0, 0.5, 0.5, 30, 0.8, 1)
+                );
+                // Schedule the command
+            }
+        }
     }
 }
