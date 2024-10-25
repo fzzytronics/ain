@@ -27,7 +27,7 @@ public class Justin2 extends LinearOpMode {
     public Translation2d fLeft, fRight, bLeft, bRight;
     public SwerveDriveKinematics kinematics;
     private MecanumDrive drivetrain;
-    private Motor intake, lifty;
+    //private Motor intake, lifty;
     public Pose2d robotPose;
     private Encoder odoLeft, odoRight, odoCenter;
     public HolonomicOdometry odometry;
@@ -47,8 +47,8 @@ public class Justin2 extends LinearOpMode {
 
         drivetrain = new MecanumDrive(frontLeft, frontRight, backLeft, backRight);
 
-        intake = new Motor(hardwareMap, "intake");
-        lifty = new Motor(hardwareMap, "lifty");
+        //intake = new Motor(hardwareMap, "intake");
+        //lifty = new Motor(hardwareMap, "lifty");
 
         kinematics = new SwerveDriveKinematics(fLeft, fRight, bLeft, bRight);
 
