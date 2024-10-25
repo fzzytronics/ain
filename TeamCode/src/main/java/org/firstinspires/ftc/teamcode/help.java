@@ -46,7 +46,6 @@ public class help extends CommandOpMode {
     // Odometry
     private MecanumDrive driveTrain;
     private HolonomicOdometry odometry;
-    private OdometrySubsystem odometrySubsystem;
     private Path mPath;
     private double strafeSpeed;
     private double forwardSpeed;
@@ -72,27 +71,23 @@ public class help extends CommandOpMode {
         // Initialization
         initializeHardware();
         initializeOdometry();
-
+        odometry.updatePose(robotPose);
 
         waitForStart();
-
-
         while (opModeIsActive()) {
             // Autonomous actions
             // Update odometry
-            Pose2d pose = odometry.getPose();
-            telemetry.addData("X Position (in)", pose.getX());
-            telemetry.addData("Y Position (in)", pose.getY());
-            telemetry.addData("Angle", pose.getHeading());
-            odometry.updatePose();
-
-
             mPath.followPath(driveTrain, odometry);
             telemetry.update();
 
 
             ppCommand.schedule(); // Schedule the command
             mPath.init();
+
+            odometry.updatePose();
+            robotPose = odometry.getPose();
+            telemetry.addData("Robot Position: ", robotPose);
+            telemetry.update();
         }
     }
 
@@ -115,7 +110,6 @@ public class help extends CommandOpMode {
         odoLeft = frontLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
         odoRight = frontRight.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
         odoCenter = backLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-
 
         odoRight.setDirection(Motor.Direction.REVERSE);
 
@@ -145,15 +139,8 @@ public class help extends CommandOpMode {
 
 
     private void initializeOdometry() {
-        encoderLeft = new MotorEx(hardwareMap, "frontLeft");
-        encoderRight = new MotorEx(hardwareMap, "frontRight");
-        encoderCenter = new MotorEx(hardwareMap, "backLeft");
-
-
         // Set distance per pulse for encoders
         double ticksToInches = WHEEL_DIAMETER * Math.PI / TICKS_PER_REV;
-
-
         encoderLeft.setDistancePerPulse(ticksToInches);
         encoderRight.setDistancePerPulse(ticksToInches);
         encoderCenter.setDistancePerPulse(ticksToInches);
@@ -166,24 +153,7 @@ public class help extends CommandOpMode {
                 encoderCenter::getDistance,
                 TRACKWIDTH, CENTER_WHEEL_OFFSET
         );
-
-        waitForStart();
-        // Create odometry subsystem
-        OdometrySubsystem odometry = new OdometrySubsystem(holOdom);
-        // Initial odometry update
-        odometry.update();
-
-
-        while (opModeIsActive()) {
-            odometry.updatePose();
-            robotPose = odometry.getPose();
-            telemetry.addData("Robot Position: ", robotPose);
-            telemetry.update();
-
-
             public void periodic () {
-
-
                 Rotation2d gyroAngle = Rotation2d.fromDegrees(gyro.getAngle());
                 odometry.updatePose();
                 robotPose = new Pose2d(
