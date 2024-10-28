@@ -9,7 +9,7 @@ import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
-import com.arcrobotics.ftclib.kinematics.wpilibkinematics.SwerveDriveKinematics;
+import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveKinematics;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
@@ -25,7 +25,7 @@ public class Justin2 extends LinearOpMode {
     private MotorEx frontLeft, frontRight, backLeft, backRight;
     private ServoEx gyro;
     public Translation2d fLeft, fRight, bLeft, bRight;
-    public SwerveDriveKinematics kinematics;
+    public MecanumDriveKinematics kinematics;
     private MecanumDrive drivetrain;
     //private Motor intake, lifty;
     public Pose2d robotPose;
@@ -50,7 +50,7 @@ public class Justin2 extends LinearOpMode {
         //intake = new Motor(hardwareMap, "intake");
         //lifty = new Motor(hardwareMap, "lifty");
 
-        kinematics = new SwerveDriveKinematics(fLeft, fRight, bLeft, bRight);
+        kinematics = new MecanumDriveKinematics(fLeft, fRight, bLeft, bRight);
 
         odoLeft = frontLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
         odoRight = frontRight.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
