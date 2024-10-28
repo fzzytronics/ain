@@ -1,7 +1,7 @@
-package org.firstinspires.ftc.teamcode.team7786.kinematics;
+package org.firstinspires.ftc.teamcode.team12347.kinematics;
 
 
-import org.firstinspires.ftc.teamcode.team7786.geometry.Pose;
+import org.firstinspires.ftc.teamcode.team12347.geometry.Pose;
 
 public class ThreeWheelOdometry {
 

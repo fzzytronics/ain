@@ -1,6 +1,6 @@
-package org.firstinspires.ftc.teamcode.team7786.purepursuit.waypoints;
+package org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints;
 
-import org.firstinspires.ftc.teamcode.team7786.geometry.Point;
+import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
 
 public class StandardWaypoint extends WaypointBase {
     private final WaypointTypes type = WaypointTypes.STANDARD;

@@ -1,13 +1,15 @@
-package org.firstinspires.ftc.teamcode.team7786.core;
+package org.firstinspires.ftc.teamcode.team12347.core;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.team7786.purepursuit.PursuitPoint;
-import org.firstinspires.ftc.teamcode.team7786.purepursuit.Trajectory;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.PursuitPoint;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.Trajectory;
 
-import static org.firstinspires.ftc.teamcode.team7786.core.ROBOT_DATA.*;
-import static org.firstinspires.ftc.teamcode.team7786.utils.GraphFunctions.*;
+import static org.firstinspires.ftc.teamcode.team12347.core.ROBOT_DATA.*;
+import static org.firstinspires.ftc.teamcode.team12347.utils.GraphFunctions.*;
 
+@Autonomous
 public class AutoBot extends MecanumRobot{
 
     private Trajectory currentTraj;

@@ -1,8 +1,8 @@
-package org.firstinspires.ftc.teamcode.team7786.core;
+package org.firstinspires.ftc.teamcode.team12347.core;
 
-import org.firstinspires.ftc.teamcode.team7786.geometry.Pose;
-import org.firstinspires.ftc.teamcode.team7786.utils.MathFunctions;
-import org.firstinspires.ftc.teamcode.team7786.utils.MathFunctions;
+import org.firstinspires.ftc.teamcode.team12347.geometry.Pose;
+import org.firstinspires.ftc.teamcode.team12347.utils.MathFunctions;
+import org.firstinspires.ftc.teamcode.team12347.utils.MathFunctions;
 
 public class ROBOT_DATA
 {
@@ -12,10 +12,10 @@ public class ROBOT_DATA
 
 
   // Hardware map names
-  public static final String LEFT_FRONT_NAME = "leftFrontDrive";
-  public static final String RIGHT_FRONT_NAME= "rightFrontDrive";
-  public static final String LEFT_REAR_NAME = "leftRearDrive";
-  public static final String RIGHT_REAR_NAME = "rightRearDrive";
+  public static final String LEFT_FRONT_NAME = "frontLeft";
+  public static final String RIGHT_FRONT_NAME= "frontRight";
+  public static final String LEFT_REAR_NAME = "backLeft";
+  public static final String RIGHT_REAR_NAME = "backRight";
 
   // Drivetrain inversions
   public static final boolean[] MOTOR_INVERTED = {false, true, false, true};

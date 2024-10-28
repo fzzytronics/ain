@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.team7786.core;
+package org.firstinspires.ftc.teamcode.team12347.core;
 
 
-import static org.firstinspires.ftc.teamcode.team7786.core.ROBOT_DATA.*;
+import static org.firstinspires.ftc.teamcode.team12347.core.ROBOT_DATA.*;
 
-import org.firstinspires.ftc.teamcode.team7786.geometry.Point;
+import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class FTCBot extends MecanumRobot

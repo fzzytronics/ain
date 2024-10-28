@@ -1,7 +1,7 @@
-package org.firstinspires.ftc.teamcode.team7786.purepursuit;
+package org.firstinspires.ftc.teamcode.team12347.purepursuit;
 
-import org.firstinspires.ftc.teamcode.team7786.geometry.Point;
-import org.firstinspires.ftc.teamcode.team7786.geometry.Pose;
+import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
+import org.firstinspires.ftc.teamcode.team12347.geometry.Pose;
 
 public class PursuitPoint extends Point {
     public int state;

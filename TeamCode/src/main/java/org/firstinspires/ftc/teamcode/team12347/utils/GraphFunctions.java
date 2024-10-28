@@ -1,6 +1,6 @@
-package org.firstinspires.ftc.teamcode.team7786.utils;
+package org.firstinspires.ftc.teamcode.team12347.utils;
 
-import org.firstinspires.ftc.teamcode.team7786.geometry.Point;
+import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
 
 public class GraphFunctions
 {

@@ -1,14 +1,14 @@
-package org.firstinspires.ftc.teamcode.team7786.core;
+package org.firstinspires.ftc.teamcode.team12347.core;
 
-import static org.firstinspires.ftc.teamcode.team7786.core.ROBOT_DATA.*;
-import static org.firstinspires.ftc.teamcode.team7786.utils.MathFunctions.clipRange;
-import static org.firstinspires.ftc.teamcode.team7786.utils.MathFunctions.squareInput;
+import static org.firstinspires.ftc.teamcode.team12347.core.ROBOT_DATA.*;
+import static org.firstinspires.ftc.teamcode.team12347.utils.MathFunctions.clipRange;
+import static org.firstinspires.ftc.teamcode.team12347.utils.MathFunctions.squareInput;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.team7786.controller.PIDFBase;
-import org.firstinspires.ftc.teamcode.team7786.geometry.Point;
-import org.firstinspires.ftc.teamcode.team7786.kinematics.MecanumDriveQueue;
+import org.firstinspires.ftc.teamcode.team12347.controller.PIDFBase;
+import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
+import org.firstinspires.ftc.teamcode.team12347.kinematics.MecanumDriveQueue;
 
 
 public class MecanumRobot extends Robot

@@ -1,16 +1,16 @@
-package org.firstinspires.ftc.teamcode.team7786.purepursuit;
+package org.firstinspires.ftc.teamcode.team12347.purepursuit;
 
 
-import org.firstinspires.ftc.teamcode.team7786.geometry.Point;
-import org.firstinspires.ftc.teamcode.team7786.purepursuit.waypoints.EndWaypoint;
-import org.firstinspires.ftc.teamcode.team7786.purepursuit.waypoints.PointTurnWaypoint;
-import org.firstinspires.ftc.teamcode.team7786.purepursuit.waypoints.StandardWaypoint;
-import org.firstinspires.ftc.teamcode.team7786.purepursuit.waypoints.StartWaypoint;
-import org.firstinspires.ftc.teamcode.team7786.purepursuit.waypoints.WaypointBase;
-import org.firstinspires.ftc.teamcode.team7786.purepursuit.waypoints.WaypointTypes;
+import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.EndWaypoint;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.PointTurnWaypoint;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.StandardWaypoint;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.StartWaypoint;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.WaypointBase;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.WaypointTypes;
 
-import static org.firstinspires.ftc.teamcode.team7786.core.ROBOT_DATA.*;
-import static org.firstinspires.ftc.teamcode.team7786.utils.GraphFunctions.*;
+import static org.firstinspires.ftc.teamcode.team12347.core.ROBOT_DATA.*;
+import static org.firstinspires.ftc.teamcode.team12347.utils.GraphFunctions.*;
 
 import java.util.ArrayList;
 

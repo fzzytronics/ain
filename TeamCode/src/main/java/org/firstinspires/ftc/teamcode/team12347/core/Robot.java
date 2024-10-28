@@ -1,12 +1,12 @@
-package org.firstinspires.ftc.teamcode.team7786.core;
+package org.firstinspires.ftc.teamcode.team12347.core;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import static org.firstinspires.ftc.teamcode.team7786.core.ROBOT_DATA.*;
+import static org.firstinspires.ftc.teamcode.team12347.core.ROBOT_DATA.*;
 
-import org.firstinspires.ftc.teamcode.team7786.kinematics.Odometer;
-import org.firstinspires.ftc.teamcode.team7786.kinematics.ThreeWheelOdometry;
+import org.firstinspires.ftc.teamcode.team12347.kinematics.Odometer;
+import org.firstinspires.ftc.teamcode.team12347.kinematics.ThreeWheelOdometry;
 
 // This code serves as a base class for a 4 motor drivetrain
 public class Robot
