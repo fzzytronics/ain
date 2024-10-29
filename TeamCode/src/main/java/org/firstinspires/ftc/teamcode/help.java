@@ -1,4 +1,5 @@
 //this is now full spaghetti code, best of luck, o programmers
+/*
 package org.firstinspires.ftc.teamcode;
 
 
@@ -172,3 +173,4 @@ public class help extends CommandOpMode {
         }
     }
 }
+*/
