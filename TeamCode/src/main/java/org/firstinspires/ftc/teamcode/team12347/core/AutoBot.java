@@ -9,7 +9,6 @@ import org.firstinspires.ftc.teamcode.team12347.purepursuit.Trajectory;
 import static org.firstinspires.ftc.teamcode.team12347.core.ROBOT_DATA.*;
 import static org.firstinspires.ftc.teamcode.team12347.utils.GraphFunctions.*;
 
-@Autonomous
 public class AutoBot extends MecanumRobot{
 
     private Trajectory currentTraj;
