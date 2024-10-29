@@ -1,5 +1,14 @@
 package org.firstinspires.ftc.teamcode.team12347.opmodes;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.PursuitPoint;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.Trajectory;
+
+import static org.firstinspires.ftc.teamcode.team12347.core.ROBOT_DATA.*;
+import static org.firstinspires.ftc.teamcode.team12347.utils.GraphFunctions.*;
+
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
