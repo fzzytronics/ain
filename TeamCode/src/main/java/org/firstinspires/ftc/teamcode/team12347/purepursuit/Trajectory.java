@@ -20,7 +20,7 @@ public class Trajectory {
     /** Constructor for trajectory class. Utilized with a builder pattern
      * @param paths        An array of all PursuitLines in this trajectory.
      */
-    private Trajectory(PursuitLine[] paths)  {
+    public Trajectory(PursuitLine[] paths)  {
         this.paths = paths;
         verifyPath();
     }

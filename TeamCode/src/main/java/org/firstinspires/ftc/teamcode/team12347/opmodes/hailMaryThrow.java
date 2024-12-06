@@ -1,72 +1,80 @@
 package org.firstinspires.ftc.teamcode.team12347.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.team12347.core.AutoBot;
+import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.PursuitLine;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.PursuitPoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.Trajectory;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.WaypointBase;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.Waypoint;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.WaypointTypes;
 
-import static org.firstinspires.ftc.teamcode.team12347.core.ROBOT_DATA.*;
-import static org.firstinspires.ftc.teamcode.team12347.utils.GraphFunctions.*;
+@Autonomous(name = "hailMaryThrow", group = "Autonomous")
+public class hailMaryThrow extends OpMode {
 
+    private AutoBot autoBot;
+    private Trajectory currentTraj;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import org.firstinspires.ftc.teamcode.team12347.purepursuit.TrajectoryBuilder;
-import org.firstinspires.ftc.teamcode.team12347.core.AutoBot;
-
-
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.teamcode.team7786.opmodes.gamepadconfigs.SampleConfig;
-
-
-@Autonomous
-public class hailMaryThrow extends OpMode
-{
     DcMotorEx dave;
     double velocity;
 
-    SampleConfig gamepad;
-    /*
-     * Code to run ONCE when the driver hits INIT
-     */
     @Override
     public void init() {
+        HardwareMap hwMap = hardwareMap;
+        autoBot = new AutoBot(hwMap);
 
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
     }
 
-    /*
-     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
-     */
     @Override
     public void init_loop() {
+        // Initialization loop logic here
     }
 
-    /*
-     * Code to run ONCE when the driver hits PLAY
-     */
     @Override
     public void start() {
+        // Define your waypoints here using WaypointBase objects
+        WaypointBase[] waypoints = new WaypointBase[]{
+                new Waypoint(new PursuitPoint(new Point(0, 0), 0, 0)),
+                new Waypoint(new PursuitPoint(new Point(1, 1), 1, 0))
+                // Add more waypoints as needed
+        };
+
+        PursuitLine line1 = new PursuitLine(waypoints[0], waypoints[1]);
+        // Add more lines as needed
+
+        PursuitLine[] lines = {line1};
+
+        // Initialize the trajectory with the pursuit lines
+        currentTraj = new Trajectory(lines);
+        autoBot.beginTrajectory(currentTraj);
+
+        telemetry.addData("Status", "Started");
+        telemetry.update();
     }
 
-    /*
-     * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
-     */
     @Override
     public void loop() {
+        // This should control how the robot follows the trajectory
+        if (currentTraj != null && currentTraj.hasNextPoint()) {
+            PursuitPoint target = currentTraj.nextPoint();
+            autoBot.pursuePose(target);
+        }
 
-
+        telemetry.addData("Status", "Running");
+        telemetry.update();
     }
 
-    /*
-     * Code to run ONCE after the driver hits STOP
-     */
     @Override
     public void stop() {
-
+        // Stop logic here
+        telemetry.addData("Status", "Stopped");
+        telemetry.update();
     }
-
 }

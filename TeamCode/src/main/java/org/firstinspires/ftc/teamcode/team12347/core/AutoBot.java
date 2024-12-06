@@ -21,7 +21,7 @@ public class AutoBot extends MecanumRobot{
         currentTraj = traj;
     }
 
-    private void pursuePose(PursuitPoint target) {
+    public void pursuePose(PursuitPoint target) {
         if (Double.isNaN(target.heading)) { // If there is no specified heading
             pursuePoint(target, 1);
             return;
