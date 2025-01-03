@@ -19,7 +19,7 @@ public class Justin2 extends LinearOpMode {
     public static final double TRACKWIDTH = 13.7;
     public static final double CENTER_WHEEL_OFFSET = 2.4;
     public static final double WHEEL_DIAMETER = 0.075;
-    public static final double TICKS_PER_REV = 15.3;
+    public static final double TICKS_PER_REV = 28;
     public static final double DISTANCE_PER_PULSE = Math.PI * WHEEL_DIAMETER / TICKS_PER_REV;
 
     private MotorEx frontLeft, frontRight, backLeft, backRight;
