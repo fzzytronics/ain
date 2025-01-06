@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.team12347.opmodes;
 
+import com.arcrobotics.ftclib.purepursuit.Waypoint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -10,9 +11,8 @@ import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.PursuitLine;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.PursuitPoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.Trajectory;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.StartWaypoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.WaypointBase;
-import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.Waypoint;
-import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.WaypointTypes;
 
 @Autonomous(name = "hailMaryThrow", group = "Autonomous")
 public class hailMaryThrow extends OpMode {
@@ -41,7 +41,7 @@ public class hailMaryThrow extends OpMode {
     public void start() {
         // Define your waypoints here using WaypointBase objects
         WaypointBase[] waypoints = new WaypointBase[]{
-                new Waypoint(new PursuitPoint(new Point(0, 0), 0, 0)),
+                new StartWaypoint(new PursuitPoint(new Point(0, 0), 0, 0)),
                 new Waypoint(new PursuitPoint(new Point(1, 1), 1, 0))
                 // Add more waypoints as needed
         };
