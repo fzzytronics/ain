@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.PursuitLine;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.PursuitPoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.Trajectory;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.StandardWaypoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.StartWaypoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.WaypointBase;
 
@@ -41,8 +42,8 @@ public class hailMaryThrow extends OpMode {
     public void start() {
         // Define your waypoints here using WaypointBase objects
         WaypointBase[] waypoints = new WaypointBase[]{
-                new StartWaypoint(new PursuitPoint(new Point(0, 0), 0, 0)),
-                new Waypoint(new PursuitPoint(new Point(1, 1), 1, 0))
+                new StartWaypoint(-60, 25),
+                new StandardWaypoint(-30, -10)
                 // Add more waypoints as needed
         };
 
@@ -70,7 +71,6 @@ public class hailMaryThrow extends OpMode {
         telemetry.addData("Status", "Running");
         telemetry.update();
     }
-
     @Override
     public void stop() {
         // Stop logic here

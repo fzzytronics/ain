@@ -111,6 +111,9 @@ public class Trajectory {
         public Builder(double startX, double startY) {
             m_paths = new ArrayList<PursuitLine>();
             start = new StartWaypoint(startX, startY);
+            /**
+            Here is where the dreaded check and next code will go
+             **/
         }
 
         /** Add a standard waypoint to a trajectory

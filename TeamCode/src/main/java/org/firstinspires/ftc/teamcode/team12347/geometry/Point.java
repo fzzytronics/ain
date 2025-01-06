@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.team12347.geometry;
 
 /**
 * This represents a single point on a 2 dimensional plane
-* @see org.firstinspires.ftc.teamcode.team7786.geometry.Graph
+* @see org.firstinspires.ftc.teamcode.team12347.geometry.Graph
 * @author TheConverseEngineer
 */
 public class Point
