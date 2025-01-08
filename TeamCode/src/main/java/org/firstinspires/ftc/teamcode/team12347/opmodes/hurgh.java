@@ -20,16 +20,16 @@ import com.acmerobotics.roadrunner.drive.MecanumDrive;
 import com.acmerobotics.roadrunner.followers.TrajectoryFollower;
 import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 
-
+/**
 public class hurgh extends LinearOpMode {
     @Override
     public void runOpMode() {
-        MecanumDrive drive = new SimpleMecanumDrive(hardwareMap);
+        /MecanumDrive drive = new SimpleMecanumDrive(hardwareMap);
         Pose2d startPose = new Pose2d(10, -8, Math.toRadians(90));
 
         drive.setPoseEstimate(startPose);
 
-        Trajectory myTrajectory = drive.trajectoryBuilder(new Pose2d())
+        Trajectory myTrajectory = drive.trajectoryBuilder(startPose)
                 .strafeRight(10)
                 .forward(5)
                 .build();
@@ -41,3 +41,4 @@ public class hurgh extends LinearOpMode {
         drive.followTrajectory(myTrajectory);
     }
 }
+**/

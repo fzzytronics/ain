@@ -11,9 +11,11 @@ import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.PursuitLine;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.PursuitPoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.Trajectory;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.EndWaypoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.StandardWaypoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.StartWaypoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.WaypointBase;
+import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.EndWaypoint;
 import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
 
 @Autonomous(name = "hailMaryThrow", group = "Autonomous")
@@ -44,7 +46,8 @@ public class hailMaryThrow extends OpMode {
         // Define your waypoints here using WaypointBase objects
         WaypointBase[] waypoints = new WaypointBase[]{
                 new StartWaypoint(-60, 25),
-                new StandardWaypoint(-30, -10)
+                new StandardWaypoint(-30, -10),
+                new EndWaypoint(-60.0, -25.0, 0)
                 // Add more waypoints as needed
         };
 
@@ -64,13 +67,13 @@ public class hailMaryThrow extends OpMode {
     @Override
     public void loop() {
         // This should control how the robot follows the trajectory
-
-        autoBot.pursuePose(target);
-        /**if (currentTraj != null && currentTraj.hasNextPoint()) {
+/**
+        if (currentTraj != null && currentTraj.hasNextPoint())
+        {
             PursuitPoint target = currentTraj.nextPoint();
             autoBot.pursuePose(target);
         }
-        **/
+**/
 
         telemetry.addData("Status", "Running");
         telemetry.update();
