@@ -63,10 +63,13 @@ public class hailMaryThrow extends OpMode {
     @Override
     public void loop() {
         // This should control how the robot follows the trajectory
-        if (currentTraj != null && currentTraj.hasNextPoint()) {
+
+        autoBot.pursuePose(target);
+        /**if (currentTraj != null && currentTraj.hasNextPoint()) {
             PursuitPoint target = currentTraj.nextPoint();
             autoBot.pursuePose(target);
         }
+        **/
 
         telemetry.addData("Status", "Running");
         telemetry.update();
