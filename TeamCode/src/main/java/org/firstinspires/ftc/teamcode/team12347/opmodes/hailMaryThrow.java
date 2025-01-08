@@ -14,6 +14,7 @@ import org.firstinspires.ftc.teamcode.team12347.purepursuit.Trajectory;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.StandardWaypoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.StartWaypoint;
 import org.firstinspires.ftc.teamcode.team12347.purepursuit.waypoints.WaypointBase;
+import org.firstinspires.ftc.teamcode.team12347.geometry.Point;
 
 @Autonomous(name = "hailMaryThrow", group = "Autonomous")
 public class hailMaryThrow extends OpMode {
